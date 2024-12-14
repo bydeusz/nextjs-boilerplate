@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import '@/assets/styles/globals.css'
+import "@/assets/styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Next.js Boilerplate - by Tadeusz de Ruijter",
-  description: "A modern Next.js boilerplate with TypeScript, Prisma, TailwindCSS, and ESLint - ready for full-stack development",
+  description:
+    "A modern Next.js boilerplate with TypeScript, Prisma, TailwindCSS, and ESLint - ready for full-stack development",
 };
 
 export default function RootLayout({
@@ -13,9 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

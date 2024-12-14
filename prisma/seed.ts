@@ -1,11 +1,11 @@
-import { PrismaClient } from '@prisma/client'
-import { seeders } from './seeders'
+import { PrismaClient } from "@prisma/client";
+import { seeders } from "./seeders";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 async function resetDatabase() {
-  console.log('🗑️  Resetting database...')
-  
+  console.log("🗑️  Resetting database...");
+
   // Truncate all tables with CASCADE
   await prisma.$executeRaw`DO $$ 
     BEGIN 
@@ -14,36 +14,36 @@ async function resetDatabase() {
         FROM pg_tables
         WHERE schemaname = 'public'
       );
-    END $$;`
+    END $$;`;
 
-  console.log('✅ Database reset completed')
+  console.log("✅ Database reset completed");
 }
 
 async function main() {
   try {
-    console.log('🌱 Starting database seeding...')
-    
+    console.log("🌱 Starting database seeding...");
+
     // Reset the database first
-    await resetDatabase()
-    
+    await resetDatabase();
+
     // Run seeders in sequence
-    await seeders.users(prisma)
+    await seeders.users(prisma);
     // Add more seeders here as needed
     // await seeders.posts(prisma)
     // await seeders.comments(prisma)
-    
-    console.log('✅ Database seeding completed')
+
+    console.log("✅ Database seeding completed");
   } catch (error) {
-    console.error('❌ Database seeding failed:', error)
-    throw error
+    console.error("❌ Database seeding failed:", error);
+    throw error;
   }
 }
 
 main()
   .catch((e) => {
-    console.error(e)
-    process.exit(1)
+    console.error(e);
+    process.exit(1);
   })
   .finally(async () => {
-    await prisma.$disconnect()
-  }) 
+    await prisma.$disconnect();
+  });

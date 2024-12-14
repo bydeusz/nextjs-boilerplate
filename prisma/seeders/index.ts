@@ -1,5 +1,5 @@
-import { seedUsers } from './users'
+import { seedUsers } from "./users";
 
 export const seeders = {
   users: seedUsers,
-} 
+};
