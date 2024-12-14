@@ -4,16 +4,16 @@ export async function seedUsers(prisma: PrismaClient) {
   console.log("🌱 Seeding users...");
 
   const users = [
-    { name: "John Doe", email: "john.doe@example.com" },
-    { name: "Jane Smith", email: "jane.smith@example.com" },
-    { name: "Alice Johnson", email: "alice.johnson@example.com" },
-    { name: "Bob Wilson", email: "bob.wilson@example.com" },
-    { name: "Charlie Brown", email: "charlie.brown@example.com" },
-    { name: "Diana Prince", email: "diana.prince@example.com" },
-    { name: "Edward Stone", email: "edward.stone@example.com" },
-    { name: "Fiona Green", email: "fiona.green@example.com" },
-    { name: "George Miller", email: "george.miller@example.com" },
-    { name: "Helen Davis", email: "helen.davis@example.com" },
+    { name: "John Doe", email: "john.doe@example.com", isAdmin: true },
+    { name: "Jane Smith", email: "jane.smith@example.com", isAdmin: false },
+    { name: "Alice Johnson", email: "alice.johnson@example.com", isAdmin: false },
+    { name: "Bob Wilson", email: "bob.wilson@example.com", isAdmin: false },
+    { name: "Charlie Brown", email: "charlie.brown@example.com", isAdmin: false },
+    { name: "Diana Prince", email: "diana.prince@example.com", isAdmin: false },
+    { name: "Edward Stone", email: "edward.stone@example.com", isAdmin: false },
+    { name: "Fiona Green", email: "fiona.green@example.com", isAdmin: false },
+    { name: "George Miller", email: "george.miller@example.com", isAdmin: false },
+    { name: "Helen Davis", email: "helen.davis@example.com", isAdmin: false },
   ];
 
   const createdUsers = await Promise.all(
