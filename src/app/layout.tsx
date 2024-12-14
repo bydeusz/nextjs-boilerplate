@@ -1,20 +1,28 @@
-import type { Metadata } from "next";
-import "@/assets/styles/globals.css";
+import "@/assets/style/globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 
-export const metadata: Metadata = {
-  title: "Next.js Boilerplate - by Tadeusz de Ruijter",
-  description:
-    "A modern Next.js boilerplate with TypeScript, Prisma, TailwindCSS, and ESLint - ready for full-stack development",
-};
+interface LangParams {
+  lang: string;
+}
+export async function generateStaticParams() {
+  return [{ lang: "en" }, { lang: "nl" }];
+}
 
 export default function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: LangParams;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang={params.lang}>
+        <body>
+          {children}
+          <div id="modal-root"></div>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

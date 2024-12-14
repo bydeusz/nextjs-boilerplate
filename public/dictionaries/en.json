@@ -1,0 +1,108 @@
+{
+  "signUp": {
+    "title": "Create an Account",
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas volutpat, nunc non sollicitudin ultricies.",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Create Account",
+    "signIn": "Sign In",
+    "verify": "Verify Your Email",
+    "verifyDesc": "We have sent a verification code to your email address.",
+    "completeSignUp": "Complete Registration"
+  },
+  "signIn": {
+    "title": "Sign In",
+    "desc": "Log in with your account",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign In",
+    "reset": "Reset Password",
+    "signUp": "Sign Up",
+    "noAccount": "Don't have an account?"
+  },
+  "resetPassword": {
+    "title": "Forgot Password?",
+    "desc": "Create a new and secure password for your account.",
+    "email": "Enter your email address",
+    "submit": "Send Password Reset Code",
+    "signIn": "Sign In",
+    "password": "Enter your new password",
+    "confirmPassword": "Enter the password reset code sent to your email",
+    "reset": "Reset"
+  },
+  "onboarding": {
+    "title": "Almost There...",
+    "desc": "We need a few more details to get you started.",
+    "firstname": "First Name",
+    "surname": "Last Name",
+    "role": "Role",
+    "company": "Company",
+    "submit": "Create Account"
+  },
+  "navbar": {
+    "dashboard": "Dashboard",
+    "search": "Search",
+    "settings": "Settings",
+    "support": "Support",
+    "signOut": "Sign Out"
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "settings": {
+      "account": {
+        "title": "Settings"
+      },
+      "team": {
+        "title": "Team",
+        "delete": "Delete",
+        "settings": "Permissions"
+      },
+      "delete": {
+        "title": "Delete Account"
+      },
+      "tabs": {
+        "profile": "Profile",
+        "team": "Team",
+        "delete": "Delete Account"
+      }
+    }
+  },
+  "modals": {
+    "delete": {
+      "title": "Delete account",
+      "desc": "You are about to delete an account. This action is irreversible and will result in the permanent loss of the account and all associated data. Proceed with caution.",
+      "button": "Delete",
+      "label": "Enter full name:",
+      "placeholder": "Enter name here"
+    },
+    "admin": {
+      "demote": {
+        "title": "Remove admin rights",
+        "desc": "You are about to remove this user's admin rights. Note: After this action, the user will no longer be able to perform admin tasks. The user can always request admin rights again.",
+        "button": "Change rights",
+        "label": "Enter full name:",
+        "placeholder": "Enter name here"
+      },
+      "promote": {
+        "title": "Grant admin rights",
+        "desc": "You are about to grant this user admin rights. Note: After this action, the user will be able to perform admin tasks, such as deleting accounts and changing settings.",
+        "button": "Change rights",
+        "label": "Enter full name:",
+        "placeholder": "Enter name here"
+      }
+    }
+  }, 
+  "tools": {
+    "neonDesigner": {
+      "title": "Neon Designer",
+      "desc": "Create custom neon signs with our easy-to-use designer tool.",
+      "button": "Start using this tool"
+    }
+  },
+  "orders": {
+    "button": "Load more orders",
+    "loading": "Loading orders..."
+  }
+}
