@@ -3,9 +3,28 @@ import { seeders } from './seeders'
 
 const prisma = new PrismaClient()
 
+async function resetDatabase() {
+  console.log('🗑️  Resetting database...')
+  
+  // Truncate all tables with CASCADE
+  await prisma.$executeRaw`DO $$ 
+    BEGIN 
+      EXECUTE (
+        SELECT 'TRUNCATE TABLE ' || string_agg(quote_ident(tablename), ', ') || ' CASCADE'
+        FROM pg_tables
+        WHERE schemaname = 'public'
+      );
+    END $$;`
+
+  console.log('✅ Database reset completed')
+}
+
 async function main() {
   try {
     console.log('🌱 Starting database seeding...')
+    
+    // Reset the database first
+    await resetDatabase()
     
     // Run seeders in sequence
     await seeders.users(prisma)

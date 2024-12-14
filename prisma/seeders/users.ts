@@ -3,9 +3,6 @@ import { PrismaClient } from '@prisma/client'
 export async function seedUsers(prisma: PrismaClient) {
   console.log('🌱 Seeding users...')
   
-  // Delete existing records
-  await prisma.user.deleteMany({})
-
   const users = [
     { name: 'John Doe', email: 'john.doe@example.com' },
     { name: 'Jane Smith', email: 'jane.smith@example.com' },
