@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "concurrently \"next dev --turbopack\" \"prisma studio\" \"wait-on tcp:3000 && open-cli http://localhost:3000\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -11,7 +11,6 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
-    "@prisma/client": "^6.0.1",
     "@tailwindcss/forms": "^0.5.9",
     "next": "15.1.0",
     "react": "^19.0.0",
@@ -19,19 +18,22 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@prisma/client": "^6.0.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.0",
     "eslint": "^9",
     "eslint-config-next": "15.1.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.2.1",
+    "open-cli": "^8.0.0",
     "postcss": "^8",
     "prettier": "^3.4.2",
     "prisma": "^6.0.1",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wait-on": "^8.0.1"
   }
 }

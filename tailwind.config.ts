@@ -1,7 +1,6 @@
 import type { Config } from "tailwindcss";
-import forms from '@tailwindcss/forms';
 
-const config: Config = {
+export default {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,11 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#1E3EE6",
-        secondary: "#1832B8",
+        background: "var(--background)",
+        foreground: "var(--foreground)",
       },
     },
   },
-  plugins: [forms],
-};
-export default config;
+  plugins: [],
+} satisfies Config;
