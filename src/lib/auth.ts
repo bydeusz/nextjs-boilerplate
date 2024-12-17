@@ -50,6 +50,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
+    session: async ({ session, token }) => {
+      if (session?.user) {
+        session.user.id = token.sub as string;
+      }
+      return session;
+    },
     signIn({ user, profile }) {
       const allowedDomain = process.env.ALLOWED_DOMAIN;
       const email = user?.email || profile?.email;
