@@ -1,5 +1,5 @@
-import { prisma } from "@/lib/prisma";
-import { auth } from "@/lib/auth";
+import { prisma } from "@/config/prisma";
+import { auth } from "@/config/auth";
 import Link from "next/link";
 
 export async function Thumbnail() {

@@ -1,5 +1,6 @@
-import { auth } from "@/lib/auth";
+import { auth } from "@/config/auth";
 import { redirect } from "next/navigation";
+import TranslationTest from "@/components/test/TranslationTest";
 
 export default async function Home() {
   const session = await auth();
@@ -14,6 +15,9 @@ export default async function Home() {
         Welcome, {session.user.name || session.user.email}
       </h1>
       <p className="text-gray-600">{session.user.email}</p>
+      <div>
+        <TranslationTest />
+      </div>
     </div>
   );
 }

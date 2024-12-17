@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth";
+import { auth } from "@/config/auth";
 import RegisterForm from "@/components/forms/Register/RegisterForm";
 import { redirect } from "next/navigation";
 import Link from "next/link";
