@@ -1,5 +1,9 @@
 {
   "HomePage": {
     "title": "Hello world!"
+  },
+  "LanguageSwitcher": {
+    "dutch": "Nederlands",
+    "english": "English"
   }
 }

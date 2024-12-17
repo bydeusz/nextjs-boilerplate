@@ -1,25 +1,28 @@
 "use client";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 
-export default function LanguageSwitcher({ lang }: { lang: string }) {
+export default function LanguageSwitcher() {
+  const t = useTranslations("LanguageSwitcher");
+  const locale = useLocale();
   const router = useRouter();
-  const pathname = usePathname();
 
-  const handleLanguageChange = async (event: any) => {
+  const handleLanguageChange = async (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
     const newLocale = event.target.value;
 
-    // Get the current pathname without the existing locale
-    const currentPathname = pathname.replace(/^\/[a-z]{2}(\/|$)/, "/");
-
-    await fetch(`/api/set-locale`, {
+    // Set the cookie using Next.js API route
+    await fetch("/api/language", {
       method: "POST",
+      body: JSON.stringify({ locale: newLocale }),
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ locale: newLocale }),
     });
 
-    router.push(`/${newLocale}${currentPathname}`);
+    // Refresh the page to apply the new locale
+    router.refresh();
   };
 
   return (
@@ -29,9 +32,9 @@ export default function LanguageSwitcher({ lang }: { lang: string }) {
         name="language"
         className="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-primary sm:text-sm sm:leading-6 hover:cursor-pointer"
         onChange={handleLanguageChange}
-        value={lang}>
-        <option value="nl">Nederlands</option>
-        <option value="en">English</option>
+        value={locale}>
+        <option value="nl">{t("dutch")}</option>
+        <option value="en">{t("english")}</option>
       </select>
     </div>
   );
