@@ -2,8 +2,26 @@
   "HomePage": {
     "title": "Hallo wereld!"
   },
+  "LoginForm": {
+    "title": "Inloggen",
+    "description": "Vul je inloggegevens in om verder te gaan.",
+    "email": "Email",
+    "password": "Wachtwoord",
+    "forgotPassword": "Wachtwoord vergeten?",
+    "signIn": "Inloggen",
+    "noAccount": "Geen account?"
+  },
+  "RegisterForm": {
+    "title": "Maak je account aan",
+    "description": "Vul je inloggegevens in om verder te gaan.",
+    "name": "Volledige naam",
+    "email": "Email",
+    "password": "Wachtwoord",
+    "signUp": "Aanmelden",
+    "alreadyHaveAccount": "Heb je al een account?"
+  },
   "LanguageSwitcher": {
     "dutch": "Nederlands",
-    "english": "English"
+    "english": "Engels"
   }
 }

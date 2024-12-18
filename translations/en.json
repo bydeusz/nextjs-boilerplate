@@ -2,6 +2,24 @@
   "HomePage": {
     "title": "Hello world!"
   },
+  "LoginForm": {
+    "title": "Sign in",
+    "description": "Please enter your credentials to continue.",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "signIn": "Sign in",
+    "noAccount": "Don't have an account?"
+  },
+  "RegisterForm": {
+    "title": "Create your account",
+    "description": "Please fill in your information to create an account.",
+    "name": "Full name",
+    "email": "Email",
+    "password": "Password",
+    "signUp": "Sign up",
+    "alreadyHaveAccount": "Already have an account?"
+  },
   "LanguageSwitcher": {
     "dutch": "Nederlands",
     "english": "English"

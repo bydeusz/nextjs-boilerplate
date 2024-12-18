@@ -5,8 +5,8 @@ import { cookies, headers } from "next/headers";
 const locales = ["en", "nl"];
 
 export default getRequestConfig(async () => {
-  const cookieStore = cookies();
-  const headersList = headers();
+  const cookieStore = await cookies();
+  const headersList = await headers();
 
   // Try to get locale from cookie
   let locale = cookieStore.get("NEXT_LOCALE")?.value;

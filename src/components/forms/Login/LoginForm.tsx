@@ -3,21 +3,29 @@
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { InputField } from "@/components/inputs/InputField/Input";
+import { PasswordInput } from "@/components/inputs/Password/Password";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Loading } from "@/components/lables/Loading/Loading";
 
 export default function LoginForm() {
   const router = useRouter();
   const [error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const t = useTranslations("LoginForm");
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
     setError("");
 
-    const formData = new FormData(event.currentTarget);
     const response = await signIn("credentials", {
-      email: formData.get("email"),
-      password: formData.get("password"),
+      email,
+      password,
       redirect: false,
     });
 
@@ -28,51 +36,60 @@ export default function LoginForm() {
       return;
     }
 
-    router.push("/"); // Redirect to home page on success
-    router.refresh(); // Refresh the page to update the session
+    router.push("/");
+    router.refresh();
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="email" className="sr-only">
-          Email address
-        </label>
-        <input
-          id="email"
-          name="email"
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <h1 className="text-xl font-bold">{t("title")}</h1>
+        <p className="text-sm text-gray-500">{t("description")}</p>
+      </div>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <InputField
+          label={t("email")}
+          required={true}
           type="email"
-          autoComplete="email"
-          required
-          className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-          placeholder="Email address"
+          name="email"
+          id="email"
+          placeholder="john@doe.com"
+          onChange={(e) => setEmail(e.target.value)}
         />
-      </div>
-      <div>
-        <label htmlFor="password" className="sr-only">
-          Password
-        </label>
-        <input
-          id="password"
+        <PasswordInput
           name="password"
-          type="password"
-          autoComplete="current-password"
-          required
-          className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+          id="password"
+          label={t("password")}
+          required={true}
           placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
         />
-      </div>
-
-      {error && <div className="text-red-500 text-sm text-center">{error}</div>}
-
-      <div>
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed">
-          {isLoading ? "Signing in..." : "Sign in"}
-        </button>
-      </div>
-    </form>
+        <div className="flex space-x-4 items-center">
+          <button
+            type="submit"
+            disabled={isLoading}
+            className={
+              !isLoading
+                ? "flex items-center bg-primary text-white rounded-md hover:bg-secondary px-4 py-2 text-sm"
+                : "flex items-center bg-gray-300 text-gray-600 rounded-md px-4 py-2 text-sm"
+            }>
+            {isLoading && <Loading className="size-4" />}
+            {t("signIn")}
+          </button>
+          <Link
+            href="/register"
+            className="font-medium text-sm text-primary hover:underline underline-offset-4">
+            {t("noAccount")}
+          </Link>
+        </div>
+      </form>
+      {error && (
+        <div
+          className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative"
+          role="alert">
+          <span className="block sm:inline">{error}</span>
+        </div>
+      )}
+    </div>
   );
 }
