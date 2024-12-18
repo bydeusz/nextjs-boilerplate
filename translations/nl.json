@@ -1,6 +1,21 @@
 {
-  "HomePage": {
-    "title": "Hallo wereld!"
+  "Navbar": {
+    "search": "Zoeken",
+    "links": {
+      "dashboard": "Dashboard",
+      "settings": "Instellingen",
+      "support": "Support"
+    }
+  },
+  "Buttons": {
+    "logout": "Uitloggen"
+  },
+  "LanguageSwitcher": {
+    "dutch": "Nederlands",
+    "english": "Engels"
+  },
+  "Dashboard": {
+    "title": "Dashboard"
   },
   "LoginForm": {
     "title": "Inloggen",
@@ -19,9 +34,5 @@
     "password": "Wachtwoord",
     "signUp": "Aanmelden",
     "alreadyHaveAccount": "Heb je al een account?"
-  },
-  "LanguageSwitcher": {
-    "dutch": "Nederlands",
-    "english": "Engels"
   }
 }

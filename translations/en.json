@@ -1,7 +1,24 @@
 {
-  "HomePage": {
-    "title": "Hello world!"
+  "Navbar": {
+    "search": "Search",
+    "links": {
+      "dashboard": "Dashboard",
+      "settings": "Settings",
+      "support": "Support"
+    }
   },
+  "Buttons": {
+    "logout": "Sign out"
+  },
+  "LanguageSwitcher": {
+    "dutch": "Dutch",
+    "english": "English"
+  },
+
+  "Dashboard": {
+    "title": "Dashboard"
+  },
+
   "LoginForm": {
     "title": "Sign in",
     "description": "Please enter your credentials to continue.",
@@ -19,9 +36,5 @@
     "password": "Password",
     "signUp": "Sign up",
     "alreadyHaveAccount": "Already have an account?"
-  },
-  "LanguageSwitcher": {
-    "dutch": "Nederlands",
-    "english": "English"
   }
 }

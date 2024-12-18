@@ -12,6 +12,7 @@ import { NavLink } from "@/components/actions/NavLink/NavLink";
 import { SearchInput } from "@/components/inputs/Search/Search";
 import LanguageSwitcher from "@/components/actions/LanguageSwitcher/LanguageSwitcher";
 import LogoutButton from "@/components/actions/Logout/LogoutButton";
+import { useTranslations } from "next-intl";
 
 interface DashboardProps {
   children: React.ReactNode;
@@ -20,7 +21,7 @@ interface DashboardProps {
 
 export const Dashboard = ({ children, thumbnail }: DashboardProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
+  const t = useTranslations("Navbar");
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -46,7 +47,7 @@ export const Dashboard = ({ children, thumbnail }: DashboardProps) => {
         <div className="mb-6">
           <SearchInput
             className="bg-gray-100 px-8 py-[9px] border border-gray-200 rounded-md text-xs text-gray-900 focus:border-gray-700"
-            placeholder="search"
+            placeholder={t("search")}
             name="search"
             id="search"
             disabled={true}
@@ -58,17 +59,19 @@ export const Dashboard = ({ children, thumbnail }: DashboardProps) => {
 
         <nav className="flex-1 space-y-2">
           <NavLink href="/">
-            <HomeIcon className="h-[20px] w-[20px] mr-2" /> Dashboard
+            <HomeIcon className="h-[20px] w-[20px] mr-2" />{" "}
+            {t("links.dashboard")}
           </NavLink>
         </nav>
         <nav className="space-y-2 absolute bottom-0 left-0 w-full p-4 border-t">
-          <LanguageSwitcher lang="nl" />
+          <LanguageSwitcher />
           <NavLink href="/settings">
             <Cog8ToothIcon className="h-[20px] w-[20px] mr-2" />
-            Settings
+            {t("links.settings")}
           </NavLink>
           <NavLink href="/support">
-            <LifebuoyIcon className="h-[20px] w-[20px] mr-2" /> Support
+            <LifebuoyIcon className="h-[20px] w-[20px] mr-2" />
+            {t("links.support")}
           </NavLink>
           <LogoutButton />
         </nav>

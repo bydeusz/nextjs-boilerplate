@@ -5,9 +5,13 @@ import Link from "next/link";
 export async function Thumbnail() {
   const session = await auth();
 
+  if (!session?.user?.id) {
+    return null;
+  }
+
   const data = await prisma.user.findUnique({
     where: {
-      id: session?.user?.id as string,
+      id: session.user.id,
     },
   });
 
