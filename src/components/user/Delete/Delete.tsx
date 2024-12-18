@@ -1,15 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+import React, { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
+
 import { Button } from "@/components/actions/Button/Button";
 import { InputField } from "@/components/inputs/InputField/Input";
-import React, { useState, useEffect } from "react";
 import { Loading } from "@/components/lables/Loading/Loading";
 
 interface DeleteUserProps {
   user: any;
-  t: any;
 }
 
-export function DeleteUser({ user, t }: DeleteUserProps) {
+export function DeleteUser({ user }: DeleteUserProps) {
+  const t = useTranslations("Modals.delete");
+
   const [inputValue, setInputValue] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -44,14 +48,14 @@ export function DeleteUser({ user, t }: DeleteUserProps) {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-medium">{t.modals.delete.title}</h2>
-      <p className="text-sm">{t.modals.delete.desc}</p>
+      <h2 className="text-base font-medium">{t("title")}</h2>
+      <p className="text-sm">{t("desc")}</p>
       <InputField
         name="name"
         id="name"
         type="text"
-        label={`${t.modals.delete.label} "${user.firstname} ${user.lastname}"`}
-        placeholder={t.modals.delete.placeholder}
+        label={`${t("label")} "${user.name}"`}
+        placeholder={t("placeholder")}
         onChange={(e) => setInputValue(e.target.value)}
         required={true}
       />
@@ -72,7 +76,7 @@ export function DeleteUser({ user, t }: DeleteUserProps) {
           }
         }}>
         {isLoading && <Loading className="h-4 w-4" />}
-        {t.modals.delete.button}
+        {t("button")}
       </Button>
     </div>
   );

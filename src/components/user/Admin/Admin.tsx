@@ -1,25 +1,28 @@
+import React, { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
+import { User } from "@/types/User";
+
 import { Button } from "@/components/actions/Button/Button";
 import { InputField } from "@/components/inputs/InputField/Input";
-import React, { useState, useEffect } from "react";
 import { Loading } from "@/components/lables/Loading/Loading";
 
 interface AdminProps {
-  user: any;
-  t: any;
+  user: User;
 }
 
-export default function Admin({ user, t }: AdminProps) {
+export default function Admin({ user }: AdminProps) {
+  const t = useTranslations("Modals.admin");
   const [inputValue, setInputValue] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const validateInput = () => {
-      const fullName = `${user.firstname} ${user.lastname}`;
+      const fullName = `${user.name}`;
       setIsButtonDisabled(inputValue !== fullName);
     };
     validateInput();
-  }, [inputValue, user.firstname, user.lastname]);
+  }, [inputValue, user.name]);
 
   const deleteUser = async (id: string) => {
     setIsLoading(true);
@@ -45,16 +48,14 @@ export default function Admin({ user, t }: AdminProps) {
     <div>
       {user.isAdmin ? (
         <div className="space-y-4">
-          <h2 className="text-base font-medium">
-            {t.modals.admin.demote.title}
-          </h2>
-          <p className="text-sm">{t.modals.admin.demote.desc}</p>
+          <h2 className="text-base font-medium">{t("demote.title")}</h2>
+          <p className="text-sm">{t("demote.desc")}</p>
           <InputField
             name="name"
             id="name"
             type="text"
-            label={`${t.modals.admin.demote.label} "${user.firstname} ${user.lastname}"`}
-            placeholder={t.modals.admin.demote.placeholder}
+            label={`${t("demote.label")} "${user.name}"`}
+            placeholder={t("demote.placeholder")}
             onChange={(e) => setInputValue(e.target.value)}
             required={true}
           />
@@ -69,27 +70,25 @@ export default function Admin({ user, t }: AdminProps) {
             disabled={isButtonDisabled}
             onClick={() => {
               if (user?.id) {
-                deleteUser(user.clerkId);
+                deleteUser(user.id);
               } else {
                 console.error("User or user ID is undefined");
               }
             }}>
             {isLoading && <Loading className="h-4 w-4" />}
-            {t.modals.admin.demote.button}
+            {t("demote.button")}
           </Button>
         </div>
       ) : (
         <div className="space-y-4">
-          <h2 className="text-base font-medium">
-            {t.modals.admin.promote.title}
-          </h2>
-          <p className="text-sm">{t.modals.admin.promote.desc}</p>
+          <h2 className="text-base font-medium">{t("promote.title")}</h2>
+          <p className="text-sm">{t("promote.desc")}</p>
           <InputField
             name="name"
             id="name"
             type="text"
-            label={`${t.modals.admin.promote.label} "${user.firstname} ${user.lastname}"`}
-            placeholder={t.modals.admin.promote.placeholder}
+            label={`${t("promote.label")} "${user.name}"`}
+            placeholder={t("promote.placeholder")}
             onChange={(e) => setInputValue(e.target.value)}
             required={true}
           />
@@ -104,13 +103,13 @@ export default function Admin({ user, t }: AdminProps) {
             disabled={isButtonDisabled}
             onClick={() => {
               if (user?.id) {
-                deleteUser(user.clerkId);
+                deleteUser(user.id);
               } else {
                 console.error("User or user ID is undefined");
               }
             }}>
             {isLoading && <Loading className="h-4 w-4" />}
-            {t.modals.admin.promote.button}
+            {t("promote.button")}
           </Button>
         </div>
       )}
