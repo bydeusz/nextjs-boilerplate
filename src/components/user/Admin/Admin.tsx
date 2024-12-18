@@ -24,7 +24,7 @@ export default function Admin({ user }: AdminProps) {
     validateInput();
   }, [inputValue, user.name]);
 
-  const deleteUser = async (id: string) => {
+  const toggleAdmin = async (id: string) => {
     setIsLoading(true);
     const response = await fetch("/api/user/admin", {
       method: "PATCH",
@@ -70,7 +70,7 @@ export default function Admin({ user }: AdminProps) {
             disabled={isButtonDisabled}
             onClick={() => {
               if (user?.id) {
-                deleteUser(user.id);
+                toggleAdmin(user.id);
               } else {
                 console.error("User or user ID is undefined");
               }
@@ -103,7 +103,7 @@ export default function Admin({ user }: AdminProps) {
             disabled={isButtonDisabled}
             onClick={() => {
               if (user?.id) {
-                deleteUser(user.id);
+                toggleAdmin(user.id);
               } else {
                 console.error("User or user ID is undefined");
               }

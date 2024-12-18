@@ -1,14 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
+import { User } from "@/types/User";
 
 import { Button } from "@/components/actions/Button/Button";
 import { InputField } from "@/components/inputs/InputField/Input";
 import { Loading } from "@/components/lables/Loading/Loading";
 
 interface DeleteUserProps {
-  user: any;
+  user: User;
 }
 
 export function DeleteUser({ user }: DeleteUserProps) {
@@ -20,11 +20,11 @@ export function DeleteUser({ user }: DeleteUserProps) {
 
   useEffect(() => {
     const validateInput = () => {
-      const fullName = `${user.firstname} ${user.lastname}`;
+      const fullName = `${user.name}`;
       setIsButtonDisabled(inputValue !== fullName);
     };
     validateInput();
-  }, [inputValue, user.firstname, user.lastname]);
+  }, [inputValue, user.name]);
 
   const deleteUser = async (id: string) => {
     setIsLoading(true);
@@ -70,7 +70,7 @@ export function DeleteUser({ user }: DeleteUserProps) {
         disabled={isButtonDisabled}
         onClick={() => {
           if (user?.id) {
-            deleteUser(user.clerkId);
+            deleteUser(user.id);
           } else {
             console.error("User or user ID is undefined");
           }
