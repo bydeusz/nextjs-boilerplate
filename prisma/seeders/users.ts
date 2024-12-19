@@ -8,6 +8,7 @@ export async function seedUsers(prisma: PrismaClient) {
     {
       name: "John Doe",
       email: "john.doe@bydeusz.com",
+      role: "Manager",
       isAdmin: true,
       password: await hash("test@123", 12),
       emailVerified: new Date(),
@@ -16,6 +17,7 @@ export async function seedUsers(prisma: PrismaClient) {
     {
       name: "Jane Smith",
       email: "jane.smith@bydeusz.com",
+      role: "Sales",
       isAdmin: false,
       password: await hash("test@123", 12),
       emailVerified: new Date(),
@@ -24,6 +26,7 @@ export async function seedUsers(prisma: PrismaClient) {
     {
       name: "Alice Johnson",
       email: "alice.johnson@bydeusz.com",
+      role: "Designer",
       isAdmin: false,
       password: await hash("test@123", 12),
       emailVerified: new Date(),

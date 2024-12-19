@@ -1,8 +1,11 @@
 import { isLoggedIn } from "@/utils/isLoggedIn";
+import { getTranslations } from "next-intl/server";
+
 import { Header } from "@/components/headers/Header/Header";
 import { Tabs } from "@/components/navigation/Tabs/Tabs";
 import { Tab } from "@/components/actions/Tab/Tab";
-import { getTranslations } from "next-intl/server";
+import { UpdateUser } from "@/components/user/Update/UpdateUser";
+import { UpdatePassword } from "@/components/user/Update/UpdatePassword";
 
 export default async function Page() {
   await isLoggedIn();
@@ -15,8 +18,9 @@ export default async function Page() {
         <Tab href={`/settings`}>{t("tabs.profile")}</Tab>
         <Tab href={`/settings/team`}>{t("tabs.team")}</Tab>
       </Tabs>
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-        <p>Content</p>
+      <div className="space-y-4">
+        <UpdateUser />
+        <UpdatePassword />
       </div>
     </div>
   );

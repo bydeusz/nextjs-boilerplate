@@ -38,17 +38,15 @@ export const UserItem = ({ user, currentUser }: UserItemProps) => {
             {user.name?.charAt(0)}
           </div>
           <div className="text-sm">
-            <div className="font-semibold flex space-x-2">
-              <div>
-                {user.name}{" "}
-                {user.isAdmin && (
-                  <Badge className="text-xs bg-blue-100 border border-blue-400 ml-[5px] px-2 py-[1px]">
-                    {t("admin")}
-                  </Badge>
-                )}
-              </div>
+            <div className="font-semibold flex space-x-2 items-center mb-1">
+              <span>{user.name}</span>
+              {user.isAdmin && (
+                <Badge className="text-[8px] bg-blue-100 border border-blue-200 text-blue-500 ml-[5px] px-2 py-[1px] uppercase font-semibold">
+                  {t("admin")}
+                </Badge>
+              )}
             </div>
-            <div>{user.email}</div>
+            <div className="text-xs">{user.email}</div>
           </div>
         </div>
         <div className="space-x-4">
@@ -56,7 +54,7 @@ export const UserItem = ({ user, currentUser }: UserItemProps) => {
             <Button
               type="button"
               onClick={handleAdminModal}
-              className="bg-white border rounded-md text-xs hover:bg-black hover:text-white hover:border-black">
+              className="bg-white border rounded-md text-xs hover:bg-primary hover:text-white hover:border-primary">
               {t("settings")}
             </Button>
           )}

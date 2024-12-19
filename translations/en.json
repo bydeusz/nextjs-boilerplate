@@ -54,6 +54,39 @@
         "label": "Enter full name:",
         "placeholder": "Enter name here"
       }
+    },
+    "add": {
+      "title": "Add New User",
+      "desc": "Enter the details for the new user below.",
+      "fullName": "Full name",
+      "email": "Email",
+      "password": "Password",
+      "fullNamePlaceholder": "Enter full name here",
+      "emailPlaceholder": "Enter email here",
+      "passwordPlaceholder": "Enter password here",
+      "button": "Add user",
+      "invalidDomain": "This email domain is not allowed. Please use an approved domain."
+    }
+  },
+
+  "User": {
+    "update": {
+      "title": "Account details",
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "edit": "Edit",
+      "cancel": "Cancel",
+      "save": "Save"
+    },
+    "password": {
+      "title": "Update password",
+      "desc": "Enter your new password below.",
+      "newPassword": "New password",
+      "newPasswordPlaceholder": "Enter new password",
+      "confirmPassword": "Confirm password",
+      "confirmPasswordPlaceholder": "Confirm new password",
+      "update": "Update"
     }
   },
 

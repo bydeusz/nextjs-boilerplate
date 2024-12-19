@@ -54,6 +54,39 @@
         "label": "Voer volledige naam in:",
         "placeholder": "Voer naam in"
       }
+    },
+    "add": {
+      "title": "Gebruiker toevoegen",
+      "desc": "Je staat op het punt om een gebruiker toe te voegen aan het team.",
+      "fullName": "Volledige naam",
+      "email": "Email",
+      "password": "Wachtwoord",
+      "fullNamePlaceholder": "Voer volledige naam in",
+      "emailPlaceholder": "Voer email in",
+      "passwordPlaceholder": "Voer wachtwoord in",
+      "button": "Gebruiker toevoegen",
+      "invalidDomain": "Dit e-maildomein is niet toegestaan. Gebruik een goedgekeurd domein."
+    }
+  },
+
+  "User": {
+    "update": {
+      "title": "Account details",
+      "name": "Naam",
+      "email": "Email",
+      "role": "Rol",
+      "edit": "Bewerken",
+      "cancel": "Annuleren",
+      "save": "Opslaan"
+    },
+    "password": {
+      "title": "Wachtwoord wijzigen",
+      "desc": "Voer je nieuwe wachtwoord in.",
+      "newPassword": "Nieuw wachtwoord",
+      "newPasswordPlaceholder": "Voer nieuw wachtwoord in",
+      "confirmPassword": "Bevestig wachtwoord",
+      "confirmPasswordPlaceholder": "Bevestig nieuw wachtwoord",
+      "update": "Wijzigen"
     }
   },
 
