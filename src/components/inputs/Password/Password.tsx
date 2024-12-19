@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
+
 import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/outline";
 
 // Input type
@@ -10,6 +12,7 @@ export interface PasswordProps {
   id: string;
   placeholder: string;
   disabled?: boolean;
+  value?: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -20,9 +23,10 @@ export const PasswordInput = ({
   id,
   placeholder,
   disabled,
+  value,
   onChange,
 }: PasswordProps) => {
-  const [value, setValue] = useState("");
+  const t = useTranslations("Inputs.errors");
   const [error, setError] = useState(false);
   const [blurred, setBlurred] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -31,16 +35,11 @@ export const PasswordInput = ({
     setBlurred(true);
 
     // Check for error after blur
-    if (required && value === "") {
+    if (required && !value) {
       setError(true);
     } else {
       setError(false);
     }
-  };
-
-  const inputHandler: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    setValue(event.target.value);
-    onChange(event);
   };
 
   const togglePasswordVisibility = () => {
@@ -67,9 +66,9 @@ export const PasswordInput = ({
           }`}
           placeholder={placeholder}
           disabled={disabled}
-          value={value}
+          value={value ?? ""}
           onBlur={handleBlur}
-          onChange={inputHandler}
+          onChange={onChange}
         />
         <button
           type="button"
@@ -88,7 +87,7 @@ export const PasswordInput = ({
       </div>
       {error && blurred && (
         <p className="mt-2 text-xs text-red-600" id="email-error">
-          This field is required
+          {t("required")}
         </p>
       )}
     </div>

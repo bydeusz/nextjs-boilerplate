@@ -54,6 +54,7 @@ export default function LoginForm() {
           name="email"
           id="email"
           placeholder="john@doe.com"
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <PasswordInput
@@ -62,6 +63,7 @@ export default function LoginForm() {
           label={t("password")}
           required={true}
           placeholder="Password"
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className="flex space-x-4 items-center">

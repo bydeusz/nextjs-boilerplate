@@ -63,6 +63,7 @@ export default function RegisterForm() {
           name="name"
           id="name"
           placeholder="John Doe"
+          value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <InputField
@@ -72,6 +73,7 @@ export default function RegisterForm() {
           name="email"
           id="email"
           placeholder="john@doe.com"
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <PasswordInput
@@ -80,6 +82,7 @@ export default function RegisterForm() {
           label={t("password")}
           required={true}
           placeholder="Password"
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className="flex space-x-4 items-center">

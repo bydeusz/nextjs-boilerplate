@@ -107,5 +107,28 @@
     "password": "Password",
     "signUp": "Sign up",
     "alreadyHaveAccount": "Already have an account?"
+  },
+  "ContactForm": {
+    "title": "Support Ticket",
+    "description": "Fill in the support ticket form to contact us.",
+    "name": "Name",
+    "namePlaceholder": "Enter name here",
+    "email": "E-mail",
+    "emailPlaceholder": "Enter e-mail here",
+    "subject": "Subject",
+    "subjectPlaceholder": "Enter subject here",
+    "message": "Message",
+    "messagePlaceholder": "Enter message here",
+    "submit": "Send message",
+    "success": "Your message has been sent successfully!",
+    "error": "An error occurred while sending your message. Please try again."
+  },
+  "Inputs": {
+    "errors": {
+      "required": "This field is required",
+      "email": "Please enter a valid email address",
+      "url": "Please enter a valid url like: https://www.example.com",
+      "tel": "Please enter a valid phone number"
+    }
   }
 }

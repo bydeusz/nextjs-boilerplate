@@ -1,25 +1,28 @@
 import { prisma } from "@/config/prisma";
 import { hash } from "bcryptjs";
 import { NextResponse } from "next/server";
+import { validateDomain } from "@/utils/validateDomain";
 
 export async function POST(request: Request) {
   try {
     const { name, email, password } = await request.json();
-    const allowedDomain = process.env.ALLOWED_DOMAIN;
+    const allowedDomains = process.env.ALLOWED_DOMAIN;
+
+    if (!validateDomain(email, allowedDomains)) {
+      return NextResponse.json(
+        {
+          error:
+            "This email domain is not allowed. Please use an approved domain.",
+        },
+        { status: 400 },
+      );
+    }
 
     // Basic validation
     if (!email || !password) {
       return NextResponse.json(
         { error: "Email and password are required" },
         { status: 400 },
-      );
-    }
-
-    // Check email domain
-    if (!email.endsWith(`@${allowedDomain}`)) {
-      return NextResponse.json(
-        { error: `Only ${allowedDomain} email addresses are allowed` },
-        { status: 403 },
       );
     }
 

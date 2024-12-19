@@ -107,5 +107,28 @@
     "password": "Wachtwoord",
     "signUp": "Aanmelden",
     "alreadyHaveAccount": "Heb je al een account?"
+  },
+  "ContactForm": {
+    "title": "Support Ticket",
+    "description": "Vul het support formulier in om contact op te nemen met ons.",
+    "name": "Naam",
+    "namePlaceholder": "Voer naam in",
+    "email": "E-mail",
+    "emailPlaceholder": "Voer e-mail in",
+    "subject": "Onderwerp",
+    "subjectPlaceholder": "Voer onderwerp in",
+    "message": "Bericht",
+    "messagePlaceholder": "Voer bericht in",
+    "submit": "Bericht verzenden",
+    "success": "Je bericht is succesvol verzonden!",
+    "error": "Er is iets fout gegaan bij het verzenden van je bericht. Probeer het opnieuw."
+  },
+  "Inputs": {
+    "errors": {
+      "required": "Dit veld is verplicht",
+      "email": "Voer een geldig e-mailadres in",
+      "url": "Voer een geldige URL in, bijv. https://www.example.com",
+      "tel": "Voer een geldig telefoonnummer in"
+    }
   }
 }

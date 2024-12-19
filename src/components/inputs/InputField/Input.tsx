@@ -1,5 +1,7 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 
 // Input type
@@ -12,6 +14,7 @@ export interface InputProps {
   placeholder: string;
   disabled?: boolean;
   initialValue?: string;
+  value?: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -24,9 +27,10 @@ export const InputField = ({
   placeholder,
   disabled,
   initialValue,
+  value,
   onChange,
 }: InputProps) => {
-  const [value, setValue] = useState(initialValue || "");
+  const t = useTranslations("Inputs.errors");
   const [error, setError] = useState(false);
   const [blurred, setBlurred] = useState(false);
 
@@ -34,27 +38,23 @@ export const InputField = ({
     setBlurred(true);
 
     // Check for error after blur
-    if (required && value === "") {
+    if (required && !value) {
       setError(true);
-    } else if (type === "email" && !value.includes("@")) {
+    } else if (type === "email" && !value?.includes("@")) {
       setError(true);
     } else if (type === "url") {
       try {
-        new URL(value);
+        new URL(value || "");
         setError(false);
-      } catch (e) {
+      } catch (error) {
         setError(true);
+        console.log(error);
       }
-    } else if (type === "tel" && !/^\+?\d{7,14}$/.test(value)) {
+    } else if (type === "tel" && !/^\+?\d{7,14}$/.test(value || "")) {
       setError(true);
     } else {
       setError(false);
     }
-  };
-
-  const inputHandler: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    setValue(event.target.value);
-    onChange(event);
   };
 
   return (
@@ -77,9 +77,9 @@ export const InputField = ({
           }`}
           placeholder={placeholder}
           disabled={disabled}
-          value={value}
+          value={value ?? initialValue ?? ""}
           onBlur={handleBlur}
-          onChange={inputHandler}
+          onChange={onChange}
         />
         {error && (
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
@@ -93,12 +93,12 @@ export const InputField = ({
       {error && blurred && (
         <p className="mt-2 text-xs text-red-600" id="email-error">
           {type === "email"
-            ? "Please enter a valid email address"
+            ? t("email")
             : type === "url"
-              ? "Please enter a valid url like: https://www.example.com"
+              ? t("url")
               : type === "tel"
-                ? "Please enter a valid phone number"
-                : "This field is required"}
+                ? t("tel")
+                : t("required")}
         </p>
       )}
     </div>

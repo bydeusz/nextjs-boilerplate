@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 // Input type
 export interface TextAreaProps {
@@ -8,6 +9,7 @@ export interface TextAreaProps {
   name: string;
   id: string;
   disabled?: boolean;
+  value?: string;
   onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
 }
 
@@ -17,9 +19,10 @@ export const TextArea = ({
   name,
   id,
   disabled,
+  value,
   onChange,
 }: TextAreaProps) => {
-  const [value, setValue] = useState("");
+  const t = useTranslations("Inputs.errors");
   const [error, setError] = useState(false);
   const [blurred, setBlurred] = useState(false);
 
@@ -27,25 +30,18 @@ export const TextArea = ({
     setBlurred(true);
 
     // Check for error after blur
-    if (required && value === "") {
+    if (required && !value) {
       setError(true);
     } else {
       setError(false);
     }
   };
 
-  const inputHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (
-    event,
-  ) => {
-    setValue(event.target.value);
-    onChange(event);
-  };
-
   return (
     <div>
       <label
         htmlFor={name}
-        className="block text-sm font-medium leading-6 text-gray-900">
+        className="block text-xs font-medium leading-6 text-gray-900">
         {label}
         {required && <span className="text-red-600">*</span>}
       </label>
@@ -59,15 +55,15 @@ export const TextArea = ({
               ? "text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500"
               : "text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 focus:ring-gray-700 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200"
           }`}
-          defaultValue={""}
+          value={value ?? ""}
           disabled={disabled}
           onBlur={handleBlur}
-          onChange={inputHandler}
+          onChange={onChange}
         />
       </div>
       {error && blurred && (
         <p className="mt-2 text-xs text-red-600" id="email-error">
-          This field is required
+          {t("required")}
         </p>
       )}
     </div>
