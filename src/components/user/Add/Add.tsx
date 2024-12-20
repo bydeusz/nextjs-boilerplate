@@ -93,6 +93,7 @@ export const AddUser = ({ isAdmin }: AddUserProps) => {
               id="fullName"
               required={true}
               placeholder={t("fullNamePlaceholder")}
+              value={inputValue.fullName}
               onChange={handleChange}
             />
 
@@ -103,6 +104,7 @@ export const AddUser = ({ isAdmin }: AddUserProps) => {
               id="email"
               required={true}
               placeholder={t("emailPlaceholder")}
+              value={inputValue.email}
               onChange={handleChange}
             />
 
@@ -112,6 +114,7 @@ export const AddUser = ({ isAdmin }: AddUserProps) => {
               id="password"
               required={true}
               placeholder={t("passwordPlaceholder")}
+              value={inputValue.password}
               onChange={handleChange}
             />
 

@@ -9,7 +9,7 @@ export default async function Home() {
 
   return (
     <div className="p-4 md:p-12 space-y-6">
-      <Header title={t("title")} />
+      <Header border={true} title={t("title")} />
     </div>
   );
 }

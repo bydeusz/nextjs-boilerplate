@@ -56,6 +56,7 @@ export function DeleteUser({ user }: DeleteUserProps) {
         type="text"
         label={`${t("label")} "${user.name}"`}
         placeholder={t("placeholder")}
+        value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         required={true}
       />

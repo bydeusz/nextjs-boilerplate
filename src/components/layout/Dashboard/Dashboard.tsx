@@ -41,7 +41,7 @@ export const Dashboard = ({ children, thumbnail }: DashboardProps) => {
 
         <div className="flex justify-between mb-6">
           <Brand href="/" />
-          {thumbnail}
+          <div className="hidden md:block">{thumbnail}</div>
         </div>
 
         <div className="mb-6">

@@ -56,6 +56,7 @@ export default function Admin({ user }: AdminProps) {
             type="text"
             label={`${t("demote.label")} "${user.name}"`}
             placeholder={t("demote.placeholder")}
+            value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             required={true}
           />
@@ -89,6 +90,7 @@ export default function Admin({ user }: AdminProps) {
             type="text"
             label={`${t("promote.label")} "${user.name}"`}
             placeholder={t("promote.placeholder")}
+            value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             required={true}
           />
