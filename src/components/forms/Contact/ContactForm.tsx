@@ -36,7 +36,7 @@ export default function ContactForm() {
     setSuccess(false);
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("/api/mailer/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

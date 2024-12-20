@@ -63,6 +63,7 @@ export function UpdatePassword() {
           name="password"
           id="password"
           placeholder={t("newPasswordPlaceholder")}
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <PasswordInput
@@ -71,6 +72,7 @@ export function UpdatePassword() {
           name="confirmPassword"
           id="confirmPassword"
           placeholder={t("confirmPasswordPlaceholder")}
+          value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
         {error && <Alert type="error" title="Error" description={error} />}

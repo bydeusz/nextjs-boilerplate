@@ -32,10 +32,9 @@ export async function POST(request: Request) {
       from: `"${name}" <${process.env.SMTP_FROM_EMAIL}>`,
       to: process.env.SMTP_TO_EMAIL,
       replyTo: email,
-      subject: `Contact Form: ${subject}`,
+      subject: `Next Js Boilerplate - Support Ticket: ${subject}`,
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
       html: `
-        <h3>New Contact Form Submission</h3>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Subject:</strong> ${subject}</p>

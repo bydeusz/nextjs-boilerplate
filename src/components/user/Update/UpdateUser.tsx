@@ -108,7 +108,7 @@ export function UpdateUser() {
               name="fullname"
               id="fullname"
               placeholder="Enter your full name"
-              initialValue={user.fullname}
+              value={fullname}
               onChange={(e) => setFullname(e.target.value)}
             />
 
@@ -118,7 +118,7 @@ export function UpdateUser() {
               name="email"
               id="email"
               placeholder="Enter your email"
-              initialValue={user.email}
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
 
