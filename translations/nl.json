@@ -96,7 +96,8 @@
     "email": "Email",
     "password": "Wachtwoord",
     "signIn": "Inloggen",
-    "noAccount": "Heb je nog geen account?",
+    "noAccount": "Registreren",
+    "forgotPassword": "Wachtwoord vergeten?",
     "errors": {
       "missingCredentials": "Vul alle velden in",
       "userNotFound": "Gebruiker niet gevonden",
@@ -128,6 +129,27 @@
     "submit": "Bericht verzenden",
     "success": "Je bericht is succesvol verzonden!",
     "error": "Er is iets fout gegaan bij het verzenden van je bericht. Probeer het opnieuw."
+  },
+  "ResetPassword": {
+    "title": "Reset password",
+    "description": "Voer je email adres in om je wachtwoord te resetten.",
+    "email": "Email",
+    "submit": "Reset password",
+    "success": "Als een account bestaat, ontvang je een wachtwoord reset email",
+    "error": "Er is iets fout gegaan bij het verzenden van je email. Probeer het opnieuw.",
+    "resetTitle": "Reset je wachtwoord",
+    "resetDescription": "Voer je nieuwe wachtwoord in.",
+    "newPassword": "Nieuw wachtwoord",
+    "newPasswordPlaceholder": "Voer nieuw wachtwoord in",
+    "confirmPassword": "Bevestig wachtwoord",
+    "confirmPasswordPlaceholder": "Bevestig nieuw wachtwoord",
+    "resetButton": "Wachtwoord resetten",
+    "errors": {
+      "passwordMismatch": "Passwords do not match",
+      "passwordLength": "Password must be at least 6 characters long",
+      "invalidToken": "Invalid or expired reset token",
+      "default": "Something went wrong"
+    }
   },
   "Verify": {
     "success": "Email succesvol geverifieerd!",

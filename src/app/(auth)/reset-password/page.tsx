@@ -1,8 +1,9 @@
 import { auth } from "@/config/auth";
-import LoginForm from "@/components/forms/Login/LoginForm";
 import { redirect } from "next/navigation";
 
-export default async function LoginPage() {
+import ResetPassword from "@/components/forms/Reset/ResetPassword";
+
+export default async function ResetPasswordPage() {
   const session = await auth();
 
   // Redirect to home if already logged in
@@ -12,7 +13,7 @@ export default async function LoginPage() {
 
   return (
     <>
-      <LoginForm />
+      <ResetPassword />
     </>
   );
 }

@@ -89,7 +89,7 @@ export default function LoginForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <div className="flex space-x-4 items-center">
+        <div className="flex space-x-2 items-center">
           <button
             type="submit"
             disabled={isLoading}
@@ -103,8 +103,15 @@ export default function LoginForm() {
           </button>
           <Link
             href="/register"
-            className="font-medium text-sm text-primary hover:underline underline-offset-4">
+            className="flex items-center bg-white text-primary font-medium hover:underline underline-offset-4 px-4 py-2 text-sm">
             {t("noAccount")}
+          </Link>
+        </div>
+        <div>
+          <Link
+            href="/reset-password"
+            className="text-sm text-gray-500 hover:underline underline-offset-4 hover:text-black">
+            {t("forgotPassword")}
           </Link>
         </div>
       </form>

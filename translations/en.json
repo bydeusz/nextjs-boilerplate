@@ -96,7 +96,8 @@
     "email": "Email",
     "password": "Password",
     "signIn": "Sign In",
-    "noAccount": "Don't have an account?",
+    "noAccount": "Sign up",
+    "forgotPassword": "Forgot password?",
     "errors": {
       "missingCredentials": "Please fill in all fields",
       "userNotFound": "User not found",
@@ -128,6 +129,27 @@
     "submit": "Send message",
     "success": "Your message has been sent successfully!",
     "error": "An error occurred while sending your message. Please try again."
+  },
+  "ResetPassword": {
+    "title": "Reset password",
+    "description": "Enter your email address to reset your password.",
+    "email": "Email",
+    "submit": "Reset password",
+    "success": "If an account exists, you will receive a password reset email",
+    "error": "An error occurred while sending your email. Please try again.",
+    "resetTitle": "Reset Your Password",
+    "resetDescription": "Please enter your new password below.",
+    "newPassword": "New Password",
+    "newPasswordPlaceholder": "Enter your new password",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Confirm your new password",
+    "resetButton": "Reset Password",
+    "errors": {
+      "passwordMismatch": "Passwords do not match",
+      "passwordLength": "Password must be at least 6 characters long",
+      "invalidToken": "Invalid or expired reset token",
+      "default": "Something went wrong"
+    }
   },
   "Verify": {
     "success": "Email verified successfully!",
