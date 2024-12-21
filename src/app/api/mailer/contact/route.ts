@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { mailTransporter } from "@/utils/mailer";
 
 export async function POST(request: Request) {
   try {
     const { name, email, subject, message } = await request.json();
 
-    // Validate required fields
     if (!name || !email || !subject || !message) {
       return NextResponse.json(
         { error: "All fields are required" },
@@ -13,21 +12,8 @@ export async function POST(request: Request) {
       );
     }
 
-    // Create transporter with your SMTP settings
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT || "465"),
-      secure: process.env.SMTP_SECURE === "true",
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASSWORD,
-      },
-      tls: {
-        rejectUnauthorized: false,
-      },
-    });
+    const transporter = mailTransporter();
 
-    // Email content
     const mailOptions = {
       from: `"${name}" <${process.env.SMTP_FROM_EMAIL}>`,
       to: process.env.SMTP_TO_EMAIL,
@@ -43,7 +29,6 @@ export async function POST(request: Request) {
       `,
     };
 
-    // Send email
     await transporter.sendMail(mailOptions);
 
     return NextResponse.json(

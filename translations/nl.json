@@ -129,6 +129,12 @@
     "success": "Je bericht is succesvol verzonden!",
     "error": "Er is iets fout gegaan bij het verzenden van je bericht. Probeer het opnieuw."
   },
+  "Verify": {
+    "title": "Verifieer je email",
+    "verifying": "Verifieer je email...",
+    "success": "Email succesvol geverifieerd!",
+    "error": "Er is iets fout gegaan bij het verifiëren van je email. Probeer het opnieuw."
+  },
   "Inputs": {
     "errors": {
       "required": "Dit veld is verplicht",

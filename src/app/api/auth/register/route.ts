@@ -2,6 +2,7 @@ import { prisma } from "@/config/prisma";
 import { hash } from "bcryptjs";
 import { NextResponse } from "next/server";
 import { validateDomain } from "@/utils/validateDomain";
+import { randomBytes } from "crypto";
 
 export async function POST(request: Request) {
   try {
@@ -41,17 +42,46 @@ export async function POST(request: Request) {
     // Hash password
     const hashedPassword = await hash(password, 12);
 
-    // Create user
-    const user = await prisma.user.create({
+    // Create verification token
+    const token = randomBytes(32).toString("hex");
+    const expires = new Date(Date.now() + 24 * 60 * 60 * 1000);
+
+    // Create user and verification token
+    await prisma.user.create({
       data: {
         name,
         email,
         password: hashedPassword,
+        emailVerified: null,
       },
     });
 
+    await prisma.verificationToken.create({
+      data: {
+        identifier: email,
+        token,
+        expires,
+      },
+    });
+
+    // Send verification email using the new endpoint
+    const verificationResponse = await fetch(
+      `${process.env.NEXTAUTH_URL}/api/mailer/verification`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, token }),
+      },
+    );
+
+    if (!verificationResponse.ok) {
+      throw new Error("Failed to send verification email");
+    }
+
     return NextResponse.json(
-      { message: "User created successfully", userId: user.id },
+      { message: "User created successfully. Please verify your email." },
       { status: 201 },
     );
   } catch (error) {

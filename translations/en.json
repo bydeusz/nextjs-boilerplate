@@ -129,6 +129,12 @@
     "success": "Your message has been sent successfully!",
     "error": "An error occurred while sending your message. Please try again."
   },
+  "Verify": {
+    "title": "Verify your email",
+    "verifying": "Verifying your email...",
+    "success": "Email verified successfully!",
+    "error": "An error occurred while verifying your email. Please try again."
+  },
   "Inputs": {
     "errors": {
       "required": "This field is required",
