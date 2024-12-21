@@ -130,10 +130,10 @@
     "error": "Er is iets fout gegaan bij het verzenden van je bericht. Probeer het opnieuw."
   },
   "Verify": {
-    "title": "Verifieer je email",
-    "verifying": "Verifieer je email...",
     "success": "Email succesvol geverifieerd!",
-    "error": "Er is iets fout gegaan bij het verifiëren van je email. Probeer het opnieuw."
+    "error": "Er is iets fout gegaan bij het verifiëren van je email. Probeer het opnieuw.",
+    "redirecting": "Je kunt nu inloggen. Uw account is nu volledig geactiveerd.",
+    "backToLogin": "Inloggen"
   },
   "Inputs": {
     "errors": {

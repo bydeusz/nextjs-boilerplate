@@ -3,7 +3,10 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+
+import { Button } from "@/components/actions/Button/Button";
 import { Loading } from "@/components/lables/Loading/Loading";
+import { XCircleIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
 
 export default function VerifyEmail({ token }: { token: string }) {
   const router = useRouter();
@@ -26,9 +29,6 @@ export default function VerifyEmail({ token }: { token: string }) {
           const data = await response.json();
           throw new Error(data.error);
         }
-        setTimeout(() => {
-          router.push("/login?verified=true");
-        }, 2000);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Verification failed");
       } finally {
@@ -47,23 +47,28 @@ export default function VerifyEmail({ token }: { token: string }) {
     );
   }
 
-  if (error) {
-    return (
-      <div className="text-center py-8">
-        <p className="text-red-500">{error}</p>
-        <button
-          onClick={() => router.push("/login")}
-          className="mt-4 text-primary hover:underline">
-          {t("backToLogin")}
-        </button>
-      </div>
-    );
-  }
-
   return (
-    <div className="text-center py-8">
-      <p className="text-green-500">{t("success")}</p>
-      <p className="mt-2 text-gray-600">{t("redirecting")}</p>
+    <div className="text-center space-y-6 p-8">
+      <div className="flex justify-center items-center">
+        {error ? (
+          <XCircleIcon className="size-12 text-red-500" />
+        ) : (
+          <CheckCircleIcon className="size-12 text-green-500" />
+        )}
+      </div>
+      <h4
+        className={`font-semibold ${error ? "text-red-500" : "text-green-500"}`}>
+        {error || t("success")}
+      </h4>
+      <p className="text-gray-600 text-sm">
+        {error ? t("error") : t("redirecting")}
+      </p>
+      <Button
+        type="button"
+        size="sm"
+        onClick={() => router.push(`/login?verified=${!error}`)}>
+        {t("backToLogin")}
+      </Button>
     </div>
   );
 }

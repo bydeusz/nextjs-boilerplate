@@ -130,10 +130,10 @@
     "error": "An error occurred while sending your message. Please try again."
   },
   "Verify": {
-    "title": "Verify your email",
-    "verifying": "Verifying your email...",
     "success": "Email verified successfully!",
-    "error": "An error occurred while verifying your email. Please try again."
+    "error": "An error occurred while verifying your email. Please try again.",
+    "redirecting": "You can now login. Your account is now fully activated.",
+    "backToLogin": "Login"
   },
   "Inputs": {
     "errors": {
