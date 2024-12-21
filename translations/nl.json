@@ -164,5 +164,15 @@
       "url": "Voer een geldige URL in, bijv. https://www.example.com",
       "tel": "Voer een geldig telefoonnummer in"
     }
+  },
+  "Data": {
+    "roles": {
+      "designer": "Designer",
+      "sales": "Sales",
+      "softwareEngineer": "Software Engineer",
+      "manager": "Manager",
+      "seoSpecialist": "SEO Specialist",
+      "contentCreator": "Content Creator"
+    }
   }
 }

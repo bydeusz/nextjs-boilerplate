@@ -1,15 +1,16 @@
 "use client";
 import { useState, useEffect } from "react";
-import { userRoles } from "@/data/roles";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/actions/Button/Button";
 import { InputField } from "@/components/inputs/InputField/Input";
 import { SelectInput } from "@/components/inputs/Select/Select";
 import { Loading } from "@/components/lables/Loading/Loading";
 import { Alert } from "@/components/messages/Alert/Alert";
+import { useRoles } from "@/hooks/useRoles";
 
 export function UpdateUser() {
   const t = useTranslations("User.update");
+  const roles = useRoles();
   const [showForm, setShowForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -128,7 +129,7 @@ export function UpdateUser() {
               id="role"
               onChange={(e) => setRole(e.target.value)}
               defaultValue={user.role}
-              options={userRoles}
+              options={roles}
             />
 
             <Button

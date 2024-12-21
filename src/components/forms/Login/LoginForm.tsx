@@ -3,10 +3,11 @@
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
+
 import { InputField } from "@/components/inputs/InputField/Input";
 import { PasswordInput } from "@/components/inputs/Password/Password";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
 import { Loading } from "@/components/lables/Loading/Loading";
 
 export default function LoginForm() {
@@ -64,8 +65,8 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="space-y-2">
+    <div className="space-y-4">
+      <div className="space-y-1">
         <h1 className="text-xl font-bold">{t("title")}</h1>
         <p className="text-sm text-gray-500">{t("description")}</p>
       </div>

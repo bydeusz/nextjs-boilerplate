@@ -12,9 +12,10 @@ export default function Layout({
         <Image
           src="/img/mood-bg.jpg"
           alt="This is showing a mood background for the login screen"
-          width={500}
-          height={500}
-          layout="responsive"
+          width={1080}
+          height={1350}
+          priority={true}
+          className="object-cover object-center"
         />
       </div>
       <div className="relative flex w-full lg:w-2/3 xl:w-1/2 items-center bg-gray-100 justify-center p-4 md:p-0">

@@ -164,5 +164,15 @@
       "url": "Please enter a valid url like: https://www.example.com",
       "tel": "Please enter a valid phone number"
     }
+  },
+  "Data": {
+    "roles": {
+      "designer": "Designer",
+      "sales": "Sales",
+      "softwareEngineer": "Software Engineer",
+      "manager": "Manager",
+      "seoSpecialist": "SEO Specialist",
+      "contentCreator": "Content Creator"
+    }
   }
 }
