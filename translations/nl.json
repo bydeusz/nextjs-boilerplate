@@ -92,12 +92,18 @@
 
   "LoginForm": {
     "title": "Inloggen",
-    "description": "Vul je inloggegevens in om verder te gaan.",
+    "description": "Inloggen in je account",
     "email": "Email",
     "password": "Wachtwoord",
-    "forgotPassword": "Wachtwoord vergeten?",
     "signIn": "Inloggen",
-    "noAccount": "Geen account?"
+    "noAccount": "Heb je nog geen account?",
+    "errors": {
+      "missingCredentials": "Vul alle velden in",
+      "userNotFound": "Gebruiker niet gevonden",
+      "invalidPassword": "Ongeldig wachtwoord",
+      "emailNotVerified": "Email niet geverifieerd",
+      "default": "Er is iets fout gegaan"
+    }
   },
   "RegisterForm": {
     "title": "Maak je account aan",

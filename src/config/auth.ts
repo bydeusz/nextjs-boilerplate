@@ -1,8 +1,25 @@
-import NextAuth from "next-auth";
+import NextAuth, { CredentialsSignin } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/config/prisma";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
+
+// Define custom error classes
+class InvalidCredentialsError extends CredentialsSignin {
+  code = "InvalidCredentials";
+}
+
+class UserNotFoundError extends CredentialsSignin {
+  code = "UserNotFound";
+}
+
+class MissingCredentialsError extends CredentialsSignin {
+  code = "MissingCredentials";
+}
+
+class EmailNotVerifiedError extends CredentialsSignin {
+  code = "EmailNotVerified";
+}
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -17,28 +34,30 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(
-        credentials: Partial<Record<"email" | "password", unknown>>,
-      ) {
+      async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          return null;
+          throw new MissingCredentialsError();
         }
 
         const user = await prisma.user.findUnique({
           where: { email: credentials.email as string },
         });
 
-        if (!user?.password) {
-          return null;
+        if (!user) {
+          throw new UserNotFoundError();
         }
 
         const isPasswordValid = await bcrypt.compare(
           credentials.password as string,
-          user.password,
+          user.password as string,
         );
 
         if (!isPasswordValid) {
-          return null;
+          throw new InvalidCredentialsError();
+        }
+
+        if (!user.emailVerified) {
+          throw new EmailNotVerifiedError();
         }
 
         return {
@@ -55,11 +74,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.id = token.sub as string;
       }
       return session;
-    },
-    signIn({ user, profile }) {
-      const allowedDomain = process.env.ALLOWED_DOMAIN;
-      const email = user?.email || profile?.email;
-      return email?.endsWith(`@${allowedDomain}`) ?? false;
     },
   },
 });

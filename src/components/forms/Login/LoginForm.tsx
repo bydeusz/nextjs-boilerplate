@@ -18,26 +18,49 @@ export default function LoginForm() {
 
   const t = useTranslations("LoginForm");
 
+  const getErrorMessage = (error: string) => {
+    switch (error) {
+      case "MissingCredentials":
+        return t("errors.missingCredentials");
+      case "UserNotFound":
+        return t("errors.userNotFound");
+      case "InvalidCredentials":
+        return t("errors.invalidPassword");
+      case "EmailNotVerified":
+        return t("errors.emailNotVerified");
+      default:
+        return t("errors.default");
+    }
+  };
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
     setError("");
 
-    const response = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    });
+    try {
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+        callbackUrl: "/",
+      });
 
-    setIsLoading(false);
+      if (result?.code) {
+        setError(getErrorMessage(result.code));
+        return;
+      }
 
-    if (response?.error) {
-      setError("Invalid email or password");
-      return;
+      if (result?.url) {
+        router.push(result.url);
+        router.refresh();
+      }
+    } catch (err) {
+      setError(getErrorMessage("default"));
+      console.error(err);
+    } finally {
+      setIsLoading(false);
     }
-
-    router.push("/");
-    router.refresh();
   }
 
   return (
