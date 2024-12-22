@@ -3,6 +3,7 @@
     "search": "Search",
     "links": {
       "dashboard": "Dashboard",
+      "websites": "Websites",
       "settings": "Settings",
       "support": "Support"
     }
@@ -17,6 +18,9 @@
 
   "Dashboard": {
     "title": "Dashboard"
+  },
+  "Websites": {
+    "title": "Websites"
   },
   "Settings": {
     "title": "Settings",

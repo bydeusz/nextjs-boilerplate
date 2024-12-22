@@ -2,6 +2,7 @@ import { isLoggedIn } from "@/utils/isLoggedIn";
 import { getTranslations } from "next-intl/server";
 
 import { Header } from "@/components/headers/Header/Header";
+import DefaultCard from "@/components/cards/DefaultCard/DefaultCard";
 
 export default async function Home() {
   await isLoggedIn();
@@ -10,6 +11,15 @@ export default async function Home() {
   return (
     <div className="p-4 md:p-12 space-y-6">
       <Header border={true} title={t("title")} />
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <DefaultCard
+          title="Websites"
+          description="Add your websites that have access to the API routes."
+          badge="Access"
+          button="Add websites"
+          href="/websites"
+        />
+      </div>
     </div>
   );
 }

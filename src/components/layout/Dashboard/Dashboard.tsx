@@ -6,6 +6,7 @@ import {
   Cog8ToothIcon,
   HomeIcon,
   LifebuoyIcon,
+  GlobeAltIcon,
 } from "@heroicons/react/24/outline";
 import { Brand } from "@/components/lables/Brand/Brand";
 import { NavLink } from "@/components/actions/NavLink/NavLink";
@@ -61,6 +62,10 @@ export const Dashboard = ({ children, thumbnail }: DashboardProps) => {
           <NavLink href="/">
             <HomeIcon className="h-[20px] w-[20px] mr-2" />{" "}
             {t("links.dashboard")}
+          </NavLink>
+          <NavLink href="/websites">
+            <GlobeAltIcon className="h-[20px] w-[20px] mr-2" />
+            {t("links.websites")}
           </NavLink>
         </nav>
         <nav className="space-y-2 absolute bottom-0 left-0 w-full p-4 border-t">

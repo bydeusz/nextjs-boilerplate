@@ -3,6 +3,7 @@
     "search": "Zoeken",
     "links": {
       "dashboard": "Dashboard",
+      "websites": "Websites",
       "settings": "Instellingen",
       "support": "Support"
     }
@@ -17,6 +18,9 @@
 
   "Dashboard": {
     "title": "Dashboard"
+  },
+  "Websites": {
+    "title": "Websites"
   },
   "Settings": {
     "title": "Instellingen",
