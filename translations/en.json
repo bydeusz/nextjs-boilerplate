@@ -26,7 +26,8 @@
     "title": "Settings",
     "tabs": {
       "profile": "Profile",
-      "team": "Team"
+      "team": "Team",
+      "password": "Password"
     },
     "team": {
       "admin": "Admin",
@@ -117,7 +118,10 @@
     "email": "Email",
     "password": "Password",
     "signUp": "Sign up",
-    "alreadyHaveAccount": "Already have an account?"
+    "alreadyHaveAccount": "Already have an account?",
+    "confirmTitle": "Registration successful!",
+    "confirmMessage": "We've sent a verification email to {email}. Please check your inbox and click the verification link to activate your account.",
+    "backToLogin": "Back to login"
   },
   "ContactForm": {
     "title": "Support Ticket",
@@ -137,17 +141,18 @@
   "ResetPassword": {
     "title": "Reset password",
     "description": "Enter your email address to reset your password.",
-    "email": "Email",
-    "submit": "Reset password",
-    "success": "If an account exists, you will receive a password reset email",
+    "email": "Enter your email address",
+    "submit": "Submit",
+    "login": "Back to login",
+    "success": "If the account exists, you will receive a password reset email",
     "error": "An error occurred while sending your email. Please try again.",
-    "resetTitle": "Reset Your Password",
-    "resetDescription": "Please enter your new password below.",
-    "newPassword": "New Password",
-    "newPasswordPlaceholder": "Enter your new password",
-    "confirmPassword": "Confirm Password",
-    "confirmPasswordPlaceholder": "Confirm your new password",
-    "resetButton": "Reset Password",
+    "resetTitle": "Forgot password?",
+    "resetDescription": "Create a new and secure password for your account.",
+    "newPassword": "New password",
+    "newPasswordPlaceholder": "Enter new password",
+    "confirmPassword": "Confirm password",
+    "confirmPasswordPlaceholder": "Confirm new password",
+    "resetButton": "Reset password",
     "errors": {
       "passwordMismatch": "Passwords do not match",
       "passwordLength": "Password must be at least 6 characters long",

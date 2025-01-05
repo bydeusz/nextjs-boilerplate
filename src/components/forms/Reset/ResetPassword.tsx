@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 import { InputField } from "@/components/inputs/InputField/Input";
 import { Loading } from "@/components/lables/Loading/Loading";
@@ -73,6 +74,11 @@ export default function ResetPassword() {
             {isLoading && <Loading className="size-4" />}
             {t("submit")}
           </button>
+          <Link
+            href="/login"
+            className="text-sm text-primary hover:underline underline-offset-4">
+            {t("login")}
+          </Link>
         </div>
       </form>
       {error && <Alert type="error" title="Error" description={error} />}

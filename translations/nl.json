@@ -26,7 +26,8 @@
     "title": "Instellingen",
     "tabs": {
       "profile": "Profiel",
-      "team": "Team"
+      "team": "Team",
+      "password": "Wachtwoord"
     },
     "team": {
       "admin": "Admin",
@@ -117,7 +118,10 @@
     "email": "Email",
     "password": "Wachtwoord",
     "signUp": "Aanmelden",
-    "alreadyHaveAccount": "Heb je al een account?"
+    "alreadyHaveAccount": "Heb je al een account?",
+    "confirmTitle": "Registratie succesvol!",
+    "confirmMessage": "We hebben een verificatie e-mail gestuurd naar {email}. Controleer je inbox en klik op de verificatielink om je account te activeren.",
+    "backToLogin": "Terug naar inloggen"
   },
   "ContactForm": {
     "title": "Support Ticket",
@@ -137,28 +141,29 @@
   "ResetPassword": {
     "title": "Reset password",
     "description": "Voer je email adres in om je wachtwoord te resetten.",
-    "email": "Email",
-    "submit": "Reset password",
-    "success": "Als een account bestaat, ontvang je een wachtwoord reset email",
+    "email": "Geef je e-mailadres op",
+    "submit": "Verzenden",
+    "login": "Terug naar inloggen",
+    "success": "Als het account bestaat, ontvang je een wachtwoord reset email",
     "error": "Er is iets fout gegaan bij het verzenden van je email. Probeer het opnieuw.",
-    "resetTitle": "Reset je wachtwoord",
-    "resetDescription": "Voer je nieuwe wachtwoord in.",
+    "resetTitle": "Wachtwoord vergeten?",
+    "resetDescription": "Maak een nieuw en veilig wachtwoord voor je account.",
     "newPassword": "Nieuw wachtwoord",
     "newPasswordPlaceholder": "Voer nieuw wachtwoord in",
     "confirmPassword": "Bevestig wachtwoord",
     "confirmPasswordPlaceholder": "Bevestig nieuw wachtwoord",
     "resetButton": "Wachtwoord resetten",
     "errors": {
-      "passwordMismatch": "Passwords do not match",
-      "passwordLength": "Password must be at least 6 characters long",
-      "invalidToken": "Invalid or expired reset token",
-      "default": "Something went wrong"
+      "passwordMismatch": "Wachtwoorden komen niet overeen",
+      "passwordLength": "Wachtwoord moet minstens 6 tekens lang zijn",
+      "invalidToken": "Ongeldig of verlopen reset token",
+      "default": "Er is iets fout gegaan"
     }
   },
   "Verify": {
     "success": "Email succesvol geverifieerd!",
     "error": "Er is iets fout gegaan bij het verifiëren van je email. Probeer het opnieuw.",
-    "redirecting": "Je kunt nu inloggen. Uw account is nu volledig geactiveerd.",
+    "redirecting": "Je kunt nu inloggen. Het account is nu volledig geactiveerd.",
     "backToLogin": "Inloggen"
   },
   "Inputs": {
