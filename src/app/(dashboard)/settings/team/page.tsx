@@ -1,8 +1,8 @@
 import { auth } from "@/config/auth";
 import { prisma } from "@/config/prisma";
 
-import { UserItem } from "@/components/Team/UserItem/UserItem";
-import { AddUser } from "@/components/user/Add/Add";
+import { UserItem } from "@/components/team/UserItem/UserItem";
+import { AddUser } from "@/components/modals/Add/Add";
 
 export default async function Page() {
   const session = await auth();

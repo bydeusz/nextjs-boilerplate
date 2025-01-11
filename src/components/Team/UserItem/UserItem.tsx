@@ -5,8 +5,8 @@ import { useTranslations } from "next-intl";
 
 import Modal from "@/components/messages/Modal/Modal";
 import { Button } from "@/components/actions/Button/Button";
-import { DeleteUser } from "@/components/user/Delete/Delete";
-import Admin from "@/components/user/Admin/Admin";
+import { DeleteUser } from "@/components/modals/Delete/Delete";
+import Admin from "@/components/modals/Admin/Admin";
 import { Badge } from "@/components/lables/Badge/Badge";
 
 interface UserItemProps {
