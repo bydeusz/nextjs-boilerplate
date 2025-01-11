@@ -1,0 +1,60 @@
+# Usage
+#   Download            docker compose pull
+#   Start:              docker compose up -d
+#   Stop:               docker compose down
+#   Destroy:            docker compose down -v --remove-orphans
+
+name: nextjs-boilerplate
+
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - postgres
+      - minio
+      - pgadmin
+
+  postgres:
+    container_name: postgres
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=db
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    expose:
+      - "80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@local.dev
+      - PGADMIN_DEFAULT_PASSWORD=admin123
+
+  minio:
+    container_name: minio
+    image: minio/minio:latest
+    expose:
+      - "9000"
+      - "9001"
+    volumes:
+      - ./storage:/data
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    command: server --console-address ":9001" /data
+
+volumes:
+  postgres_data:
+  pgadmin_data:
