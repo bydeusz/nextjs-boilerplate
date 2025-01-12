@@ -183,5 +183,23 @@
       "seoSpecialist": "SEO Specialist",
       "contentCreator": "Content Creator"
     }
+  },
+  "Organization": {
+    "update": {
+      "title": "Organisatie details",
+      "general": "Algemeen",
+      "edit": "Bewerken",
+      "cancel": "Annuleren",
+      "save": "Opslaan",
+      "name": "Naam",
+      "website": "Website",
+      "phone": "Telefoonnummer",
+      "email": "Email",
+      "address": "Adres",
+      "city": "Stad",
+      "country": "Land",
+      "postalCode": "Postcode",
+      "vat": "BTW nummer"
+    }
   }
 }

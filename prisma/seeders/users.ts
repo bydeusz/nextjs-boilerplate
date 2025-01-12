@@ -1,47 +1,66 @@
 import { PrismaClient } from "@prisma/client";
 import { hash } from "bcryptjs";
 
-export async function seedUsers(prisma: PrismaClient) {
+const prisma = new PrismaClient();
+
+const users = [
+  {
+    name: "Tadeusz de Ruijter",
+    email: "hello@bydeusz.com",
+    password: "test@123",
+    isAdmin: true,
+    role: "Software Engineer",
+    emailVerified: new Date(),
+  },
+  {
+    name: "John Doe",
+    email: "john@techsolutions.com",
+    password: "test@123",
+    isAdmin: false,
+    role: "designer",
+    emailVerified: new Date(),
+  },
+  {
+    name: "Jane Smith",
+    email: "jane@bydeusz.com",
+    password: "test@123",
+    isAdmin: false,
+    role: "manager",
+    emailVerified: new Date(),
+  },
+  {
+    name: "Mike Johnson",
+    email: "mike@techsolutions.com",
+    password: "test@123",
+    isAdmin: true,
+    role: "seoSpecialist",
+    emailVerified: new Date(),
+  },
+];
+
+export async function seedUsers() {
   console.log("🌱 Seeding users...");
 
-  const users = [
-    {
-      name: "John Doe",
-      email: "john.doe@bydeusz.com",
-      role: "Manager",
-      isAdmin: true,
-      password: await hash("test@123", 12),
-      emailVerified: new Date(),
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=John",
-    },
-    {
-      name: "Jane Smith",
-      email: "jane.smith@bydeusz.com",
-      role: "Sales",
-      isAdmin: false,
-      password: await hash("test@123", 12),
-      emailVerified: new Date(),
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Jane",
-    },
-    {
-      name: "Alice Johnson",
-      email: "alice.johnson@bydeusz.com",
-      role: "Designer",
-      isAdmin: false,
-      password: await hash("test@123", 12),
-      emailVerified: new Date(),
-      image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alice",
-    },
-  ];
+  for (const user of users) {
+    const hashedPassword = await hash(user.password, 12);
+    await prisma.user.upsert({
+      where: { email: user.email },
+      update: {
+        name: user.name,
+        isAdmin: user.isAdmin,
+        role: user.role,
+        emailVerified: user.emailVerified,
+      },
+      create: {
+        name: user.name,
+        email: user.email,
+        password: hashedPassword,
+        isAdmin: user.isAdmin,
+        role: user.role,
+        emailVerified: user.emailVerified,
+      },
+    });
+  }
 
-  const createdUsers = await Promise.all(
-    users.map((user) =>
-      prisma.user.create({
-        data: user,
-      }),
-    ),
-  );
-
-  console.log(`✅ Created ${createdUsers.length} users`);
-  return createdUsers;
+  console.log("✅ Users seeded successfully");
 }

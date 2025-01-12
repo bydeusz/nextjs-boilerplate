@@ -183,5 +183,23 @@
       "seoSpecialist": "SEO Specialist",
       "contentCreator": "Content Creator"
     }
+  },
+  "Organization": {
+    "update": {
+      "title": "Organization Details",
+      "general": "General",
+      "edit": "Edit",
+      "cancel": "Cancel",
+      "save": "Save Changes",
+      "name": "Name",
+      "website": "Website",
+      "phone": "Phone Number",
+      "email": "Email Address",
+      "address": "Address",
+      "city": "City",
+      "country": "Country",
+      "postalCode": "Postal Code",
+      "vat": "VAT Number"
+    }
   }
 }
