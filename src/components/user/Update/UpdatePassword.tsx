@@ -11,6 +11,7 @@ import { Alert } from "@/components/messages/Alert/Alert";
 
 export function UpdatePassword() {
   const t = useTranslations("User.password");
+  const [currentPassword, setCurrentPassword] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -38,16 +39,19 @@ export function UpdatePassword() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ currentPassword, password }),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to update password");
+        const data = await response.json();
+        throw new Error(data.error || "Failed to update password");
       }
 
       await signOut({ redirect: true, callbackUrl: "/login" });
-    } catch (error) {
-      setError("Failed to update password");
+    } catch (error: unknown) {
+      setError(
+        error instanceof Error ? error.message : "Failed to update password",
+      );
       console.error(error);
       setIsLoading(false);
     }
@@ -56,38 +60,51 @@ export function UpdatePassword() {
   return (
     <div className="p-6 border rounded-md bg-white space-y-4">
       <h4>{t("title")}</h4>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <PasswordInput
-          label={t("newPassword")}
-          required={true}
-          name="password"
-          id="password"
-          placeholder={t("newPasswordPlaceholder")}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <PasswordInput
-          label={t("confirmPassword")}
-          required={true}
-          name="confirmPassword"
-          id="confirmPassword"
-          placeholder={t("confirmPasswordPlaceholder")}
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        {error && <Alert type="error" title="Error" description={error} />}
-        <Button
-          type="submit"
-          size="sm"
-          disabled={isLoading}
-          className={
-            !isLoading
-              ? "flex items-center bg-primary text-white rounded-md hover:bg-secondary"
-              : "flex items-center bg-gray-300 text-gray-600 rounded-md"
-          }>
-          {isLoading && <Loading className="size-4 mr-2" />}
-          {t("update")}
-        </Button>
+      <form onSubmit={handleSubmit}>
+        <div className="space-y-4">
+          <PasswordInput
+            label={t("currentPassword")}
+            required={true}
+            name="currentPassword"
+            id="currentPassword"
+            placeholder={t("currentPasswordPlaceholder")}
+            value={currentPassword}
+            onChange={(e) => setCurrentPassword(e.target.value)}
+          />
+          <PasswordInput
+            label={t("newPassword")}
+            required={true}
+            name="password"
+            id="password"
+            placeholder={t("newPasswordPlaceholder")}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <PasswordInput
+            label={t("confirmPassword")}
+            required={true}
+            name="confirmPassword"
+            id="confirmPassword"
+            placeholder={t("confirmPasswordPlaceholder")}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          {error && <Alert type="error" title="Error" description={error} />}
+        </div>
+        <div className="mt-8">
+          <Button
+            type="submit"
+            size="sm"
+            disabled={isLoading}
+            className={
+              !isLoading
+                ? "flex items-center bg-primary text-white rounded-md hover:bg-secondary"
+                : "flex items-center bg-gray-300 text-gray-600 rounded-md"
+            }>
+            {isLoading && <Loading className="size-4 mr-2" />}
+            {t("update")}
+          </Button>
+        </div>
       </form>
     </div>
   );

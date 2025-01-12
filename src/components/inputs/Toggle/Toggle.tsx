@@ -19,7 +19,7 @@ export const Toggle = ({ label, required, onChange }: ToggleProps) => {
 
   return (
     <div>
-      <label className="block text-sm font-medium leading-6 text-gray-900">
+      <label className="block text-sm font-semibold leading-6 text-gray-900">
         {label}
         {required && <span className="text-red-600">*</span>}
       </label>

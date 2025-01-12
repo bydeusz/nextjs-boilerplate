@@ -1,6 +1,6 @@
 import { auth } from "@/config/auth";
 import { prisma } from "@/config/prisma";
-import { hash } from "bcryptjs";
+import { hash, compare } from "bcryptjs";
 import { NextResponse } from "next/server";
 
 export async function PUT(request: Request) {
@@ -15,12 +15,38 @@ export async function PUT(request: Request) {
     }
 
     // Get request body
-    const { password } = await request.json();
+    const { currentPassword, password } = await request.json();
 
     // Basic validation
-    if (!password || password.length < 6) {
+    if (!currentPassword || !password) {
+      return NextResponse.json(
+        { error: "Current password and new password are required" },
+        { status: 400 },
+      );
+    }
+
+    if (password.length < 6) {
       return NextResponse.json(
         { error: "Password must be at least 6 characters long" },
+        { status: 400 },
+      );
+    }
+
+    // Get current user with password
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { password: true },
+    });
+
+    if (!user?.password) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    // Verify current password
+    const isValid = await compare(currentPassword, user.password);
+    if (!isValid) {
+      return NextResponse.json(
+        { error: "Current password is incorrect" },
         { status: 400 },
       );
     }

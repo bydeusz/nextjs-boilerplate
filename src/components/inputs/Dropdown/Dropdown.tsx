@@ -1,4 +1,3 @@
-"use client";
 import { useState, useRef } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/20/solid";
 import { SearchInput } from "@/components/inputs/Search/Search";
@@ -22,7 +21,7 @@ export const DropdownInput = ({
   const [label, setLabel] = useState(options[0].label);
   const [isOpen, setIsOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null!);
 
   const closeMenu = () => {
     setIsOpen(false);
@@ -55,7 +54,7 @@ export const DropdownInput = ({
           aria-expanded="true"
           aria-haspopup="true"
           onClick={toggleMenu}>
-          <div>{label}</div>
+          <div className="font-semibold">{label}</div>
           {isOpen ? (
             <ChevronUpIcon className="w-[20px] h-[20px]" />
           ) : (

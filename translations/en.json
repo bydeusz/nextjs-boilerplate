@@ -76,10 +76,13 @@
 
   "User": {
     "update": {
-      "title": "Account details",
+      "title": "Personal Information",
       "name": "Name",
+      "namePlaceholder": "Enter name here",
       "email": "Email",
+      "emailPlaceholder": "Enter email here",
       "role": "Role",
+      "rolePlaceholder": "Enter role here",
       "edit": "Edit",
       "cancel": "Cancel",
       "save": "Save"
@@ -87,6 +90,8 @@
     "password": {
       "title": "Update password",
       "desc": "Enter your new password below.",
+      "currentPassword": "Current password",
+      "currentPasswordPlaceholder": "Enter current password",
       "newPassword": "New password",
       "newPasswordPlaceholder": "Enter new password",
       "confirmPassword": "Confirm password",
@@ -182,24 +187,6 @@
       "manager": "Manager",
       "seoSpecialist": "SEO Specialist",
       "contentCreator": "Content Creator"
-    }
-  },
-  "Organization": {
-    "update": {
-      "title": "Organization Details",
-      "general": "General",
-      "edit": "Edit",
-      "cancel": "Cancel",
-      "save": "Save Changes",
-      "name": "Name",
-      "website": "Website",
-      "phone": "Phone Number",
-      "email": "Email Address",
-      "address": "Address",
-      "city": "City",
-      "country": "Country",
-      "postalCode": "Postal Code",
-      "vat": "VAT Number"
     }
   }
 }

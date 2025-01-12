@@ -18,7 +18,6 @@ export default async function Layout({
       <Header title={t("title")} />
       <Tabs>
         <Tab href={`/settings`}>{t("tabs.profile")}</Tab>
-        <Tab href={`/settings/password`}>{t("tabs.password")}</Tab>
         <Tab href={`/settings/team`}>{t("tabs.team")}</Tab>
       </Tabs>
       <div className="space-y-4">{children}</div>

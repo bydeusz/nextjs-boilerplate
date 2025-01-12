@@ -76,10 +76,13 @@
 
   "User": {
     "update": {
-      "title": "Account details",
+      "title": "Persoonlijke informatie",
       "name": "Naam",
+      "namePlaceholder": "Voer naam in",
       "email": "Email",
+      "emailPlaceholder": "Voer email in",
       "role": "Rol",
+      "rolePlaceholder": "Voer rol in",
       "edit": "Bewerken",
       "cancel": "Annuleren",
       "save": "Opslaan"
@@ -87,6 +90,8 @@
     "password": {
       "title": "Wachtwoord wijzigen",
       "desc": "Voer je nieuwe wachtwoord in.",
+      "currentPassword": "Huidig wachtwoord",
+      "currentPasswordPlaceholder": "Voer huidig wachtwoord in",
       "newPassword": "Nieuw wachtwoord",
       "newPasswordPlaceholder": "Voer nieuw wachtwoord in",
       "confirmPassword": "Bevestig wachtwoord",
@@ -182,24 +187,6 @@
       "manager": "Manager",
       "seoSpecialist": "SEO Specialist",
       "contentCreator": "Content Creator"
-    }
-  },
-  "Organization": {
-    "update": {
-      "title": "Organisatie details",
-      "general": "Algemeen",
-      "edit": "Bewerken",
-      "cancel": "Annuleren",
-      "save": "Opslaan",
-      "name": "Naam",
-      "website": "Website",
-      "phone": "Telefoonnummer",
-      "email": "Email",
-      "address": "Adres",
-      "city": "Stad",
-      "country": "Land",
-      "postalCode": "Postcode",
-      "vat": "BTW nummer"
     }
   }
 }
