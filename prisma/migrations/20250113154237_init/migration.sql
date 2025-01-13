@@ -1,7 +1,18 @@
--- AlterTable
-ALTER TABLE "User" ADD COLUMN     "emailVerified" TIMESTAMP(3),
-ADD COLUMN     "image" TEXT,
-ADD COLUMN     "isAdmin" BOOLEAN NOT NULL DEFAULT false;
+-- CreateTable
+CREATE TABLE "User" (
+    "id" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "name" TEXT,
+    "role" TEXT,
+    "password" TEXT,
+    "isAdmin" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "emailVerified" TIMESTAMP(3),
+    "avatar" TEXT,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "Account" (
@@ -38,6 +49,16 @@ CREATE TABLE "VerificationToken" (
     "expires" TIMESTAMP(3) NOT NULL
 );
 
+-- CreateTable
+CREATE TABLE "PasswordResetToken" (
+    "identifier" TEXT NOT NULL,
+    "token" TEXT NOT NULL,
+    "expires" TIMESTAMP(3) NOT NULL
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Account_provider_providerAccountId_key" ON "Account"("provider", "providerAccountId");
 
@@ -49,6 +70,12 @@ CREATE UNIQUE INDEX "VerificationToken_token_key" ON "VerificationToken"("token"
 
 -- CreateIndex
 CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationToken"("identifier", "token");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "PasswordResetToken_token_key" ON "PasswordResetToken"("token");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "PasswordResetToken_identifier_token_key" ON "PasswordResetToken"("identifier", "token");
 
 -- AddForeignKey
 ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
