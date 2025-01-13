@@ -25,6 +25,7 @@ export default async function RootLayout({
           <NextIntlClientProvider messages={messages}>
             {children}
             <div id="modal-root"></div>
+            <div id="toast-root"></div>
           </NextIntlClientProvider>
         </AuthProviders>
       </body>

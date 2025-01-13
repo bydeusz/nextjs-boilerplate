@@ -13,6 +13,11 @@ export async function Thumbnail() {
     where: {
       id: session.user.id,
     },
+    select: {
+      id: true,
+      name: true,
+      avatar: true,
+    },
   });
 
   if (!data) {

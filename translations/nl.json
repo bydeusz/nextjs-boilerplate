@@ -97,6 +97,16 @@
       "confirmPassword": "Bevestig wachtwoord",
       "confirmPasswordPlaceholder": "Bevestig nieuw wachtwoord",
       "update": "Wijzigen"
+    },
+    "avatar": {
+      "title": "Profiel foto",
+      "changeAvatar": "Profiel foto wijzigen",
+      "noAvatar": "Geen profiel foto",
+      "avatarAlt": "Profiel foto",
+      "errorFileSize": "Afbeelding moet kleiner zijn dan 1MB",
+      "errorFileType": "Alleen JPEG, GIF en PNG bestanden zijn toegestaan",
+      "errorLoading": "Fout bij het laden van de afbeelding",
+      "errorUploading": "Fout bij het uploaden van de afbeelding"
     }
   },
 

@@ -97,6 +97,16 @@
       "confirmPassword": "Confirm password",
       "confirmPasswordPlaceholder": "Confirm new password",
       "update": "Update"
+    },
+    "avatar": {
+      "title": "Profile Picture",
+      "changeAvatar": "Change Avatar",
+      "noAvatar": "No Avatar",
+      "avatarAlt": "User Avatar",
+      "errorFileSize": "Image must be less than 1MB",
+      "errorFileType": "Only JPEG, GIF and PNG files are allowed",
+      "errorLoading": "Error loading image",
+      "errorUploading": "Error uploading image"
     }
   },
 
