@@ -24,8 +24,6 @@ export async function Thumbnail() {
     return null;
   }
 
-  console.log(data.avatar);
-
   return (
     <Link
       href="/settings"

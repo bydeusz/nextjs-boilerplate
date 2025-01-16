@@ -21,6 +21,7 @@ export async function GET() {
         name: true,
         email: true,
         role: true,
+        avatar: true,
       },
     });
 
@@ -32,6 +33,7 @@ export async function GET() {
       fullname: user.name,
       email: user.email,
       role: user.role || "",
+      avatar: user.avatar || "",
     };
 
     return NextResponse.json({ user: transformedUser });
