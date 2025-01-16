@@ -19,6 +19,7 @@ export default async function Layout({
       <Tabs>
         <Tab href={`/settings`}>{t("tabs.profile")}</Tab>
         <Tab href={`/settings/team`}>{t("tabs.team")}</Tab>
+        <Tab href={`/settings/account`}>{t("tabs.account")}</Tab>
       </Tabs>
       <div className="space-y-4">{children}</div>
     </div>

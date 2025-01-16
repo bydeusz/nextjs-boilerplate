@@ -2,9 +2,14 @@
 "use client";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
+
+import {
+  TrashIcon,
+  AdjustmentsHorizontalIcon,
+} from "@heroicons/react/24/outline";
 
 import Modal from "@/components/messages/Modal/Modal";
-import { Button } from "@/components/actions/Button/Button";
 import { DeleteUser } from "@/components/modals/Delete/Delete";
 import Admin from "@/components/modals/Admin/Admin";
 import { Badge } from "@/components/lables/Badge/Badge";
@@ -30,45 +35,66 @@ export const UserItem = ({ user, currentUser }: UserItemProps) => {
 
   return (
     <>
-      <div
-        className="flex justify-between items-center bg-white w-full p-4 rounded-lg border"
-        key={user.id}>
-        <div className="flex space-x-4 items-center">
-          <div className="flex justify-center items-center bg-gray-100 h-12 w-12 rounded-full border font-semibold text-xs">
-            {user.name?.charAt(0)}
-          </div>
-          <div className="text-sm">
-            <div className="font-semibold flex space-x-2 items-center mb-1">
-              <span>{user.name}</span>
-              {user.isAdmin && (
-                <Badge className="text-[8px] bg-blue-100 border border-blue-200 text-blue-500 ml-[5px] px-2 py-[1px] uppercase font-semibold">
-                  {t("admin")}
-                </Badge>
+      <div className="rounded-lg border bg-white relative">
+        <div className="flex w-full items-center justify-between space-x-6 p-6">
+          <div className="flex space-x-4">
+            <div className="overflow-hidden size-10 shrink-0 rounded-full bg-gray-200 flex items-center justify-center font-semibold text-xs border border-white ring-2 ring-gray-200">
+              {user.avatar ? (
+                <Image
+                  src={user.avatar}
+                  alt={`avatar picture of ${user.name}`}
+                  width={50}
+                  height={50}
+                />
+              ) : (
+                user.name?.charAt(0)
               )}
             </div>
-            <div className="text-xs">{user.email}</div>
+            <div>
+              <h3 className="text-sm font-medium text-gray-900">{user.name}</h3>
+              <p className="text-sm text-gray-500">{user.email}</p>
+            </div>
           </div>
         </div>
-        <div className="space-x-4">
-          {currentUser?.isAdmin && (
-            <Button
-              type="button"
-              onClick={handleAdminModal}
-              className="bg-white border rounded-md text-xs hover:bg-primary hover:text-white hover:border-primary">
-              {t("settings")}
-            </Button>
-          )}
-
-          {(currentUser?.isAdmin || currentUser?.id === user.id) && (
-            <Button
-              type="button"
-              onClick={handleDeleteModal}
-              className="bg-red-600 text-white border border-red-600 rounded-md text-xs hover:bg-transparent hover:text-red-600 hover:border-red-600">
-              {t("delete")}
-            </Button>
-          )}
+        <div>
+          <div className="-mt-px flex divide-x divide-gray-200 border-t border-gray-200">
+            <div className="flex w-0 flex-1">
+              <button
+                onClick={handleAdminModal}
+                disabled={!currentUser?.isAdmin || currentUser?.id === user.id}
+                className={`relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold ${
+                  currentUser?.isAdmin && currentUser?.id !== user.id
+                    ? "text-gray-900 hover:bg-gray-50"
+                    : "text-gray-400 cursor-not-allowed"
+                }`}>
+                <AdjustmentsHorizontalIcon className="size-5 text-gray-400" />
+                {t("settings")}
+              </button>
+            </div>
+            <div className="-ml-px flex w-0 flex-1">
+              <button
+                onClick={handleDeleteModal}
+                disabled={!currentUser?.isAdmin || currentUser?.id === user.id}
+                className={`relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold ${
+                  currentUser?.isAdmin && currentUser?.id !== user.id
+                    ? "text-red-600 hover:bg-red-50"
+                    : "text-red-300 cursor-not-allowed"
+                }`}>
+                <TrashIcon
+                  className={`size-5 ${currentUser?.isAdmin && currentUser?.id !== user.id ? "text-red-400" : "text-red-300"}`}
+                />
+                {t("delete")}
+              </button>
+            </div>
+          </div>
         </div>
+        {user.isAdmin && (
+          <Badge className="absolute top-3 right-3 rounded-full bg-green-50 px-1.5 py-0.5 text-xs font-medium text-green-700 border border-green-600/20">
+            {t("admin")}
+          </Badge>
+        )}
       </div>
+
       <Modal isOpen={openDeleteModal} onClose={handleDeleteModal}>
         <DeleteUser user={user} />
       </Modal>

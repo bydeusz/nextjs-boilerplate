@@ -26,7 +26,7 @@ export default async function Page() {
       <div className="flex justify-end">
         <AddUser isAdmin={currentUser?.isAdmin || false} />
       </div>
-      <div className="space-y-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
         {users.map((user) => (
           <UserItem key={user.id} user={user} currentUser={currentUser} />
         ))}

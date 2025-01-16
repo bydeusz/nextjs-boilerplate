@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"next dev --turbopack\" \"prisma studio\" \"wait-on tcp:3000 && open-cli http://localhost:3000\"",
+    "dev": "concurrently \"supabase start\" \"next dev --turbopack\" \"prisma studio\" \"wait-on tcp:3000 && open-cli http://localhost:3000\" \"wait-on tcp:54323 && open-cli http://localhost:54323\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -43,6 +43,7 @@
     "postcss": "^8",
     "prettier": "^3.4.2",
     "prisma": "^6.0.1",
+    "supabase": "^2.6.8",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5",

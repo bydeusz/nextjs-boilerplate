@@ -27,7 +27,7 @@
     "tabs": {
       "profile": "Profile",
       "team": "Team",
-      "password": "Password"
+      "account": "Account"
     },
     "team": {
       "admin": "Admin",
