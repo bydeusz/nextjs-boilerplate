@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { auth } from "@/config/auth";
 import PasswordForm from "@/components/forms/Password/PasswordForm";
+
+export const metadata: Metadata = {
+  title:
+    "Confirm your password reset - Next JS Dashboard Boilerplate by @bydeusz.com",
+};
 
 export default async function ResetPasswordConfirmPage({
   searchParams,

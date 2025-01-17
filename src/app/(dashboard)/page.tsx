@@ -1,8 +1,12 @@
 import { isLoggedIn } from "@/utils/isLoggedIn";
 import { getTranslations } from "next-intl/server";
-
+import type { Metadata } from "next";
 import { Header } from "@/components/headers/Header/Header";
 import DefaultCard from "@/components/cards/DefaultCard/DefaultCard";
+
+export const metadata: Metadata = {
+  title: "Dashboard - Next JS Dashboard Boilerplate by @bydeusz.com",
+};
 
 export default async function Home() {
   await isLoggedIn();

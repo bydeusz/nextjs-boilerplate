@@ -22,7 +22,7 @@ export default function Layout({
         <div className="lg:w-1/2 bg-white rounded-md p-8 shadow-2xl">
           {children}
         </div>
-        <div className="absolute bottom-4 right-6">
+        <div className="absolute top-4 right-6">
           <LanguageSwitcher />
         </div>
       </div>

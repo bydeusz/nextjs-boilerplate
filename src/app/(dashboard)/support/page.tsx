@@ -1,5 +1,10 @@
 import { isLoggedIn } from "@/utils/isLoggedIn";
 import ContactForm from "@/components/forms/Contact/ContactForm";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Support - Next JS Dashboard Boilerplate by @bydeusz.com",
+};
 
 export default async function Page() {
   await isLoggedIn();

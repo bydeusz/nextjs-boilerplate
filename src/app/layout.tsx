@@ -1,14 +1,8 @@
-import type { Metadata } from "next";
 import { AuthProviders } from "@/providers/AuthProvider";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 
 import "@/assets/styles/globals.css";
-
-export const metadata: Metadata = {
-  title: "Next JS Dashboard Boilerplate by @bydeusz.com",
-  description: "Next JS Dashboard Boilerplate by @bydeusz.com",
-};
 
 export default async function RootLayout({
   children,

@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
 import { isLoggedIn } from "@/utils/isLoggedIn";
 import { getTranslations } from "next-intl/server";
-
 import { Header } from "@/components/headers/Header/Header";
+
+export const metadata: Metadata = {
+  title: "Websites - Next JS Dashboard Boilerplate by @bydeusz.com",
+};
+
 export default async function Websites() {
   await isLoggedIn();
   const t = await getTranslations("Websites");

@@ -1,8 +1,13 @@
+import type { Metadata } from "next";
 import { auth } from "@/config/auth";
 import { prisma } from "@/config/prisma";
 
 import { UserItem } from "@/components/team/UserItem/UserItem";
 import { AddUser } from "@/components/modals/Add/Add";
+
+export const metadata: Metadata = {
+  title: "Team - Next JS Dashboard Boilerplate by @bydeusz.com",
+};
 
 export default async function Page() {
   const session = await auth();
