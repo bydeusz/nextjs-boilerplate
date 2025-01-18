@@ -66,7 +66,7 @@ export default function LanguageSwitcher() {
       </div>
 
       {isOpen && (
-        <div className="absolute mt-1 w-full rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+        <div className="absolute mt-1 w-full rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 max-h-28 overflow-y-auto">
           {languages.map((language) => (
             <div
               key={language.code}
