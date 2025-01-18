@@ -1,42 +1,94 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-import { XMarkIcon } from "@heroicons/react/20/solid";
+import React, { useEffect } from "react";
+import { createPortal } from "react-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 interface ModalProps {
-  children?: React.ReactNode;
   isOpen: boolean;
   onClose: () => void;
+  children: React.ReactNode;
 }
 
-const Modal = ({ children, isOpen, onClose }: ModalProps) => {
-  const [modalRoot, setModalRoot] = useState<HTMLElement | null>(null);
+const overlayVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
 
+const modalVariants = {
+  hidden: {
+    scale: 0.95,
+    opacity: 0,
+    y: 20,
+  },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      duration: 0.3,
+      bounce: 0.3,
+    },
+  },
+};
+
+const Modal = ({ isOpen, onClose, children }: ModalProps) => {
   useEffect(() => {
-    // Find the element that we want to portal our Modal to
-    const root = document.getElementById("modal-root");
-    setModalRoot(root);
-  }, []);
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
 
-  if (!isOpen || !modalRoot) {
-    return null;
-  }
+    if (isOpen) {
+      document.addEventListener("keydown", handleEscape);
+      document.body.style.overflow = "hidden";
+    }
 
-  return ReactDOM.createPortal(
-    <div className="absolute top-0 left-0 h-screen w-full z-50">
-      <div className="fixed inset-0 z-10 overflow-y-auto">
-        <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-          <div className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 w-full sm:max-w-lg sm:p-6">
-            <>{children}</>
-            <button onClick={onClose} className="absolute top-2 right-2">
-              <XMarkIcon className="h-6 w-6" />
-            </button>
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen, onClose]);
+
+  return createPortal(
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          <motion.div
+            variants={overlayVariants}
+            initial="hidden"
+            animate="visible"
+            className="fixed inset-0 bg-black bg-opacity-25 z-50"
+            onClick={onClose}
+          />
+          <div className="fixed inset-0 z-50 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+              <motion.div
+                variants={modalVariants}
+                initial="hidden"
+                animate="visible"
+                className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl sm:my-8 sm:w-full sm:max-w-lg">
+                <div className="absolute right-0 top-0 hidden pr-4 pt-4 sm:block">
+                  <button
+                    type="button"
+                    className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    onClick={onClose}>
+                    <span className="sr-only">Close</span>
+                    <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                  </button>
+                </div>
+                <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                  {children}
+                </div>
+              </motion.div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div className="h-screen w-full bg-gray-500 opacity-80 absolute"></div>
-    </div>,
-    modalRoot,
+        </>
+      )}
+    </AnimatePresence>,
+    document.getElementById("modal-root") || document.body,
   );
 };
 
