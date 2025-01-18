@@ -1,18 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { useState } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-
 import {
   TrashIcon,
   AdjustmentsHorizontalIcon,
 } from "@heroicons/react/24/outline";
 
-import Modal from "@/components/messages/Modal/Modal";
 import { DeleteUser } from "@/components/modals/Delete/Delete";
 import Admin from "@/components/modals/Admin/Admin";
 import { Badge } from "@/components/lables/Badge/Badge";
+import { useModal } from "@/hooks/useModal";
 
 interface UserItemProps {
   user: any;
@@ -21,17 +19,8 @@ interface UserItemProps {
 
 export const UserItem = ({ user, currentUser }: UserItemProps) => {
   const t = useTranslations("Settings.team");
-
-  const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const [openAdminModal, setOpenAdminModal] = useState(false);
-
-  const handleDeleteModal = () => {
-    setOpenDeleteModal(!openDeleteModal);
-  };
-
-  const handleAdminModal = () => {
-    setOpenAdminModal(!openAdminModal);
-  };
+  const deleteModal = useModal();
+  const adminModal = useModal();
 
   return (
     <>
@@ -60,7 +49,7 @@ export const UserItem = ({ user, currentUser }: UserItemProps) => {
           <div className="-mt-px flex divide-x divide-gray-200 border-t border-gray-200">
             <div className="flex w-0 flex-1">
               <button
-                onClick={handleAdminModal}
+                onClick={adminModal.openModal}
                 disabled={!currentUser?.isAdmin || currentUser?.id === user.id}
                 className={`relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold ${
                   currentUser?.isAdmin && currentUser?.id !== user.id
@@ -73,7 +62,7 @@ export const UserItem = ({ user, currentUser }: UserItemProps) => {
             </div>
             <div className="-ml-px flex w-0 flex-1">
               <button
-                onClick={handleDeleteModal}
+                onClick={deleteModal.openModal}
                 disabled={!currentUser?.isAdmin || currentUser?.id === user.id}
                 className={`relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold ${
                   currentUser?.isAdmin && currentUser?.id !== user.id
@@ -95,12 +84,13 @@ export const UserItem = ({ user, currentUser }: UserItemProps) => {
         )}
       </div>
 
-      <Modal isOpen={openDeleteModal} onClose={handleDeleteModal}>
+      <deleteModal.ModalWrapper>
         <DeleteUser user={user} />
-      </Modal>
-      <Modal isOpen={openAdminModal} onClose={handleAdminModal}>
+      </deleteModal.ModalWrapper>
+
+      <adminModal.ModalWrapper>
         <Admin user={user} />
-      </Modal>
+      </adminModal.ModalWrapper>
     </>
   );
 };

@@ -4,11 +4,11 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/actions/Button/Button";
-import Modal from "@/components/messages/Modal/Modal";
 import { InputField } from "@/components/inputs/InputField/Input";
 import { PasswordInput } from "@/components/inputs/Password/Password";
 import { Loading } from "@/components/lables/Loading/Loading";
 import { PlusIcon } from "@heroicons/react/20/solid";
+import { useModal } from "@/hooks/useModal";
 
 interface AddUserProps {
   isAdmin: boolean;
@@ -17,7 +17,7 @@ interface AddUserProps {
 export const AddUser = ({ isAdmin }: AddUserProps) => {
   const t = useTranslations("Modals.add");
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
+  const { openModal, ModalWrapper } = useModal();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [inputValue, setInputValue] = useState({
@@ -49,7 +49,6 @@ export const AddUser = ({ isAdmin }: AddUserProps) => {
         throw new Error(data.error || "Failed to create user");
       }
 
-      setIsOpen(false);
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
@@ -71,17 +70,17 @@ export const AddUser = ({ isAdmin }: AddUserProps) => {
         type="button"
         ariaLabel={t("button")}
         disabled={!isAdmin}
-        className={`text-center text-xs border  font-medium rounded-md  ${
+        className={`text-center text-xs border font-medium rounded-md ${
           !isAdmin
             ? "text-gray-500 bg-white border-gray-300 cursor-not-allowed"
-            : "bg-white  text-gray-500 border-gray-300 hover:bg-primary hover:border-primary hover:text-white"
+            : "bg-white text-gray-500 border-gray-300 hover:bg-primary hover:border-primary hover:text-white"
         }`}
-        onClick={() => setIsOpen(true)}>
+        onClick={openModal}>
         <PlusIcon className="size-4 mr-1" />
         {t("button")}
       </Button>
 
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <ModalWrapper>
         <div className="space-y-4">
           <h2 className="text-base font-medium">{t("title")}</h2>
           <p className="text-sm">{t("desc")}</p>
@@ -137,7 +136,7 @@ export const AddUser = ({ isAdmin }: AddUserProps) => {
             </Button>
           </form>
         </div>
-      </Modal>
+      </ModalWrapper>
     </>
   );
 };
