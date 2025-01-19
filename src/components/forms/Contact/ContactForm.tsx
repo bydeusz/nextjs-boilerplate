@@ -7,19 +7,19 @@ import { useSession } from "next-auth/react";
 import { InputField } from "@/components/inputs/InputField/Input";
 import { TextArea } from "@/components/inputs/TextArea/TextArea";
 import { Loading } from "@/components/lables/Loading/Loading";
-import { Alert } from "@/components/messages/Alert/Alert";
+import { useNotification } from "@/hooks/useNotification";
 
 export default function ContactForm() {
   const { data: session } = useSession();
-  const [error, setError] = useState<string>("");
-  const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [attachment, setAttachment] = useState<File | null>(null);
 
   const t = useTranslations("ContactForm");
+  const { error, success, NotificationComponent } = useNotification();
 
   // Pre-fill name and email from session when available
   useEffect(() => {
@@ -29,24 +29,48 @@ export default function ContactForm() {
     }
   }, [session]);
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) {
+      setAttachment(null);
+      return;
+    }
+
+    // Validate file type
+    const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
+    if (!allowedTypes.includes(file.type)) {
+      error(t("errorTitle"), t("fileTypeError"));
+      e.target.value = "";
+      return;
+    }
+
+    // Validate file size (3MB = 3 * 1024 * 1024 bytes)
+    if (file.size > 3 * 1024 * 1024) {
+      error(t("errorTitle"), t("fileSizeError"));
+      e.target.value = "";
+      return;
+    }
+
+    setAttachment(file);
+  };
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
-    setError("");
-    setSuccess(false);
 
     try {
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("subject", subject);
+      formData.append("message", message);
+      if (attachment) {
+        formData.append("attachment", attachment);
+      }
+
       const response = await fetch("/api/mailer/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          subject,
-          message,
-        }),
+        body: formData,
       });
 
       if (!response.ok) {
@@ -59,9 +83,18 @@ export default function ContactForm() {
       setEmail(session?.user?.email || "");
       setSubject("");
       setMessage("");
-      setSuccess(true);
+      setAttachment(null);
+      // Reset file input
+      const fileInput = document.getElementById(
+        "attachment",
+      ) as HTMLInputElement;
+      if (fileInput) fileInput.value = "";
+      success(t("successTitle"), t("success"));
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      error(
+        t("errorTitle"),
+        err instanceof Error ? err.message : "Something went wrong",
+      );
     } finally {
       setIsLoading(false);
     }
@@ -114,6 +147,27 @@ export default function ContactForm() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
+        <div className="space-y-2">
+          <label
+            htmlFor="attachment"
+            className="block text-xs font-semibold text-gray-700">
+            {t("attachment")}
+          </label>
+          <input
+            type="file"
+            id="attachment"
+            name="attachment"
+            accept=".jpg,.jpeg,.png,.gif"
+            onChange={handleFileChange}
+            className="block w-full text-sm
+              file:mr-4 file:py-2 file:px-4
+              file:rounded-md file:border-0
+              file:text-sm
+              file:bg-gray-100 file:hover:bg-gray-200 file:text-gray-700
+              file:cursor-pointer cursor-pointer"
+          />
+          <p className="text-xs text-gray-500">{t("attachmentHelp")}</p>
+        </div>
         <button
           type="submit"
           disabled={isLoading}
@@ -126,10 +180,7 @@ export default function ContactForm() {
           {t("submit")}
         </button>
       </form>
-      {error && <Alert type="error" title="Error" description={t("error")} />}
-      {success && (
-        <Alert type="success" title="Success" description={t("success")} />
-      )}
+      <NotificationComponent />
     </div>
   );
 }

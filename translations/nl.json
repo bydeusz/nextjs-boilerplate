@@ -85,7 +85,10 @@
       "rolePlaceholder": "Voer rol in",
       "edit": "Bewerken",
       "cancel": "Annuleren",
-      "save": "Opslaan"
+      "save": "Opslaan",
+      "errorTitle": "Fout",
+      "successTitle": "Succes",
+      "successMessage": "Je profiel is succesvol bijgewerkt"
     },
     "password": {
       "title": "Wachtwoord wijzigen",
@@ -107,6 +110,20 @@
       "errorFileType": "Alleen JPEG, GIF en PNG bestanden zijn toegestaan",
       "errorLoading": "Fout bij het laden van de afbeelding",
       "errorUploading": "Fout bij het uploaden van de afbeelding"
+    },
+    "delete": {
+      "title": "Account verwijderen",
+      "description": "Als je je account verwijdert, is er geen weg meer terug. Wees er zeker van.",
+      "deleteButton": "Account verwijderen",
+      "modalTitle": "Account verwijderen",
+      "modalDescription": "Deze actie kan niet ongedaan worden gemaakt. Dit zal je account permanent verwijderen en al je gegevens van onze servers wissen.",
+      "inputLabel": "Typ je volledige naam ter verificatie",
+      "inputPlaceholder": "Voer je volledige naam in",
+      "cancelButton": "Annuleren",
+      "confirmButton": "Account verwijderen",
+      "successTitle": "Succes",
+      "successMessage": "Je account is succesvol verwijderd",
+      "errorTitle": "Fout"
     }
   },
 
@@ -151,7 +168,13 @@
     "messagePlaceholder": "Voer bericht in",
     "submit": "Bericht verzenden",
     "success": "Je bericht is succesvol verzonden!",
-    "error": "Er is iets fout gegaan bij het verzenden van je bericht. Probeer het opnieuw."
+    "error": "Er is iets fout gegaan bij het verzenden van je bericht. Probeer het opnieuw.",
+    "attachment": "Bijlage",
+    "attachmentHelp": "JPEG, PNG, GIF (max 3MB)",
+    "fileTypeError": "Alleen JPEG, PNG en GIF bestanden zijn toegestaan",
+    "fileSizeError": "Bestand moet kleiner zijn dan 3MB",
+    "errorTitle": "Fout",
+    "successTitle": "Succes"
   },
   "ResetPassword": {
     "title": "Reset password",

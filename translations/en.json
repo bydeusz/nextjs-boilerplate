@@ -75,6 +75,20 @@
   },
 
   "User": {
+    "delete": {
+      "title": "Delete Account",
+      "description": "Once you delete your account, there is no going back. Please be certain.",
+      "deleteButton": "Delete Account",
+      "modalTitle": "Delete Account",
+      "modalDescription": "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
+      "inputLabel": "To verify, type your full name",
+      "inputPlaceholder": "Enter your full name",
+      "cancelButton": "Cancel",
+      "confirmButton": "Delete Account",
+      "successTitle": "Success",
+      "successMessage": "Your account has been deleted successfully",
+      "errorTitle": "Error"
+    },
     "update": {
       "title": "Personal Information",
       "name": "Name",
@@ -85,7 +99,10 @@
       "rolePlaceholder": "Enter role here",
       "edit": "Edit",
       "cancel": "Cancel",
-      "save": "Save"
+      "save": "Save",
+      "errorTitle": "Error",
+      "successTitle": "Success",
+      "successMessage": "Your profile has been updated successfully"
     },
     "password": {
       "title": "Update password",
@@ -151,7 +168,13 @@
     "messagePlaceholder": "Enter message here",
     "submit": "Send message",
     "success": "Your message has been sent successfully!",
-    "error": "An error occurred while sending your message. Please try again."
+    "error": "An error occurred while sending your message. Please try again.",
+    "attachment": "Attachment",
+    "attachmentHelp": "JPEG, PNG, GIF (max 3MB)",
+    "fileTypeError": "Only JPEG, PNG, and GIF files are allowed",
+    "fileSizeError": "File size must be less than 3MB",
+    "errorTitle": "Error",
+    "successTitle": "Success"
   },
   "ResetPassword": {
     "title": "Reset password",

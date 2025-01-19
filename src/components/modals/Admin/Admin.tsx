@@ -5,6 +5,7 @@ import { User } from "@/types/User";
 import { Button } from "@/components/actions/Button/Button";
 import { InputField } from "@/components/inputs/InputField/Input";
 import { Loading } from "@/components/lables/Loading/Loading";
+import { Alert } from "@/components/messages/Alert/Alert";
 
 interface AdminProps {
   user: User;
@@ -15,6 +16,7 @@ export default function Admin({ user }: AdminProps) {
   const [inputValue, setInputValue] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const validateInput = () => {
@@ -26,21 +28,29 @@ export default function Admin({ user }: AdminProps) {
 
   const toggleAdmin = async (id: string) => {
     setIsLoading(true);
-    const response = await fetch("/api/user/admin", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userId: id }),
-    });
+    setError("");
 
-    if (response.status === 200) {
-      setIsLoading(false);
+    try {
+      const response = await fetch("/api/user/admin", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: id }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || "Failed to update admin rights");
+      }
+
       window.location.reload();
-    } else {
-      const data = await response.json();
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Failed to update admin rights",
+      );
+    } finally {
       setIsLoading(false);
-      console.error(data);
     }
   };
 
@@ -60,6 +70,11 @@ export default function Admin({ user }: AdminProps) {
             onChange={(e) => setInputValue(e.target.value)}
             required={true}
           />
+
+          {error && (
+            <Alert type="error" title={t("error.title")} description={error} />
+          )}
+
           <Button
             type="button"
             size="sm"
@@ -73,10 +88,10 @@ export default function Admin({ user }: AdminProps) {
               if (user?.id) {
                 toggleAdmin(user.id);
               } else {
-                console.error("User or user ID is undefined");
+                setError("User ID is undefined");
               }
             }}>
-            {isLoading && <Loading className="h-4 w-4" />}
+            {isLoading && <Loading className="h-4 w-4 mr-2" />}
             {t("demote.button")}
           </Button>
         </div>
@@ -94,6 +109,11 @@ export default function Admin({ user }: AdminProps) {
             onChange={(e) => setInputValue(e.target.value)}
             required={true}
           />
+
+          {error && (
+            <Alert type="error" title={t("error.title")} description={error} />
+          )}
+
           <Button
             type="button"
             size="sm"
@@ -107,10 +127,10 @@ export default function Admin({ user }: AdminProps) {
               if (user?.id) {
                 toggleAdmin(user.id);
               } else {
-                console.error("User or user ID is undefined");
+                setError("User ID is undefined");
               }
             }}>
-            {isLoading && <Loading className="h-4 w-4" />}
+            {isLoading && <Loading className="h-4 w-4 mr-2" />}
             {t("promote.button")}
           </Button>
         </div>

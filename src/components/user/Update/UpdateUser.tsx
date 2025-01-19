@@ -6,20 +6,21 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/actions/Button/Button";
 import { InputField } from "@/components/inputs/InputField/Input";
 import { Loading } from "@/components/lables/Loading/Loading";
-import { Alert } from "@/components/messages/Alert/Alert";
+import { useNotification } from "@/hooks/useNotification";
 import Image from "next/image";
 
 export function UpdateUser() {
   const router = useRouter();
   const t = useTranslations("User.update");
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
     role: "",
     avatar: "",
   });
+
+  const { error, success, NotificationComponent } = useNotification();
 
   useEffect(() => {
     const getUser = async () => {
@@ -44,14 +45,12 @@ export function UpdateUser() {
         });
       } catch (err) {
         console.error("Error fetching user:", err);
-        setError("Failed to load user data");
+        error(t("errorTitle"), "Failed to load user data");
       }
     };
 
     getUser();
-  }, []);
-
-  console.log(formData);
+  }, [error, t]);
 
   const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -60,13 +59,13 @@ export function UpdateUser() {
     // Validate file type
     const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
     if (!allowedTypes.includes(file.type)) {
-      setError("Please upload a JPEG, PNG, or GIF file");
+      error(t("errorTitle"), "Please upload a JPEG, PNG, or GIF file");
       return;
     }
 
     // Validate file size (100KB = 102400 bytes)
     if (file.size > 102400) {
-      setError("File size must be less than 100KB");
+      error(t("errorTitle"), "File size must be less than 100KB");
       return;
     }
 
@@ -77,13 +76,12 @@ export function UpdateUser() {
     img.onload = async () => {
       URL.revokeObjectURL(objectUrl);
       if (img.width !== 80 || img.height !== 80) {
-        setError("Image dimensions must be 80x80 pixels");
+        error(t("errorTitle"), "Image dimensions must be 80x80 pixels");
         return;
       }
 
       try {
         setIsLoading(true);
-        setError("");
 
         // Convert file to base64
         const reader = new FileReader();
@@ -98,7 +96,7 @@ export function UpdateUser() {
         reader.readAsDataURL(file);
       } catch (err) {
         console.error("Error handling avatar:", err);
-        setError("Failed to handle avatar");
+        error(t("errorTitle"), "Failed to handle avatar");
         setIsLoading(false);
       }
     };
@@ -117,7 +115,6 @@ export function UpdateUser() {
   const updateUser = async (event: React.FormEvent) => {
     event.preventDefault();
     setIsLoading(true);
-    setError("");
 
     try {
       const response = await fetch("/api/user/update", {
@@ -133,11 +130,16 @@ export function UpdateUser() {
       if (!response.ok) {
         throw new Error(data.error || "Failed to update user");
       }
+
+      success(t("successTitle"), t("successMessage"));
+      router.refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to update user");
+      error(
+        t("errorTitle"),
+        err instanceof Error ? err.message : "Failed to update user",
+      );
     } finally {
       setIsLoading(false);
-      router.refresh();
     }
   };
 
@@ -229,7 +231,7 @@ export function UpdateUser() {
           </Button>
         </div>
       </form>
-      {error && <Alert title="Error" description={error} type="error" />}
+      <NotificationComponent />
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { User } from "@/types/User";
 import { Button } from "@/components/actions/Button/Button";
 import { InputField } from "@/components/inputs/InputField/Input";
 import { Loading } from "@/components/lables/Loading/Loading";
+import { Alert } from "@/components/messages/Alert/Alert";
 
 interface DeleteUserProps {
   user: User;
@@ -17,6 +18,7 @@ export function DeleteUser({ user }: DeleteUserProps) {
   const [inputValue, setInputValue] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const validateInput = () => {
@@ -28,21 +30,27 @@ export function DeleteUser({ user }: DeleteUserProps) {
 
   const deleteUser = async (id: string) => {
     setIsLoading(true);
-    const response = await fetch("/api/user/delete", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userId: id }),
-    });
+    setError("");
 
-    if (response.status === 200) {
-      setIsLoading(false);
+    try {
+      const response = await fetch("/api/user/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: id }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || "Failed to delete user");
+      }
+
       window.location.reload();
-    } else {
-      const data = await response.json();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to delete user");
+    } finally {
       setIsLoading(false);
-      console.error(data);
     }
   };
 
@@ -60,6 +68,11 @@ export function DeleteUser({ user }: DeleteUserProps) {
         onChange={(e) => setInputValue(e.target.value)}
         required={true}
       />
+
+      {error && (
+        <Alert type="error" title={t("error.title")} description={error} />
+      )}
+
       <Button
         type="button"
         size="sm"
@@ -73,10 +86,10 @@ export function DeleteUser({ user }: DeleteUserProps) {
           if (user?.id) {
             deleteUser(user.id);
           } else {
-            console.error("User or user ID is undefined");
+            setError("User ID is undefined");
           }
         }}>
-        {isLoading && <Loading className="h-4 w-4" />}
+        {isLoading && <Loading className="h-4 w-4 mr-2" />}
         {t("button")}
       </Button>
     </div>

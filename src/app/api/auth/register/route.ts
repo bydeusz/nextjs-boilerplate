@@ -6,7 +6,7 @@ import { randomBytes } from "crypto";
 
 export async function POST(request: Request) {
   try {
-    const { name, email, password } = await request.json();
+    const { name, email } = await request.json();
     const allowedDomains = process.env.ALLOWED_DOMAIN;
 
     if (!validateDomain(email, allowedDomains)) {
@@ -20,9 +20,9 @@ export async function POST(request: Request) {
     }
 
     // Basic validation
-    if (!email || !password) {
+    if (!email) {
       return NextResponse.json(
-        { error: "Email and password are required" },
+        { error: "Email is required" },
         { status: 400 },
       );
     }
@@ -39,8 +39,9 @@ export async function POST(request: Request) {
       );
     }
 
-    // Hash password
-    const hashedPassword = await hash(password, 12);
+    // Generate temporary password
+    const temporaryPassword = randomBytes(8).toString("hex");
+    const hashedPassword = await hash(temporaryPassword, 12);
 
     // Create verification token
     const token = randomBytes(32).toString("hex");
@@ -64,7 +65,7 @@ export async function POST(request: Request) {
       },
     });
 
-    // Send verification email using the new endpoint
+    // Send verification email with temporary password
     const verificationResponse = await fetch(
       `${process.env.NEXTAUTH_URL}/api/mailer/verification`,
       {
@@ -72,7 +73,12 @@ export async function POST(request: Request) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, token }),
+        body: JSON.stringify({ 
+          email, 
+          token,
+          temporaryPassword,
+          name,
+        }),
       },
     );
 
@@ -81,7 +87,7 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json(
-      { message: "User created successfully. Please verify your email." },
+      { message: "User created successfully. Please check your email for verification and login details." },
       { status: 201 },
     );
   } catch (error) {

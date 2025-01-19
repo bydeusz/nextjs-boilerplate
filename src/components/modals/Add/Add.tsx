@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/actions/Button/Button";
 import { InputField } from "@/components/inputs/InputField/Input";
-import { PasswordInput } from "@/components/inputs/Password/Password";
 import { Loading } from "@/components/lables/Loading/Loading";
+import { Alert } from "@/components/messages/Alert/Alert";
 import { PlusIcon } from "@heroicons/react/20/solid";
 import { useModal } from "@/hooks/useModal";
 
@@ -23,7 +23,6 @@ export const AddUser = ({ isAdmin }: AddUserProps) => {
   const [inputValue, setInputValue] = useState({
     fullName: "",
     email: "",
-    password: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -39,14 +38,13 @@ export const AddUser = ({ isAdmin }: AddUserProps) => {
         },
         body: JSON.stringify({
           email: inputValue.email,
-          password: inputValue.password,
           name: inputValue.fullName,
         }),
       });
 
       if (!response.ok) {
         const data = await response.json();
-        throw new Error(data.error || "Failed to create user");
+        throw new Error(data.error || "Failed to invite user");
       }
 
       router.refresh();
@@ -107,20 +105,12 @@ export const AddUser = ({ isAdmin }: AddUserProps) => {
               onChange={handleChange}
             />
 
-            <PasswordInput
-              label={t("password")}
-              name="password"
-              id="password"
-              required={true}
-              placeholder={t("passwordPlaceholder")}
-              value={inputValue.password}
-              onChange={handleChange}
-            />
-
             {error && (
-              <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-md p-3">
-                {error}
-              </p>
+              <Alert
+                type="error"
+                title={t("error.title")}
+                description={error}
+              />
             )}
             <Button
               type="submit"

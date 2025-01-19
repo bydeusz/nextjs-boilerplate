@@ -9,6 +9,7 @@ import { InputField } from "@/components/inputs/InputField/Input";
 import { PasswordInput } from "@/components/inputs/Password/Password";
 import Link from "next/link";
 import { Loading } from "@/components/lables/Loading/Loading";
+import { Alert } from "@/components/messages/Alert/Alert";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -117,13 +118,7 @@ export default function LoginForm() {
           </Link>
         </div>
       </form>
-      {error && (
-        <div
-          className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative"
-          role="alert">
-          <span className="block sm:inline">{error}</span>
-        </div>
-      )}
+      {error && <Alert type="error" title="Error" description={error} />}
     </div>
   );
 }

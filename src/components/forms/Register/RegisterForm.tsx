@@ -3,17 +3,16 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { InputField } from "@/components/inputs/InputField/Input";
-import { PasswordInput } from "@/components/inputs/Password/Password";
 import Link from "next/link";
 import { Loading } from "@/components/lables/Loading/Loading";
 import { useTranslations } from "next-intl";
+import { Alert } from "@/components/messages/Alert/Alert";
 
 export default function RegisterForm() {
   const router = useRouter();
   const [error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
   const t = useTranslations("RegisterForm");
@@ -31,7 +30,6 @@ export default function RegisterForm() {
         },
         body: JSON.stringify({
           email,
-          password,
           name,
         }),
       });
@@ -76,15 +74,6 @@ export default function RegisterForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <PasswordInput
-          name="password"
-          id="password"
-          label={t("password")}
-          required={true}
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
         <div className="flex space-x-4 items-center">
           <button
             type="submit"
@@ -104,13 +93,7 @@ export default function RegisterForm() {
           </Link>
         </div>
       </form>
-      {error && (
-        <div
-          className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative"
-          role="alert">
-          <span className="block sm:inline">{error}</span>
-        </div>
-      )}
+      {error && <Alert type="error" title="Error" description={error} />}
     </div>
   );
 }
