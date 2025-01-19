@@ -59,22 +59,22 @@ export const Dashboard = ({ children, thumbnail }: DashboardProps) => {
         </div>
 
         <nav className="flex-1 space-y-2">
-          <NavLink href="/">
+          <NavLink href="/" onClick={() => setSidebarOpen(false)}>
             <HomeIcon className="h-[20px] w-[20px] mr-2" />{" "}
             {t("links.dashboard")}
           </NavLink>
-          <NavLink href="/websites">
+          <NavLink href="/websites" onClick={() => setSidebarOpen(false)}>
             <GlobeAltIcon className="h-[20px] w-[20px] mr-2" />
             {t("links.websites")}
           </NavLink>
         </nav>
         <nav className="space-y-2 absolute bottom-0 left-0 w-full p-4 border-t">
           <LanguageSwitcher />
-          <NavLink href="/settings">
+          <NavLink href="/settings" onClick={() => setSidebarOpen(false)}>
             <Cog8ToothIcon className="h-[20px] w-[20px] mr-2" />
             {t("links.settings")}
           </NavLink>
-          <NavLink href="/support">
+          <NavLink href="/support" onClick={() => setSidebarOpen(false)}>
             <LifebuoyIcon className="h-[20px] w-[20px] mr-2" />
             {t("links.support")}
           </NavLink>
