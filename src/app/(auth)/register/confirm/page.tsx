@@ -6,14 +6,14 @@ export const metadata: Metadata = {
   title: "Confirm your account - Next JS Dashboard Boilerplate by @bydeusz.com",
 };
 
-export default function RegisterConfirmPage({
+export default async function RegisterConfirmPage({
   searchParams,
 }: {
-  searchParams: { email?: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }) {
   if (!searchParams.email) {
     redirect("/register");
   }
 
-  return <RegisterConfirm email={searchParams.email} />;
+  return <RegisterConfirm email={searchParams.email as string} />;
 }
