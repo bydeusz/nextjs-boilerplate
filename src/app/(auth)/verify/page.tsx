@@ -9,15 +9,17 @@ export const metadata: Metadata = {
 export default async function VerifyPage({
   searchParams,
 }: {
-  searchParams: { token: string };
+  searchParams: Promise<{ token: string }>;
 }) {
-  if (!searchParams.token) {
+  const { token } = await searchParams;
+  
+  if (!token) {
     redirect("/login");
   }
 
   return (
     <>
-      <VerifyEmail token={searchParams.token} />
+      <VerifyEmail token={token} />
     </>
   );
 }

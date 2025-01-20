@@ -9,11 +9,13 @@ export const metadata: Metadata = {
 export default async function RegisterConfirmPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ email?: string }>;
 }) {
-  if (!searchParams.email) {
+  const { email } = await searchParams;
+  
+  if (!email) {
     redirect("/register");
   }
 
-  return <RegisterConfirm email={searchParams.email as string} />;
+  return <RegisterConfirm email={email} />;
 }

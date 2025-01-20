@@ -31,7 +31,7 @@ const users = [
 ];
 
 export async function seedUsers() {
-  console.log("🌱 Seeding users...");
+  console.log("[SEED] Seeding users...");
 
   for (const user of users) {
     const hashedPassword = await hash(user.password, 12);
@@ -54,5 +54,5 @@ export async function seedUsers() {
     });
   }
 
-  console.log("✅ Users seeded successfully");
+  console.log("[SUCCESS] Users seeded successfully");
 }
