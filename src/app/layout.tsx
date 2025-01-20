@@ -1,6 +1,7 @@
 import { AuthProviders } from "@/providers/AuthProvider";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
+import { Analytics } from "@vercel/analytics/react";
 
 import "@/assets/styles/globals.css";
 
@@ -22,6 +23,7 @@ export default async function RootLayout({
             <div id="toaster-root"></div>
           </NextIntlClientProvider>
         </AuthProviders>
+        <Analytics />
       </body>
     </html>
   );
