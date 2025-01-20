@@ -4,7 +4,11 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin("./src/config/i18n.ts");
 const nextConfig: NextConfig = {
   images: {
-    domains: ['127.0.0.1'], // Add localhost for development
+    domains: [
+      '127.0.0.1',
+      'ogtihpenkjkzmtjfetoa.supabase.co',
+      'localhost',
+    ],
   },
   /* other config options here */
 };
