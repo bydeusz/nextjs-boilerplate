@@ -1,10 +1,11 @@
 "use client";
 import { useState } from "react";
-import { UserItem } from "@/components/team/UserItem/UserItem";
 import { AddUser } from "@/components/modals/Add/Add";
 import { SearchInput } from "@/components/inputs/Search/Search";
 import { User } from "@/types/User";
 import { useTranslations } from "next-intl";
+
+import { UserItem } from "../UserItem/UserItem";
 
 interface TeamListProps {
   users: User[];
