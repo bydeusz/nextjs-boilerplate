@@ -1,0 +1,36 @@
+# Usage
+#   Download            docker compose pull
+#   Start:              docker compose up -d
+#   Stop:               docker compose down
+#   Destroy:            docker compose down -v --remove-orphans
+#   DB URL:             postgres://postgres:postgres@localhost:5432/bydeusz_db
+
+name: bydeusz
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=bydeusz_db
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    expose:
+      - "80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@local.dev
+      - PGADMIN_DEFAULT_PASSWORD=admin123
+
+volumes:
+  postgres_data:
+  pgadmin_data:

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"supabase start\" \"next dev --turbopack\" \"prisma studio\" \"wait-on tcp:3000 && open-cli http://localhost:3000\" \"wait-on tcp:54323 && open-cli http://localhost:54323\"",
+    "dev": "concurrently \"next dev --turbopack\" \"prisma studio\" \"wait-on tcp:3000 && open-cli http://localhost:3000\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
