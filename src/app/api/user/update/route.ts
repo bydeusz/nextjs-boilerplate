@@ -1,7 +1,7 @@
 import { auth } from "@/config/auth";
 import { prisma } from "@/config/prisma";
-import { supabase } from "@/config/supabase";
 import { NextResponse } from "next/server";
+import { minioClient, MINIO_BUCKET_NAME } from "@/config/minio";
 
 export async function POST(request: Request) {
   try {
@@ -14,8 +14,12 @@ export async function POST(request: Request) {
       );
     }
 
-    // Get request body
-    const { fullname, email, role, avatar } = await request.json();
+    // Get form data
+    const formData = await request.formData();
+    const fullname = formData.get("fullname") as string;
+    const email = formData.get("email") as string;
+    const role = formData.get("role") as string;
+    const avatarFile = formData.get("avatar") as File | null;
 
     // Basic validation
     if (!fullname || !email || !role) {
@@ -25,7 +29,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Check if email domain is allowed (reusing logic from register route)
+    // Check if email domain is allowed
     const allowedDomain = process.env.ALLOWED_DOMAIN;
     if (!email.endsWith(`@${allowedDomain}`)) {
       return NextResponse.json(
@@ -34,45 +38,26 @@ export async function POST(request: Request) {
       );
     }
 
-    let avatarUrl: string | undefined = undefined;
-    
-    // Handle avatar upload if provided
-    if (avatar && avatar.startsWith('data:image')) {
-      try {
-        // Convert base64 to buffer
-        const base64Data = avatar.split(',')[1];
-        const buffer = Buffer.from(base64Data, 'base64');
-        
-        // Get file extension from mime type
-        const mimeType = avatar.split(';')[0].split(':')[1];
-        const extension = mimeType.split('/')[1];
-        
-        // Create file path
-        const filePath = `users/${session.user.id}/${session.user.id}-avatar.${extension}`;
-        
-        // Upload to Supabase
-        const { error: uploadError } = await supabase.storage
-          .from(process.env.NEXT_PUBLIC_BUCKET_ID!)
-          .upload(filePath, buffer, {
-            contentType: mimeType,
-            upsert: true
-          });
+    let avatarUrl: string | null = null;
+    if (avatarFile) {
+      // Generate avatar path
+      const extension = avatarFile.name.split('.').pop();
+      const avatarPath = `users/${session.user.id}/${session.user.id}-avatar.${extension}`;
 
-        if (uploadError) throw uploadError;
+      // Convert File to Buffer
+      const buffer = Buffer.from(await avatarFile.arrayBuffer());
 
-        // Get public URL
-        const { data: { publicUrl } } = supabase.storage
-          .from(process.env.NEXT_PUBLIC_BUCKET_ID!)
-          .getPublicUrl(filePath);
+      // Upload to MinIO
+      await minioClient.putObject(
+        MINIO_BUCKET_NAME,
+        avatarPath,
+        buffer,
+        avatarFile.size,
+        { 'Content-Type': avatarFile.type }
+      );
 
-        avatarUrl = publicUrl;
-      } catch (error) {
-        console.error('Error uploading avatar:', error);
-        return NextResponse.json(
-          { error: "Failed to upload avatar" },
-          { status: 500 }
-        );
-      }
+      // Generate URL for the avatar
+      avatarUrl = `${process.env.NEXT_PUBLIC_MINIO_URL}/${MINIO_BUCKET_NAME}/${avatarPath}`;
     }
 
     // Update user
@@ -84,7 +69,7 @@ export async function POST(request: Request) {
         name: fullname,
         email,
         role,
-        avatar: avatarUrl || avatar || undefined,
+        ...(avatarUrl && { avatar: avatarUrl }),
       },
     });
 

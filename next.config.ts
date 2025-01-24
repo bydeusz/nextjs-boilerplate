@@ -5,8 +5,6 @@ const withNextIntl = createNextIntlPlugin("./src/config/i18n.ts");
 const nextConfig: NextConfig = {
   images: {
     domains: [
-      '127.0.0.1',
-      'ogtihpenkjkzmtjfetoa.supabase.co',
       'localhost',
     ],
   },

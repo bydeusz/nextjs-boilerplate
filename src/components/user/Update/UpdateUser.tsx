@@ -117,12 +117,21 @@ export function UpdateUser() {
     setIsLoading(true);
 
     try {
+      const formDataToSend = new FormData();
+      formDataToSend.append("fullname", formData.fullname);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("role", formData.role);
+
+      if (formData.avatar && formData.avatar.startsWith("data:image")) {
+        // Convert base64 to blob
+        const response = await fetch(formData.avatar);
+        const blob = await response.blob();
+        formDataToSend.append("avatar", blob, "avatar.png");
+      }
+
       const response = await fetch("/api/user/update", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+        body: formDataToSend,
       });
 
       const data = await response.json();
