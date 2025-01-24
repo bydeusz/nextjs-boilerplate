@@ -3,11 +3,20 @@
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
+import { useNotification } from "@/hooks/useNotification";
 
+import { Loader2 } from "lucide-react";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/Card";
 import { InputField } from "@/components/inputs/InputField/Input";
 import { TextArea } from "@/components/inputs/TextArea/TextArea";
-import { Loading } from "@/components/lables/Loading/Loading";
-import { useNotification } from "@/hooks/useNotification";
+import { Button } from "@/components/ui/Button";
 
 export default function ContactForm() {
   const { data: session } = useSession();
@@ -101,86 +110,83 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="space-y-2">
-        <h1 className="text-xl font-bold">{t("title")}</h1>
-        <p className="text-sm text-gray-500">{t("description")}</p>
-      </div>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <InputField
-          label={t("name")}
-          required={true}
-          type="text"
-          name="name"
-          id="name"
-          placeholder="John Doe"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          disabled={!!session?.user?.name}
-        />
-        <InputField
-          label={t("email")}
-          required={true}
-          type="email"
-          name="email"
-          id="email"
-          placeholder="john@doe.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          disabled={!!session?.user?.email}
-        />
-        <InputField
-          label={t("subject")}
-          required={true}
-          type="text"
-          name="subject"
-          id="subject"
-          placeholder={t("subjectPlaceholder")}
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
-        />
-        <TextArea
-          label={t("message")}
-          name="message"
-          id="message"
-          required={true}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <div className="space-y-2">
-          <label
-            htmlFor="attachment"
-            className="block text-xs font-semibold text-gray-700">
-            {t("attachment")}
-          </label>
-          <input
-            type="file"
-            id="attachment"
-            name="attachment"
-            accept=".jpg,.jpeg,.png,.gif"
-            onChange={handleFileChange}
-            className="block w-full text-sm
+    <Card>
+      <CardHeader>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <InputField
+            label={t("name")}
+            required={true}
+            type="text"
+            name="name"
+            id="name"
+            placeholder="John Doe"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            disabled={!!session?.user?.name}
+          />
+          <InputField
+            label={t("email")}
+            required={true}
+            type="email"
+            name="email"
+            id="email"
+            placeholder="john@doe.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={!!session?.user?.email}
+          />
+          <InputField
+            label={t("subject")}
+            required={true}
+            type="text"
+            name="subject"
+            id="subject"
+            placeholder={t("subjectPlaceholder")}
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+          />
+          <TextArea
+            label={t("message")}
+            name="message"
+            id="message"
+            required={true}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+          <div className="space-y-2">
+            <label
+              htmlFor="attachment"
+              className="block text-xs font-semibold text-gray-700">
+              {t("attachment")}
+            </label>
+            <input
+              type="file"
+              id="attachment"
+              name="attachment"
+              accept=".jpg,.jpeg,.png,.gif"
+              onChange={handleFileChange}
+              className="block w-full text-sm
               file:mr-4 file:py-2 file:px-4
               file:rounded-md file:border-0
               file:text-sm
               file:bg-gray-100 file:hover:bg-gray-200 file:text-gray-700
               file:cursor-pointer cursor-pointer"
-          />
-          <p className="text-xs text-gray-500">{t("attachmentHelp")}</p>
-        </div>
-        <button
-          type="submit"
-          disabled={isLoading}
-          className={
-            !isLoading
-              ? "flex items-center bg-primary text-white rounded-md hover:bg-secondary px-4 py-2 text-sm"
-              : "flex items-center bg-gray-300 text-gray-600 rounded-md px-4 py-2 text-sm"
-          }>
-          {isLoading && <Loading className="size-4" />}
-          {t("submit")}
-        </button>
-      </form>
-      <NotificationComponent />
-    </div>
+            />
+            <p className="text-xs text-gray-500">{t("attachmentHelp")}</p>
+          </div>
+          <div className="pt-2">
+            <Button variant="default" disabled={isLoading}>
+              {isLoading && <Loader2 className="size-4" />}
+              {t("submit")}
+            </Button>
+          </div>
+        </form>
+        <NotificationComponent />
+      </CardContent>
+    </Card>
   );
 }

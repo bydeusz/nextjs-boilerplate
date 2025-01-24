@@ -2,12 +2,14 @@
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-
-import { Button } from "@/components/actions/Button/Button";
-import { InputField } from "@/components/inputs/InputField/Input";
-import { Loading } from "@/components/lables/Loading/Loading";
 import { useNotification } from "@/hooks/useNotification";
 import Image from "next/image";
+
+import { Loader2 } from "lucide-react";
+
+import { Button } from "@/components/ui/Button";
+import { InputField } from "@/components/inputs/InputField/Input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 
 export function UpdateUser() {
   const router = useRouter();
@@ -153,94 +155,90 @@ export function UpdateUser() {
   };
 
   return (
-    <div className="p-6 border rounded-md bg-white space-y-2">
-      <h4>{t("title")}</h4>
-      <form onSubmit={updateUser}>
-        <div className="space-y-4 mt-4">
-          <div className="flex items-center space-x-4">
-            <div className="relative w-20 h-20">
-              {formData.avatar ? (
-                <Image
-                  src={formData.avatar}
-                  alt="Avatar"
-                  width={80}
-                  height={80}
-                  className="rounded-md object-cover"
+    <Card>
+      <CardHeader>
+        <CardTitle>{t("title")}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={updateUser}>
+          <div className="space-y-4 mt-4">
+            <div className="flex items-center space-x-4">
+              <div className="relative w-20 h-20">
+                {formData.avatar ? (
+                  <Image
+                    src={formData.avatar}
+                    alt="Avatar"
+                    width={80}
+                    height={80}
+                    className="rounded-md object-cover"
+                  />
+                ) : (
+                  <div className="w-20 h-20 bg-gray-200 rounded-md flex items-center justify-center">
+                    <span className="text-gray-500 text-2xl">
+                      {formData.fullname?.charAt(0)?.toUpperCase() || "?"}
+                    </span>
+                  </div>
+                )}
+              </div>
+              <div className="space-y-2">
+                <input
+                  type="file"
+                  accept="image/jpeg,image/png,image/gif"
+                  onChange={handleAvatarUpload}
+                  className="hidden"
+                  id="avatar-upload"
                 />
-              ) : (
-                <div className="w-20 h-20 bg-gray-200 rounded-md flex items-center justify-center">
-                  <span className="text-gray-500 text-2xl">
-                    {formData.fullname?.charAt(0)?.toUpperCase() || "?"}
-                  </span>
-                </div>
-              )}
+                <label
+                  htmlFor="avatar-upload"
+                  className="text-sm cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md inline-flex items-center">
+                  Upload Avatar
+                </label>
+                <p className="text-xs text-gray-500">
+                  JPEG, PNG, GIF (80x80px, max 100KB)
+                </p>
+              </div>
             </div>
-            <div className="space-y-2">
-              <input
-                type="file"
-                accept="image/jpeg,image/png,image/gif"
-                onChange={handleAvatarUpload}
-                className="hidden"
-                id="avatar-upload"
-              />
-              <label
-                htmlFor="avatar-upload"
-                className="text-sm cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md inline-flex items-center">
-                {isLoading ? <Loading className="h-4 w-4" /> : "Upload Avatar"}
-              </label>
-              <p className="text-xs text-gray-500">
-                JPEG, PNG, GIF (80x80px, max 100KB)
-              </p>
-            </div>
+
+            <InputField
+              label={t("name")}
+              type="text"
+              name="fullname"
+              id="fullname"
+              placeholder={t("namePlaceholder")}
+              value={formData.fullname}
+              onChange={handleInputChange}
+            />
+
+            <InputField
+              label={t("email")}
+              type="email"
+              name="email"
+              id="email"
+              placeholder={t("emailPlaceholder")}
+              value={formData.email}
+              onChange={handleInputChange}
+            />
+
+            <InputField
+              label={t("role")}
+              type="text"
+              name="role"
+              id="role"
+              placeholder={t("rolePlaceholder")}
+              value={formData.role}
+              onChange={handleInputChange}
+            />
           </div>
 
-          <InputField
-            label={t("name")}
-            type="text"
-            name="fullname"
-            id="fullname"
-            placeholder={t("namePlaceholder")}
-            value={formData.fullname}
-            onChange={handleInputChange}
-          />
-
-          <InputField
-            label={t("email")}
-            type="email"
-            name="email"
-            id="email"
-            placeholder={t("emailPlaceholder")}
-            value={formData.email}
-            onChange={handleInputChange}
-          />
-
-          <InputField
-            label={t("role")}
-            type="text"
-            name="role"
-            id="role"
-            placeholder={t("rolePlaceholder")}
-            value={formData.role}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div className="mt-8">
-          <Button
-            type="submit"
-            size="sm"
-            className={
-              !isLoading
-                ? "bg-primary text-white rounded-md hover:bg-secondary"
-                : "bg-gray-300 text-gray-600 rounded-md"
-            }
-            disabled={isLoading}>
-            {isLoading && <Loading className="h-4 w-4" />}
-            {t("save")}
-          </Button>
-        </div>
-      </form>
-      <NotificationComponent />
-    </div>
+          <div className="mt-6">
+            <Button variant="default" disabled={isLoading}>
+              {isLoading && <Loader2 className="h-4 w-4" />}
+              {t("save")}
+            </Button>
+          </div>
+        </form>
+        <NotificationComponent />
+      </CardContent>
+    </Card>
   );
 }

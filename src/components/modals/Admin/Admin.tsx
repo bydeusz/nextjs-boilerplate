@@ -2,21 +2,32 @@ import React, { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { User } from "@/types/User";
 
-import { Button } from "@/components/actions/Button/Button";
+import { Button } from "@/components/ui/Button";
 import { InputField } from "@/components/inputs/InputField/Input";
 import { Loading } from "@/components/lables/Loading/Loading";
 import { Alert } from "@/components/messages/Alert/Alert";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/Dialog";
+import { Settings } from "lucide-react";
 
 interface AdminProps {
   user: User;
+  disabled?: boolean;
 }
 
-export default function Admin({ user }: AdminProps) {
+export default function Admin({ user, disabled }: AdminProps) {
   const t = useTranslations("Modals.admin");
   const [inputValue, setInputValue] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const validateInput = () => {
@@ -44,6 +55,7 @@ export default function Admin({ user }: AdminProps) {
         throw new Error(data.error || "Failed to update admin rights");
       }
 
+      setOpen(false);
       window.location.reload();
     } catch (err) {
       setError(
@@ -55,20 +67,32 @@ export default function Admin({ user }: AdminProps) {
   };
 
   return (
-    <div>
-      {user.isAdmin ? (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button variant="outline" size="icon" disabled={disabled}>
+          <Settings className="size-5" />
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>
+            {user.isAdmin ? t("demote.title") : t("promote.title")}
+          </DialogTitle>
+          <DialogDescription>
+            {user.isAdmin ? t("demote.desc") : t("promote.desc")}
+          </DialogDescription>
+        </DialogHeader>
         <div className="space-y-4">
-          <h2 className="text-base font-medium">{t("demote.title")}</h2>
-          <p className="text-sm">{t("demote.desc")}</p>
           <InputField
             name="name"
             id="name"
             type="text"
-            label={`${t("demote.label")} "${user.name}"`}
-            placeholder={t("demote.placeholder")}
+            label={`${user.isAdmin ? t("demote.label") : t("promote.label")} "${user.name}"`}
+            placeholder={
+              user.isAdmin ? t("demote.placeholder") : t("promote.placeholder")
+            }
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            required={true}
           />
 
           {error && (
@@ -77,12 +101,7 @@ export default function Admin({ user }: AdminProps) {
 
           <Button
             type="button"
-            size="sm"
-            className={`text-white border border-transparent rounded-md ${
-              isButtonDisabled
-                ? "bg-gray-500 hover:bg-gray-500 focus:ring-gray-500 cursor-not-allowed"
-                : "bg-red-500 hover:bg-red-600 focus:ring-red-500"
-            }`}
+            variant="destructive"
             disabled={isButtonDisabled}
             onClick={() => {
               if (user?.id) {
@@ -92,49 +111,10 @@ export default function Admin({ user }: AdminProps) {
               }
             }}>
             {isLoading && <Loading className="h-4 w-4 mr-2" />}
-            {t("demote.button")}
+            {user.isAdmin ? t("demote.button") : t("promote.button")}
           </Button>
         </div>
-      ) : (
-        <div className="space-y-4">
-          <h2 className="text-base font-medium">{t("promote.title")}</h2>
-          <p className="text-sm">{t("promote.desc")}</p>
-          <InputField
-            name="name"
-            id="name"
-            type="text"
-            label={`${t("promote.label")} "${user.name}"`}
-            placeholder={t("promote.placeholder")}
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            required={true}
-          />
-
-          {error && (
-            <Alert type="error" title={t("error.title")} description={error} />
-          )}
-
-          <Button
-            type="button"
-            size="sm"
-            className={`text-white border border-transparent rounded-md ${
-              isButtonDisabled
-                ? "bg-gray-500 hover:bg-gray-500 focus:ring-gray-500 cursor-not-allowed"
-                : "bg-red-500 hover:bg-red-600 focus:ring-red-500"
-            }`}
-            disabled={isButtonDisabled}
-            onClick={() => {
-              if (user?.id) {
-                toggleAdmin(user.id);
-              } else {
-                setError("User ID is undefined");
-              }
-            }}>
-            {isLoading && <Loading className="h-4 w-4 mr-2" />}
-            {t("promote.button")}
-          </Button>
-        </div>
-      )}
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }

@@ -1,14 +1,21 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 
-import { Button } from "@/components/actions/Button/Button";
+import { Loader2 } from "lucide-react";
+
+import { Button } from "@/components/ui/Button";
 import { InputField } from "@/components/inputs/InputField/Input";
-import { Loading } from "@/components/lables/Loading/Loading";
 import { Alert } from "@/components/messages/Alert/Alert";
-import { PlusIcon } from "@heroicons/react/20/solid";
-import { useModal } from "@/hooks/useModal";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/Dialog";
 
 interface AddUserProps {
   isAdmin: boolean;
@@ -16,14 +23,20 @@ interface AddUserProps {
 
 export const AddUser = ({ isAdmin }: AddUserProps) => {
   const t = useTranslations("Modals.add");
-  const router = useRouter();
-  const { openModal, ModalWrapper } = useModal();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [open, setOpen] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
   const [inputValue, setInputValue] = useState({
     fullName: "",
     email: "",
   });
+
+  useEffect(() => {
+    setIsFormValid(
+      inputValue.fullName.trim() !== "" && inputValue.email.trim() !== "",
+    );
+  }, [inputValue]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,7 +60,9 @@ export const AddUser = ({ isAdmin }: AddUserProps) => {
         throw new Error(data.error || "Failed to invite user");
       }
 
-      router.refresh();
+      // Reset form and close dialog on success
+      setInputValue({ fullName: "", email: "" });
+      setOpen(false);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
@@ -64,31 +79,26 @@ export const AddUser = ({ isAdmin }: AddUserProps) => {
 
   return (
     <>
-      <Button
-        type="button"
-        ariaLabel={t("button")}
-        disabled={!isAdmin}
-        className={`text-center text-xs border font-medium rounded-md ${
-          !isAdmin
-            ? "text-gray-500 bg-white border-gray-300 cursor-not-allowed"
-            : "bg-white text-gray-500 border-gray-300 hover:bg-primary hover:border-primary hover:text-white"
-        }`}
-        onClick={openModal}>
-        <PlusIcon className="size-4 mr-1" />
-        {t("button")}
-      </Button>
-
-      <ModalWrapper>
-        <div className="space-y-4">
-          <h2 className="text-base font-medium">{t("title")}</h2>
-          <p className="text-sm">{t("desc")}</p>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button
+            variant={isAdmin ? "default" : "outline"}
+            disabled={!isAdmin}
+            className="disabled:opacity-50 disabled:cursor-not-allowed">
+            {t("button")}
+          </Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{t("title")}</DialogTitle>
+            <DialogDescription>{t("desc")}</DialogDescription>
+          </DialogHeader>
           <form onSubmit={handleSubmit} className="space-y-4">
             <InputField
               label={t("fullName")}
               type="text"
               name="fullName"
               id="fullName"
-              required={true}
               placeholder={t("fullNamePlaceholder")}
               value={inputValue.fullName}
               onChange={handleChange}
@@ -99,34 +109,20 @@ export const AddUser = ({ isAdmin }: AddUserProps) => {
               type="email"
               name="email"
               id="email"
-              required={true}
               placeholder={t("emailPlaceholder")}
               value={inputValue.email}
               onChange={handleChange}
             />
 
-            {error && (
-              <Alert
-                type="error"
-                title={t("error.title")}
-                description={error}
-              />
-            )}
-            <Button
-              type="submit"
-              size="sm"
-              className={`text-white border border-transparent rounded-md ${
-                isLoading
-                  ? "bg-gray-500 hover:bg-gray-500 focus:ring-gray-500 cursor-not-allowed"
-                  : "bg-primary hover:bg-secondary focus:ring-primary"
-              }`}
-              disabled={isLoading}>
-              {isLoading && <Loading className="h-4 w-4 mr-2" />}
+            {error && <Alert type="error" title="Error" description={error} />}
+
+            <Button disabled={isLoading || !isFormValid}>
+              {isLoading && <Loader2 className="h-4 w-4 mr-2" />}
               {t("button")}
             </Button>
           </form>
-        </div>
-      </ModalWrapper>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

@@ -31,7 +31,7 @@ export default function LinkedCard({
         <CardHeader>
           <CardTitle>
             <div>{title}</div>
-            <Badge variant="outline">{badge}</Badge>
+            <Badge variant="gray">{badge}</Badge>
           </CardTitle>
         </CardHeader>
         <CardContent>{description}</CardContent>

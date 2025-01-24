@@ -1,4 +1,4 @@
-import { Dashboard } from "@/components/layout/Dashboard/Dashboard";
+import { Dashboard } from "@/components/ui/Dashboard";
 import { Thumbnail } from "@/components/user/Thumbnail/Thumbnail";
 
 export default async function Layout({

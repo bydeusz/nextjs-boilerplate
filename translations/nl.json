@@ -31,6 +31,7 @@
     },
     "team": {
       "admin": "Admin",
+      "pending": "Pending",
       "settings": "Instellingen",
       "delete": "Verwijderen"
     }

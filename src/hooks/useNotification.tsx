@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { Notification } from "@/components/messages/Notification/Notification";
+import { Notification } from "@/components/ui/Notification";
 import { createPortal } from "react-dom";
 
 type NotificationType = "success" | "error" | "warning" | "info";
