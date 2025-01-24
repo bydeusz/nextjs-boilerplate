@@ -9,7 +9,7 @@ import {
 
 import { DeleteUser } from "@/components/modals/Delete/Delete";
 import Admin from "@/components/modals/Admin/Admin";
-import { Badge } from "@/components/lables/Badge/Badge";
+import { Badge } from "@/components/ui/Badge";
 import { useModal } from "@/hooks/useModal";
 
 interface UserItemProps {
@@ -78,7 +78,7 @@ export const UserItem = ({ user, currentUser }: UserItemProps) => {
           </div>
         </div>
         {user.isAdmin && (
-          <Badge className="absolute top-3 right-3 rounded-full bg-green-50 px-1.5 py-0.5 text-xs font-medium text-green-700 border border-green-600/20">
+          <Badge className="absolute top-3 right-3" variant="outline">
             {t("admin")}
           </Badge>
         )}
