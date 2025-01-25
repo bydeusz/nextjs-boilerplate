@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-import { Button } from "@/components/actions/Button/Button";
-import { Loading } from "@/components/lables/Loading/Loading";
-import { XCircleIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
+import { Card, CardContent } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { Loader2 } from "lucide-react";
+import { ShieldCheck, ShieldX } from "lucide-react";
 
 export default function VerifyEmail({ token }: { token: string }) {
   const router = useRouter();
@@ -42,33 +43,34 @@ export default function VerifyEmail({ token }: { token: string }) {
   if (isVerifying) {
     return (
       <div className="flex justify-center items-center py-8">
-        <Loading className="size-8" />
+        <Loader2 className="size-8" />
       </div>
     );
   }
 
   return (
-    <div className="text-center space-y-6 p-8">
-      <div className="flex justify-center items-center">
-        {error ? (
-          <XCircleIcon className="size-12 text-red-500" />
-        ) : (
-          <CheckCircleIcon className="size-12 text-green-500" />
-        )}
-      </div>
-      <h4
-        className={`font-semibold ${error ? "text-red-500" : "text-green-500"}`}>
-        {error || t("success")}
-      </h4>
-      <p className="text-gray-600 text-sm">
-        {error ? t("error") : t("redirecting")}
-      </p>
-      <Button
-        type="button"
-        size="sm"
-        onClick={() => router.push(`/login?verified=${!error}`)}>
-        {t("backToLogin")}
-      </Button>
-    </div>
+    <Card>
+      <CardContent>
+        <div className="flex justify-center items-center">
+          {error ? (
+            <ShieldX className="size-12 text-red-500" />
+          ) : (
+            <ShieldCheck className="size-12 text-green-500" />
+          )}
+        </div>
+        <h4
+          className={`font-semibold ${error ? "text-red-500" : "text-green-500"}`}>
+          {error || t("success")}
+        </h4>
+        <p className="text-gray-600 text-sm">
+          {error ? t("error") : t("redirecting")}
+        </p>
+        <Button
+          variant="default"
+          onClick={() => router.push(`/login?verified=${!error}`)}>
+          {t("backToLogin")}
+        </Button>
+      </CardContent>
+    </Card>
   );
 }

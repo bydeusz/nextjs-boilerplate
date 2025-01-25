@@ -7,6 +7,15 @@ import { useTranslations } from "next-intl";
 import { PasswordInput } from "@/components/inputs/Password/Password";
 import { Loading } from "@/components/lables/Loading/Loading";
 import { Alert } from "@/components/messages/Alert/Alert";
+import { Button } from "@/components/ui/Button";
+
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/Card";
 
 interface PasswordFormProps {
   token: string;
@@ -60,43 +69,38 @@ export default function PasswordForm({ token }: PasswordFormProps) {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="space-y-1">
-        <h1 className="text-xl font-bold">{t("resetTitle")}</h1>
-        <p className="text-sm text-gray-500">{t("resetDescription")}</p>
-      </div>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <PasswordInput
-          label={t("newPassword")}
-          required={true}
-          name="password"
-          id="password"
-          placeholder={t("newPasswordPlaceholder")}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <PasswordInput
-          label={t("confirmPassword")}
-          required={true}
-          name="confirmPassword"
-          id="confirmPassword"
-          placeholder={t("confirmPasswordPlaceholder")}
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <button
-          type="submit"
-          disabled={isLoading}
-          className={
-            !isLoading
-              ? "flex items-center bg-primary text-white rounded-md hover:bg-secondary px-4 py-2 text-sm"
-              : "flex items-center bg-gray-300 text-gray-600 rounded-md px-4 py-2 text-sm"
-          }>
-          {isLoading && <Loading className="size-4" />}
-          {t("resetButton")}
-        </button>
-      </form>
-      {error && <Alert type="error" title="Error" description={error} />}
-    </div>
+    <Card className="shadow-2xl">
+      <CardHeader>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <PasswordInput
+            label={t("newPassword")}
+            required={true}
+            name="password"
+            id="password"
+            placeholder={t("newPasswordPlaceholder")}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <PasswordInput
+            label={t("confirmPassword")}
+            required={true}
+            name="confirmPassword"
+            id="confirmPassword"
+            placeholder={t("confirmPasswordPlaceholder")}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <Button disabled={isLoading} variant="default">
+            {isLoading && <Loading className="size-4" />}
+            {t("resetButton")}
+          </Button>
+          {error && <Alert type="error" title="Error" description={error} />}
+        </form>
+      </CardContent>
+    </Card>
   );
 }

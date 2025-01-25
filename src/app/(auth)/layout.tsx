@@ -19,9 +19,7 @@ export default function Layout({
         />
       </div>
       <div className="relative flex w-full lg:w-2/3 xl:w-1/2 items-center bg-gray-100 justify-center p-4 md:p-0">
-        <div className="lg:w-1/2 bg-white rounded-md p-8 shadow-2xl">
-          {children}
-        </div>
+        <div className="lg:w-1/2">{children}</div>
         <div className="absolute top-4 right-6">
           <LanguageSwitcher />
         </div>

@@ -5,8 +5,16 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 import { InputField } from "@/components/inputs/InputField/Input";
-import { Loading } from "@/components/lables/Loading/Loading";
+import { Button } from "@/components/ui/Button";
+import { Loader2 } from "lucide-react";
 import { Alert } from "@/components/messages/Alert/Alert";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/Card";
 
 export default function ResetPassword() {
   const [error, setError] = useState<string>("");
@@ -46,45 +54,40 @@ export default function ResetPassword() {
   }
 
   return (
-    <div className="space-y-4">
-      <div className="space-y-1">
-        <h1 className="text-xl font-bold">{t("resetTitle")}</h1>
-        <p className="text-sm text-gray-500">{t("resetDescription")}</p>
-      </div>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <InputField
-          label={t("email")}
-          required={true}
-          type="email"
-          name="email"
-          id="email"
-          placeholder="john@doe.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <div className="flex space-x-4 items-center">
-          <button
-            type="submit"
-            disabled={isLoading}
-            className={
-              !isLoading
-                ? "flex items-center bg-primary text-white rounded-md hover:bg-secondary px-4 py-2 text-sm"
-                : "flex items-center bg-gray-300 text-gray-600 rounded-md px-4 py-2 text-sm"
-            }>
-            {isLoading && <Loading className="size-4" />}
-            {t("submit")}
-          </button>
-          <Link
-            href="/login"
-            className="text-sm text-primary hover:underline underline-offset-4">
-            {t("login")}
-          </Link>
-        </div>
-      </form>
-      {error && <Alert type="error" title="Error" description={error} />}
-      {success && (
-        <Alert type="success" title="Success" description={t("success")} />
-      )}
-    </div>
+    <Card className="shadow-2xl">
+      <CardHeader>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <InputField
+            label={t("email")}
+            required={true}
+            type="email"
+            name="email"
+            id="email"
+            placeholder="john@doe.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <div className="flex space-x-4 items-center">
+            <Button disabled={isLoading} variant="default">
+              {isLoading && <Loader2 className="size-4" />}
+              {t("submit")}
+            </Button>
+            <Link
+              href="/login"
+              className="text-sm text-primary hover:underline underline-offset-4">
+              {t("login")}
+            </Link>
+          </div>
+          {error && <Alert type="error" title="Error" description={error} />}
+          {success && (
+            <Alert type="success" title="Success" description={t("success")} />
+          )}
+        </form>
+      </CardContent>
+    </Card>
   );
 }

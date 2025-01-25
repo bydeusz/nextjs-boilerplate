@@ -4,11 +4,19 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/Card";
 import { InputField } from "@/components/inputs/InputField/Input";
 import { PasswordInput } from "@/components/inputs/Password/Password";
-import Link from "next/link";
-import { Loading } from "@/components/lables/Loading/Loading";
+import { Button } from "@/components/ui/Button";
+import { Loader2 } from "lucide-react";
 import { Alert } from "@/components/messages/Alert/Alert";
 
 export default function LoginForm() {
@@ -66,59 +74,54 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="space-y-4">
-      <div className="space-y-1">
-        <h1 className="text-xl font-bold">{t("title")}</h1>
-        <p className="text-sm text-gray-500">{t("description")}</p>
-      </div>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <InputField
-          label={t("email")}
-          required={true}
-          type="email"
-          name="email"
-          id="email"
-          placeholder="john@doe.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <PasswordInput
-          name="password"
-          id="password"
-          label={t("password")}
-          required={true}
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <div className="flex space-x-4 items-center">
-          <button
-            type="submit"
-            disabled={isLoading}
-            className={
-              !isLoading
-                ? "flex items-center bg-primary text-white rounded-md hover:bg-secondary px-4 py-2 text-sm"
-                : "flex items-center bg-gray-300 text-gray-600 rounded-md px-4 py-2 text-sm"
-            }>
-            {isLoading && <Loading className="size-4" />}
-            {t("signIn")}
-          </button>
-          <Link
-            href="/reset-password"
-            className="text-sm text-primary hover:underline underline-offset-4">
-            {t("forgotPassword")}
-          </Link>
-        </div>
-        <div className="flex space-x-1 items-center">
-          <p className="text-xs text-gray-500">Heb je geen account?</p>
-          <Link
-            href="/register"
-            className="flex items-center bg-white text-primary font-medium hover:underline underline-offset-4 text-xs">
-            {t("noAccount")}
-          </Link>
-        </div>
-      </form>
-      {error && <Alert type="error" title="Error" description={error} />}
-    </div>
+    <Card className="shadow-2xl">
+      <CardHeader>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <InputField
+            label={t("email")}
+            required={true}
+            type="email"
+            name="email"
+            id="email"
+            placeholder="john@doe.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <PasswordInput
+            name="password"
+            id="password"
+            label={t("password")}
+            required={true}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <div className="flex space-x-4 items-center">
+            <Button variant="default" disabled={isLoading}>
+              {isLoading && <Loader2 className="size-4" />}
+              {t("signIn")}
+            </Button>
+            <Link
+              href="/reset-password"
+              className="text-sm text-primary hover:underline underline-offset-4">
+              {t("forgotPassword")}
+            </Link>
+          </div>
+          <div className="flex space-x-1 items-center">
+            <p className="text-xs text-gray-500">Heb je geen account?</p>
+            <Link
+              href="/register"
+              className="flex items-center bg-white text-primary font-medium hover:underline underline-offset-4 text-xs">
+              {t("noAccount")}
+            </Link>
+          </div>
+        </form>
+        {error && <Alert type="error" title="Error" description={error} />}
+      </CardContent>
+    </Card>
   );
 }
