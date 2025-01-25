@@ -119,8 +119,8 @@ export default function LoginForm() {
               {t("noAccount")}
             </Link>
           </div>
+          {error && <Alert type="error" title="Error" description={error} />}
         </form>
-        {error && <Alert type="error" title="Error" description={error} />}
       </CardContent>
     </Card>
   );

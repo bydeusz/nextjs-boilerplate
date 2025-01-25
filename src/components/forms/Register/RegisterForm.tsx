@@ -94,8 +94,8 @@ export default function RegisterForm() {
               {t("alreadyHaveAccount")}
             </Link>
           </div>
+          {error && <Alert type="error" title="Error" description={error} />}
         </form>
-        {error && <Alert type="error" title="Error" description={error} />}
       </CardContent>
     </Card>
   );
