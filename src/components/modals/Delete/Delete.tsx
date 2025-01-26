@@ -7,7 +7,11 @@ import { signOut, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/actions/Button";
 import { InputField } from "@/components/inputs/InputField/Input";
 import { Loading } from "@/components/lables/Loading/Loading";
-import { Alert } from "@/components/messages/Alert/Alert";
+import {
+  Alert,
+  AlertTitle,
+  AlertDescription,
+} from "@/components/ui/messages/Alert";
 import {
   Dialog,
   DialogContent,
@@ -101,7 +105,10 @@ export function DeleteUser({ user, disabled, buttonText }: DeleteUserProps) {
           />
 
           {error && (
-            <Alert type="error" title={t("error.title")} description={error} />
+            <Alert variant="destructive">
+              <AlertTitle>{t("error.title")}</AlertTitle>
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
           )}
 
           <Button

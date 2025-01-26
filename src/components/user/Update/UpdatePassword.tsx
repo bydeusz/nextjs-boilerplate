@@ -14,7 +14,11 @@ import {
 } from "@/components/ui/layout/Card";
 import { PasswordInput } from "@/components/inputs/Password/Password";
 import { Button } from "@/components/ui/actions/Button";
-import { Alert } from "@/components/messages/Alert/Alert";
+import {
+  Alert,
+  AlertTitle,
+  AlertDescription,
+} from "@/components/ui/messages/Alert";
 
 export function UpdatePassword() {
   const t = useTranslations("User.password");
@@ -99,7 +103,12 @@ export function UpdatePassword() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            {error && <Alert type="error" title="Error" description={error} />}
+            {error && (
+              <Alert variant="destructive">
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
           </div>
           <Button variant="default" disabled={isLoading}>
             {isLoading && <Loader2 className="size-4 mr-2" />}

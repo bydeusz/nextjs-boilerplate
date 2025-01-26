@@ -17,7 +17,11 @@ import { InputField } from "@/components/inputs/InputField/Input";
 import { PasswordInput } from "@/components/inputs/Password/Password";
 import { Button } from "@/components/ui/actions/Button";
 import { Loader2 } from "lucide-react";
-import { Alert } from "@/components/messages/Alert/Alert";
+import {
+  Alert,
+  AlertTitle,
+  AlertDescription,
+} from "@/components/ui/messages/Alert";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -119,7 +123,12 @@ export default function LoginForm() {
               {t("noAccount")}
             </Link>
           </div>
-          {error && <Alert type="error" title="Error" description={error} />}
+          {error && (
+            <Alert variant="destructive">
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
         </form>
       </CardContent>
     </Card>

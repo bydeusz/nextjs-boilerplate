@@ -7,7 +7,11 @@ import Link from "next/link";
 import { InputField } from "@/components/inputs/InputField/Input";
 import { Button } from "@/components/ui/actions/Button";
 import { Loader2 } from "lucide-react";
-import { Alert } from "@/components/messages/Alert/Alert";
+import {
+  Alert,
+  AlertTitle,
+  AlertDescription,
+} from "@/components/ui/messages/Alert";
 import {
   Card,
   CardHeader,
@@ -82,9 +86,17 @@ export default function ResetPassword() {
               {t("login")}
             </Link>
           </div>
-          {error && <Alert type="error" title="Error" description={error} />}
+          {error && (
+            <Alert variant="destructive">
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
           {success && (
-            <Alert type="success" title="Success" description={t("success")} />
+            <Alert variant="success">
+              <AlertTitle>Success</AlertTitle>
+              <AlertDescription>{t("success")}</AlertDescription>
+            </Alert>
           )}
         </form>
       </CardContent>

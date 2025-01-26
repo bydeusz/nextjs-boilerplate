@@ -6,7 +6,11 @@ import { useTranslations } from "next-intl";
 
 import { PasswordInput } from "@/components/inputs/Password/Password";
 import { Loading } from "@/components/lables/Loading/Loading";
-import { Alert } from "@/components/messages/Alert/Alert";
+import {
+  Alert,
+  AlertTitle,
+  AlertDescription,
+} from "@/components/ui/messages/Alert";
 import { Button } from "@/components/ui/actions/Button";
 
 import {
@@ -98,7 +102,12 @@ export default function PasswordForm({ token }: PasswordFormProps) {
             {isLoading && <Loading className="size-4" />}
             {t("resetButton")}
           </Button>
-          {error && <Alert type="error" title="Error" description={error} />}
+          {error && (
+            <Alert variant="destructive">
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
         </form>
       </CardContent>
     </Card>

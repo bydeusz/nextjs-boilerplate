@@ -6,7 +6,11 @@ import { Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/actions/Button";
 import { InputField } from "@/components/inputs/InputField/Input";
-import { Alert } from "@/components/messages/Alert/Alert";
+import {
+  Alert,
+  AlertTitle,
+  AlertDescription,
+} from "@/components/ui/messages/Alert";
 
 import {
   Dialog,
@@ -114,7 +118,12 @@ export const AddUser = ({ isAdmin }: AddUserProps) => {
               onChange={handleChange}
             />
 
-            {error && <Alert type="error" title="Error" description={error} />}
+            {error && (
+              <Alert variant="destructive">
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
 
             <Button disabled={isLoading || !isFormValid}>
               {isLoading && <Loader2 className="h-4 w-4 mr-2" />}
