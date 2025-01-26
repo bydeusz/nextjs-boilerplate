@@ -6,9 +6,14 @@ import { useTranslations } from "next-intl";
 
 import { Loader2 } from "lucide-react";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/layout/Card";
 import { PasswordInput } from "@/components/inputs/Password/Password";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/actions/Button";
 import { Alert } from "@/components/messages/Alert/Alert";
 
 export function UpdatePassword() {

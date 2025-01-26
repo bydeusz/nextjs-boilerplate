@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { User } from "@/types/User";
 
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/actions/Button";
 import { InputField } from "@/components/inputs/InputField/Input";
 import { Loading } from "@/components/lables/Loading/Loading";
 import { Alert } from "@/components/messages/Alert/Alert";
@@ -13,7 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/Dialog";
+} from "@/components/ui/messages/Dialog";
 import { Settings } from "lucide-react";
 
 interface AdminProps {

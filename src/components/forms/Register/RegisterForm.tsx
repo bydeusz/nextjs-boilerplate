@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 
 import { InputField } from "@/components/inputs/InputField/Input";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/actions/Button";
 import { Loader2 } from "lucide-react";
 import { Alert } from "@/components/messages/Alert/Alert";
 import {
@@ -14,7 +14,7 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-} from "@/components/ui/Card";
+} from "@/components/ui/layout/Card";
 
 export default function RegisterForm() {
   const router = useRouter();

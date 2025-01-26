@@ -35,7 +35,10 @@ const CardTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex justify-between items-center font-semibold", className)}
+    className={cn(
+      "text-base flex justify-between items-center font-semibold",
+      className,
+    )}
     {...props}
   />
 ));

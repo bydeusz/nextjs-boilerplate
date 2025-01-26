@@ -7,8 +7,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/Card";
-import { Badge } from "@/components/ui/Badge";
+} from "@/components/ui/layout/Card";
+import { Badge } from "@/components/ui/labels/Badge";
 
 interface LinkedCardProps {
   title: string;

@@ -10,9 +10,9 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/Card";
+} from "@/components/ui/layout/Card";
 import { DeleteUser as Delete } from "@/components/modals/Delete/Delete";
-import { Skeleton } from "@/components/ui/Skeleton";
+import { Skeleton } from "@/components/ui/layout/Skeleton";
 
 export function DeleteUser() {
   const t = useTranslations("User.delete");

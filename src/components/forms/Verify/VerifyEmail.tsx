@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-import { Card, CardContent } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
+import { Card, CardContent } from "@/components/ui/layout/Card";
+import { Button } from "@/components/ui/actions/Button";
 import { Loader2 } from "lucide-react";
 import { ShieldCheck, ShieldX } from "lucide-react";
 

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
-import { useNotification } from "@/hooks/useNotification";
+import { useToast } from "@/hooks/useToast";
 
 import { Loader2 } from "lucide-react";
 
@@ -13,10 +13,10 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/Card";
+} from "@/components/ui/layout/Card";
 import { InputField } from "@/components/inputs/InputField/Input";
 import { TextArea } from "@/components/inputs/TextArea/TextArea";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/actions/Button";
 
 export default function ContactForm() {
   const { data: session } = useSession();
@@ -28,7 +28,7 @@ export default function ContactForm() {
   const [attachment, setAttachment] = useState<File | null>(null);
 
   const t = useTranslations("ContactForm");
-  const { error, success, NotificationComponent } = useNotification();
+  const { toast } = useToast();
 
   // Pre-fill name and email from session when available
   useEffect(() => {
@@ -48,14 +48,22 @@ export default function ContactForm() {
     // Validate file type
     const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
     if (!allowedTypes.includes(file.type)) {
-      error(t("errorTitle"), t("fileTypeError"));
+      toast({
+        variant: "destructive",
+        title: t("errorTitle"),
+        description: t("fileTypeError"),
+      });
       e.target.value = "";
       return;
     }
 
     // Validate file size (3MB = 3 * 1024 * 1024 bytes)
     if (file.size > 3 * 1024 * 1024) {
-      error(t("errorTitle"), t("fileSizeError"));
+      toast({
+        variant: "destructive",
+        title: t("errorTitle"),
+        description: t("fileSizeError"),
+      });
       e.target.value = "";
       return;
     }
@@ -98,12 +106,19 @@ export default function ContactForm() {
         "attachment",
       ) as HTMLInputElement;
       if (fileInput) fileInput.value = "";
-      success(t("successTitle"), t("success"));
+
+      toast({
+        variant: "success",
+        title: t("successTitle"),
+        description: t("success"),
+      });
     } catch (err) {
-      error(
-        t("errorTitle"),
-        err instanceof Error ? err.message : "Something went wrong",
-      );
+      toast({
+        variant: "destructive",
+        title: t("errorTitle"),
+        description:
+          err instanceof Error ? err.message : "Something went wrong",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -185,7 +200,6 @@ export default function ContactForm() {
             </Button>
           </div>
         </form>
-        <NotificationComponent />
       </CardContent>
     </Card>
   );

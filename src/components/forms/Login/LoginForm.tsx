@@ -12,10 +12,10 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-} from "@/components/ui/Card";
+} from "@/components/ui/layout/Card";
 import { InputField } from "@/components/inputs/InputField/Input";
 import { PasswordInput } from "@/components/inputs/Password/Password";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/actions/Button";
 import { Loader2 } from "lucide-react";
 import { Alert } from "@/components/messages/Alert/Alert";
 

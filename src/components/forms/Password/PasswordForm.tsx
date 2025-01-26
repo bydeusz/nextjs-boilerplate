@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 import { PasswordInput } from "@/components/inputs/Password/Password";
 import { Loading } from "@/components/lables/Loading/Loading";
 import { Alert } from "@/components/messages/Alert/Alert";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/actions/Button";
 
 import {
   Card,
@@ -15,7 +15,7 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-} from "@/components/ui/Card";
+} from "@/components/ui/layout/Card";
 
 interface PasswordFormProps {
   token: string;

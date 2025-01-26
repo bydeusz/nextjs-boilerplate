@@ -3,8 +3,8 @@
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
-import { Card, CardContent } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
+import { Card, CardContent } from "@/components/ui/layout/Card";
+import { Button } from "@/components/ui/actions/Button";
 import { ShieldCheck } from "lucide-react";
 
 export default function RegisterConfirm({ email }: { email: string }) {

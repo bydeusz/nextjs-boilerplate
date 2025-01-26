@@ -6,7 +6,7 @@ import { User } from "@/types/User";
 import { AddUser } from "@/components/modals/Add/Add";
 import { SearchInput } from "@/components/inputs/Search/Search";
 import { TeammateCard } from "@/components/cards/TeammateCard";
-import { Skeleton } from "@/components/ui/Skeleton";
+import { Skeleton } from "@/components/ui/layout/Skeleton";
 
 interface TeamListProps {
   currentUser: string;

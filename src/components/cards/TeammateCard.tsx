@@ -3,10 +3,10 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-import { Card, CardContent } from "@/components/ui/Card";
+import { Card, CardContent } from "@/components/ui/layout/Card";
 import Admin from "@/components/modals/Admin/Admin";
 import { DeleteUser } from "@/components/modals/Delete/Delete";
-import { Badge } from "@/components/ui/Badge";
+import { Badge } from "@/components/ui/labels/Badge";
 
 interface UserItemProps {
   user: any;

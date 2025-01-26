@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 
 import { Loader2 } from "lucide-react";
 
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/actions/Button";
 import { InputField } from "@/components/inputs/InputField/Input";
 import { Alert } from "@/components/messages/Alert/Alert";
 
@@ -15,7 +15,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/Dialog";
+} from "@/components/ui/messages/Dialog";
 
 interface AddUserProps {
   isAdmin: boolean;

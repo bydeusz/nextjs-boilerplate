@@ -2,14 +2,19 @@
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { useNotification } from "@/hooks/useNotification";
+import { useToast } from "@/hooks/useToast";
 import Image from "next/image";
 
 import { Loader2 } from "lucide-react";
 
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/actions/Button";
 import { InputField } from "@/components/inputs/InputField/Input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/layout/Card";
 
 export function UpdateUser() {
   const router = useRouter();
@@ -22,7 +27,7 @@ export function UpdateUser() {
     avatar: "",
   });
 
-  const { error, success, NotificationComponent } = useNotification();
+  const { toast } = useToast();
 
   useEffect(() => {
     const getUser = async () => {
@@ -47,12 +52,16 @@ export function UpdateUser() {
         });
       } catch (err) {
         console.error("Error fetching user:", err);
-        error(t("errorTitle"), "Failed to load user data");
+        toast({
+          variant: "destructive",
+          title: t("errorTitle"),
+          description: "Failed to load user data",
+        });
       }
     };
 
     getUser();
-  }, [error, t]);
+  }, [t, toast]);
 
   const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -61,13 +70,21 @@ export function UpdateUser() {
     // Validate file type
     const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
     if (!allowedTypes.includes(file.type)) {
-      error(t("errorTitle"), "Please upload a JPEG, PNG, or GIF file");
+      toast({
+        variant: "destructive",
+        title: t("errorTitle"),
+        description: "Please upload a JPEG, PNG, or GIF file",
+      });
       return;
     }
 
     // Validate file size (100KB = 102400 bytes)
     if (file.size > 102400) {
-      error(t("errorTitle"), "File size must be less than 100KB");
+      toast({
+        variant: "destructive",
+        title: t("errorTitle"),
+        description: "File size must be less than 100KB",
+      });
       return;
     }
 
@@ -78,7 +95,11 @@ export function UpdateUser() {
     img.onload = async () => {
       URL.revokeObjectURL(objectUrl);
       if (img.width !== 80 || img.height !== 80) {
-        error(t("errorTitle"), "Image dimensions must be 80x80 pixels");
+        toast({
+          variant: "destructive",
+          title: t("errorTitle"),
+          description: "Image dimensions must be 80x80 pixels",
+        });
         return;
       }
 
@@ -98,7 +119,11 @@ export function UpdateUser() {
         reader.readAsDataURL(file);
       } catch (err) {
         console.error("Error handling avatar:", err);
-        error(t("errorTitle"), "Failed to handle avatar");
+        toast({
+          variant: "destructive",
+          title: t("errorTitle"),
+          description: "Failed to handle avatar",
+        });
         setIsLoading(false);
       }
     };
@@ -142,13 +167,19 @@ export function UpdateUser() {
         throw new Error(data.error || "Failed to update user");
       }
 
-      success(t("successTitle"), t("successMessage"));
+      toast({
+        title: t("successTitle"),
+        description: t("successMessage"),
+        variant: "success",
+      });
       router.refresh();
     } catch (err) {
-      error(
-        t("errorTitle"),
-        err instanceof Error ? err.message : "Failed to update user",
-      );
+      toast({
+        variant: "destructive",
+        title: t("errorTitle"),
+        description:
+          err instanceof Error ? err.message : "Failed to update user",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -237,7 +268,6 @@ export function UpdateUser() {
             </Button>
           </div>
         </form>
-        <NotificationComponent />
       </CardContent>
     </Card>
   );
