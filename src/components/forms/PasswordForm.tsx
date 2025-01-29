@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-import { PasswordInput } from "@/components/inputs/Password/Password";
-import { Loading } from "@/components/lables/Loading/Loading";
+import { PasswordInput } from "@/components/ui/inputs/Password";
+import { Loader2 } from "lucide-react";
 import {
   Alert,
   AlertTitle,
@@ -99,7 +99,7 @@ export default function PasswordForm({ token }: PasswordFormProps) {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
           <Button disabled={isLoading} variant="default">
-            {isLoading && <Loading className="size-4" />}
+            {isLoading && <Loader2 className="size-4" />}
             {t("resetButton")}
           </Button>
           {error && (

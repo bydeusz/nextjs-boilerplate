@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/actions/Button";
-import { InputField } from "@/components/inputs/InputField/Input";
+import { InputField } from "@/components/ui/inputs/Input";
 import {
   Alert,
   AlertTitle,

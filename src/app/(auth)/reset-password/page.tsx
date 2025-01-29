@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { auth } from "@/config/auth";
 import { redirect } from "next/navigation";
-import ResetPassword from "@/components/forms/Reset/ResetPassword";
+import ResetPassword from "@/components/forms/ResetPassword";
 
 export const metadata: Metadata = {
   title: "Reset your password - Next JS Dashboard Boilerplate by @bydeusz.com",

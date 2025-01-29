@@ -5,8 +5,8 @@ import { User } from "@/types/User";
 import { signOut, useSession } from "next-auth/react";
 
 import { Button } from "@/components/ui/actions/Button";
-import { InputField } from "@/components/inputs/InputField/Input";
-import { Loading } from "@/components/lables/Loading/Loading";
+import { InputField } from "@/components/ui/inputs/Input";
+import { Loader2 } from "lucide-react";
 import {
   Alert,
   AlertTitle,
@@ -122,7 +122,7 @@ export function DeleteUser({ user, disabled, buttonText }: DeleteUserProps) {
                 setError("User ID is undefined");
               }
             }}>
-            {isLoading && <Loading className="h-4 w-4 mr-2" />}
+            {isLoading && <Loader2 className="h-4 w-4 mr-2" />}
             {t("button")}
           </Button>
         </div>

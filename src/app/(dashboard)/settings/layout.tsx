@@ -1,9 +1,8 @@
 import { isLoggedIn } from "@/utils/isLoggedIn";
 import { getTranslations } from "next-intl/server";
 
-import { Header } from "@/components/headers/Header/Header";
-import { Tabs } from "@/components/navigation/Tabs/Tabs";
-import { Tab } from "@/components/actions/Tab/Tab";
+import { Header } from "@/components/ui/layout/Header";
+import { Tabs, Tab } from "@/components/ui/navigation/Tabs";
 
 export default async function Layout({
   children,

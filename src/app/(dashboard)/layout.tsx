@@ -1,5 +1,5 @@
 import { Dashboard } from "@/components/ui/layout/Dashboard";
-import { Thumbnail } from "@/components/user/Thumbnail/Thumbnail";
+import { Thumbnail } from "@/components/user/Thumbnail";
 
 export default async function Layout({
   children,

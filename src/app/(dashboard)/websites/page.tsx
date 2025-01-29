@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { isLoggedIn } from "@/utils/isLoggedIn";
 import { getTranslations } from "next-intl/server";
-import { Header } from "@/components/headers/Header/Header";
+import { Header } from "@/components/ui/layout/Header";
 
 export const metadata: Metadata = {
   title: "Websites - Next JS Dashboard Boilerplate by @bydeusz.com",

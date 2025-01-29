@@ -12,7 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/layout/Card";
-import { PasswordInput } from "@/components/inputs/Password/Password";
+import { PasswordInput } from "@/components/ui/inputs/Password";
 import { Button } from "@/components/ui/actions/Button";
 import {
   Alert,

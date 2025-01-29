@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/layout/Card";
-import { DeleteUser as Delete } from "@/components/modals/Delete/Delete";
+import { DeleteUser as Delete } from "@/components/modals/Delete";
 import { Skeleton } from "@/components/ui/layout/Skeleton";
 
 export function DeleteUser() {

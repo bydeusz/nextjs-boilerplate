@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { User } from "@/types/User";
 
-import { AddUser } from "@/components/modals/Add/Add";
-import { SearchInput } from "@/components/inputs/Search/Search";
+import { AddUser } from "@/components/modals/Add";
+import { SearchInput } from "@/components/ui/inputs/Search";
 import { TeammateCard } from "@/components/cards/TeammateCard";
 import { Skeleton } from "@/components/ui/layout/Skeleton";
 

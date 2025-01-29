@@ -3,8 +3,8 @@ import { useTranslations } from "next-intl";
 import { User } from "@/types/User";
 
 import { Button } from "@/components/ui/actions/Button";
-import { InputField } from "@/components/inputs/InputField/Input";
-import { Loading } from "@/components/lables/Loading/Loading";
+import { InputField } from "@/components/ui/inputs/Input";
+import { Loader2 } from "lucide-react";
 import {
   Alert,
   AlertTitle,
@@ -117,7 +117,7 @@ export default function Admin({ user, disabled }: AdminProps) {
                 setError("User ID is undefined");
               }
             }}>
-            {isLoading && <Loading className="h-4 w-4 mr-2" />}
+            {isLoading && <Loader2 className="h-4 w-4 mr-2" />}
             {user.isAdmin ? t("demote.button") : t("promote.button")}
           </Button>
         </div>

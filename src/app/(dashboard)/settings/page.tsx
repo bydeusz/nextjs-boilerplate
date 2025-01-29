@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
-import { UpdateUser } from "@/components/user/Update/UpdateUser";
-import { UpdatePassword } from "@/components/user/Update/UpdatePassword";
-import { DeleteUser } from "@/components/user/Delete/DeleteUser";
+import { UpdateUser } from "@/components/user/UpdateUser";
+import { UpdatePassword } from "@/components/user/UpdatePassword";
+import { DeleteUser } from "@/components/user/DeleteUser";
 
 export const metadata: Metadata = {
   title: "Settings - Next JS Dashboard Boilerplate by @bydeusz.com",

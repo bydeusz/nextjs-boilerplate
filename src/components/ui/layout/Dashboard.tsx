@@ -8,11 +8,11 @@ import {
   LifebuoyIcon,
   GlobeAltIcon,
 } from "@heroicons/react/24/outline";
-import { Brand } from "@/components/lables/Brand/Brand";
-import { NavLink } from "@/components/actions/NavLink/NavLink";
-import { SearchInput } from "@/components/inputs/Search/Search";
-import LanguageSwitcher from "@/components/actions/LanguageSwitcher/LanguageSwitcher";
-import LogoutButton from "@/components/actions/Logout/LogoutButton";
+import { Brand } from "@/components/ui/labels/Brand";
+import { NavLink } from "@/components/ui/actions/NavLink";
+import { SearchInput } from "@/components/ui/inputs/Search";
+import LanguageSwitcher from "@/components/ui/actions/LanguageSwitcher";
+import LogoutButton from "@/components/ui/actions/LogoutButton";
 import { useTranslations } from "next-intl";
 
 interface DashboardProps {

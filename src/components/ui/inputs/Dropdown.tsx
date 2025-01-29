@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/20/solid";
-import { SearchInput } from "@/components/inputs/Search/Search";
+import { SearchInput } from "@/components/ui/inputs/Search";
 import { useClickOutside } from "@/hooks/useClickOutside";
 
 // Type checking for the Dropdown

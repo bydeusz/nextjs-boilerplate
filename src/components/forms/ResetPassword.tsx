@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
-import { InputField } from "@/components/inputs/InputField/Input";
+import { InputField } from "@/components/ui/inputs/Input";
 import { Button } from "@/components/ui/actions/Button";
 import { Loader2 } from "lucide-react";
 import {

@@ -14,8 +14,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/layout/Card";
-import { InputField } from "@/components/inputs/InputField/Input";
-import { TextArea } from "@/components/inputs/TextArea/TextArea";
+import { InputField } from "@/components/ui/inputs/Input";
+import { TextArea } from "@/components/ui/inputs/TextArea";
 import { Button } from "@/components/ui/actions/Button";
 
 export default function ContactForm() {

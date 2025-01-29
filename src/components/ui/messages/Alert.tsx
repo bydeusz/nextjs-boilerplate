@@ -42,10 +42,12 @@ const alertVariants = cva(
       variant: {
         default: "border-black bg-background text-foreground",
         destructive:
-          "border-destructive text-destructive dark:border-destructive [&>svg]:text-destructive",
-        success: "border-green-600 text-green-600 [&>svg]:text-green-600",
-        warning: "border-yellow-600 text-yellow-600 [&>svg]:text-yellow-600",
-        info: "border-blue-700 text-blue-600 [&>svg]:text-blue-600",
+          "border-destructive bg-destructive/10 text-destructive dark:border-destructive [&>svg]:text-destructive",
+        success:
+          "border-green-700 bg-green-50 text-green-700 [&>svg]:text-green-700",
+        warning:
+          "border-yellow-700 bg-yellow-50 text-yellow-700 [&>svg]:text-yellow-700",
+        info: "border-blue-700 bg-blue-50 text-blue-700 [&>svg]:text-blue-700",
       },
     },
     defaultVariants: {

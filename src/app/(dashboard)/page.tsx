@@ -2,7 +2,7 @@ import { isLoggedIn } from "@/utils/isLoggedIn";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 
-import { Header } from "@/components/headers/Header/Header";
+import { Header } from "@/components/ui/layout/Header";
 import LinkedCard from "@/components/cards/LinkedCard";
 
 export const metadata: Metadata = {

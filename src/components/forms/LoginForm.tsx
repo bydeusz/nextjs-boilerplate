@@ -13,8 +13,8 @@ import {
   CardDescription,
   CardContent,
 } from "@/components/ui/layout/Card";
-import { InputField } from "@/components/inputs/InputField/Input";
-import { PasswordInput } from "@/components/inputs/Password/Password";
+import { InputField } from "@/components/ui/inputs/Input";
+import { PasswordInput } from "@/components/ui/inputs/Password";
 import { Button } from "@/components/ui/actions/Button";
 import { Loader2 } from "lucide-react";
 import {

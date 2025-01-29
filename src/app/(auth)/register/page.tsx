@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { auth } from "@/config/auth";
-import RegisterForm from "@/components/forms/Register/RegisterForm";
+import RegisterForm from "@/components/forms/RegisterForm";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {

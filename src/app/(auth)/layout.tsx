@@ -1,4 +1,4 @@
-import LanguageSwitcher from "@/components/actions/LanguageSwitcher/LanguageSwitcher";
+import LanguageSwitcher from "@/components/ui/actions/LanguageSwitcher";
 import Image from "next/image";
 
 export default function Layout({
