@@ -56,11 +56,13 @@ export default function LanguageSwitcher() {
       <div
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 cursor-pointer rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 hover:ring-2 hover:ring-primary">
-        <span className={`fi fi-${selectedLanguage?.flag}`}></span>
+        <span className={"fi fi-" + selectedLanguage?.flag}></span>
         <span>{selectedLanguage?.label}</span>
         <span className="absolute right-3 top-1/2 -translate-y-1/2">
           <ChevronDown
-            className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+            className={
+              "h-4 w-4 transition-transform" + (isOpen ? " rotate-180" : "")
+            }
           />
         </span>
       </div>
@@ -71,10 +73,11 @@ export default function LanguageSwitcher() {
             <div
               key={language.code}
               onClick={() => handleLanguageChange(language.code)}
-              className={`flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-gray-100 ${
-                locale === language.code ? "bg-gray-50" : ""
-              }`}>
-              <span className={`fi fi-${language?.flag}`}></span>
+              className={
+                "flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-gray-100" +
+                (locale === language.code ? " bg-gray-50" : "")
+              }>
+              <span className={"fi fi-" + language.flag}></span>
               <span>{language.label}</span>
             </div>
           ))}
