@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import { Search } from "lucide-react";
 
 // Input type
 export interface SearchProps {
@@ -30,7 +30,7 @@ export const SearchInput = ({
 
   return (
     <div className="relative flex items-center w-full">
-      <MagnifyingGlassIcon className="absolute h-[18px] w-[18px] text-gray-400 ml-2" />
+      <Search className="absolute size-4 text-gray-400 ml-2" />
       <input
         type="text"
         name={name}

@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/20/solid";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { SearchInput } from "@/components/ui/inputs/Search";
 import { useClickOutside } from "@/hooks/useClickOutside";
 
@@ -56,9 +56,9 @@ export const DropdownInput = ({
           onClick={toggleMenu}>
           <div className="font-semibold">{label}</div>
           {isOpen ? (
-            <ChevronUpIcon className="w-[20px] h-[20px]" />
+            <ChevronUp className="size-4" />
           ) : (
-            <ChevronDownIcon className="w-[20px] h-[20px]" />
+            <ChevronDown className="size-4" />
           )}
         </button>
       </div>

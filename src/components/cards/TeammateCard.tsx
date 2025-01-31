@@ -1,12 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 
 import { Card, CardContent } from "@/components/ui/layout/Card";
 import Admin from "@/components/modals/Admin";
 import { DeleteUser } from "@/components/modals/Delete";
 import { Badge } from "@/components/ui/labels/Badge";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/labels/Avatar";
 
 interface UserItemProps {
   user: any;
@@ -21,18 +25,10 @@ export const TeammateCard = ({ user, currentUser }: UserItemProps) => {
       <CardContent>
         <div className="flex justify-between items-center pt-6">
           <div className="flex space-x-4 items-center">
-            <div className="overflow-hidden size-12 shrink-0 rounded-full bg-gray-200 flex items-center justify-center font-semibold text-xs border border-white ring-2 ring-gray-200">
-              {user.avatar ? (
-                <Image
-                  src={user.avatar}
-                  alt={`avatar picture of ${user.name}`}
-                  width={50}
-                  height={50}
-                />
-              ) : (
-                user.name?.charAt(0)
-              )}
-            </div>
+            <Avatar className="size-12">
+              <AvatarImage src={user.avatar} />
+              <AvatarFallback>{user.name?.charAt(0)}</AvatarFallback>
+            </Avatar>
             <div>
               <div className="flex space-x-2 items-center">
                 <h3 className="text-sm font-medium text-gray-900">

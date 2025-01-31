@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
-import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
+import { AlertCircle } from "lucide-react";
 
 // Input type
 export interface InputProps {
@@ -83,10 +83,7 @@ export const InputField = ({
         />
         {error && (
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-            <ExclamationCircleIcon
-              className="h-5 w-5 text-red-500"
-              aria-hidden="true"
-            />
+            <AlertCircle className="size-5 text-red-500" />
           </div>
         )}
       </div>

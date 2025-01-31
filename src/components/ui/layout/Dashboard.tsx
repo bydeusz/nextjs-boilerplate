@@ -1,13 +1,6 @@
 "use client";
 import { useState } from "react";
-import {
-  Bars3Icon,
-  XMarkIcon,
-  Cog8ToothIcon,
-  HomeIcon,
-  LifebuoyIcon,
-  GlobeAltIcon,
-} from "@heroicons/react/24/outline";
+import { X, Menu, Settings, Home, LifeBuoy, Globe } from "lucide-react";
 import { Brand } from "@/components/ui/labels/Brand";
 import { NavLink } from "@/components/ui/actions/NavLink";
 import { SearchInput } from "@/components/ui/inputs/Search";
@@ -37,7 +30,7 @@ export const Dashboard = ({ children, thumbnail }: DashboardProps) => {
           type="button"
           className="absolute top-4 right-4 p-2 text-gray-500 md:hidden hover:text-gray-900"
           onClick={toggleSidebar}>
-          <XMarkIcon className="w-6 h-6" />
+          <X className="size-6" />
         </button>
 
         <div className="flex justify-between mb-6">
@@ -60,22 +53,21 @@ export const Dashboard = ({ children, thumbnail }: DashboardProps) => {
 
         <nav className="flex-1 space-y-2">
           <NavLink href="/" onClick={() => setSidebarOpen(false)}>
-            <HomeIcon className="h-[20px] w-[20px] mr-2" />{" "}
-            {t("links.dashboard")}
+            <Home className="size-4 mr-2" /> {t("links.dashboard")}
           </NavLink>
           <NavLink href="/websites" onClick={() => setSidebarOpen(false)}>
-            <GlobeAltIcon className="h-[20px] w-[20px] mr-2" />
+            <Globe className="size-4 mr-2" />
             {t("links.websites")}
           </NavLink>
         </nav>
         <nav className="space-y-2 absolute bottom-0 left-0 w-full p-4 border-t">
           <LanguageSwitcher />
           <NavLink href="/settings" onClick={() => setSidebarOpen(false)}>
-            <Cog8ToothIcon className="h-[20px] w-[20px] mr-2" />
+            <Settings className="size-4 mr-2" />
             {t("links.settings")}
           </NavLink>
           <NavLink href="/support" onClick={() => setSidebarOpen(false)}>
-            <LifebuoyIcon className="h-[20px] w-[20px] mr-2" />
+            <LifeBuoy className="size-4 mr-2" />
             {t("links.support")}
           </NavLink>
           <LogoutButton />
@@ -87,7 +79,7 @@ export const Dashboard = ({ children, thumbnail }: DashboardProps) => {
           onClick={toggleSidebar}
           type="button"
           className="md:hidden absolute top-4 right-4">
-          <Bars3Icon className="w-6 h-6 text-gray-900" />
+          <Menu className="size-6 text-gray-900" />
         </button>
         <div>{children}</div>
       </main>

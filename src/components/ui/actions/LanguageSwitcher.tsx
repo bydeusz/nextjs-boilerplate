@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react";
 
 import "flag-icons/css/flag-icons.min.css";
 
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { ChevronDown } from "lucide-react";
 
 export default function LanguageSwitcher() {
   const t = useTranslations("LanguageSwitcher");
@@ -59,7 +59,7 @@ export default function LanguageSwitcher() {
         <span className={`fi fi-${selectedLanguage?.flag}`}></span>
         <span>{selectedLanguage?.label}</span>
         <span className="absolute right-3 top-1/2 -translate-y-1/2">
-          <ChevronDownIcon
+          <ChevronDown
             className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
           />
         </span>

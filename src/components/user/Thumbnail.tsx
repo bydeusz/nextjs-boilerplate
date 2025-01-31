@@ -1,7 +1,13 @@
 import { prisma } from "@/config/prisma";
 import { auth } from "@/config/auth";
 import Link from "next/link";
-import Image from "next/image";
+
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/labels/Avatar";
+
 export async function Thumbnail() {
   const session = await auth();
 
@@ -25,19 +31,17 @@ export async function Thumbnail() {
   }
 
   return (
-    <Link
-      href="/settings"
-      className="overflow-hidden flex transition-all items-center justify-center font-semibold text-xs h-[35px] w-[35px] rounded-full bg-gray-200 border-2 border-white ring-2 ring-gray-200 hover:ring-primary">
-      {data.avatar ? (
-        <Image
-          src={data.avatar}
-          alt={`avatar picture of ${data.name}`}
-          width={35}
-          height={35}
-        />
-      ) : (
-        data.name?.charAt(0)
-      )}
+    <Link href="/settings">
+      <Avatar className="size-9 hover:ring-slate-300">
+        {data.avatar ? (
+          <AvatarImage
+            src={data.avatar}
+            alt={`avatar picture of ${data.name}`}
+          />
+        ) : (
+          <AvatarFallback>{data.name?.charAt(0)}</AvatarFallback>
+        )}
+      </Avatar>
     </Link>
   );
 }

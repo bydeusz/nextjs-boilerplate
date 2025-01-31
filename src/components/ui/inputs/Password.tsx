@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
-import { EyeSlashIcon, EyeIcon } from "@heroicons/react/24/outline";
+import { EyeOff, Eye } from "lucide-react";
 
 // Input type
 export interface PasswordProps {
@@ -76,12 +76,9 @@ export const PasswordInput = ({
           onClick={togglePasswordVisibility}
           aria-label="Toggle password visibility">
           {showPassword ? (
-            <EyeIcon className="h-5 w-5 text-gray-500" aria-hidden="true" />
+            <Eye className="size-5 text-gray-500" />
           ) : (
-            <EyeSlashIcon
-              className="h-5 w-5 text-gray-500"
-              aria-hidden="true"
-            />
+            <EyeOff className="size-5 text-gray-500" />
           )}
         </button>
       </div>
