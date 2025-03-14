@@ -5,8 +5,23 @@ import { User } from "@/types/User";
 
 import { AddUser } from "@/components/modals/Add";
 import { SearchInput } from "@/components/ui/inputs/Search";
-import { TeammateCard } from "@/components/cards/TeammateCard";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableHead,
+  TableRow,
+  TableCell,
+} from "@/components/ui/layout/Table";
 import { Skeleton } from "@/components/ui/layout/Skeleton";
+import Admin from "@/components/modals/Admin";
+import { DeleteUser } from "@/components/modals/Delete";
+import { Badge } from "@/components/ui/labels/Badge";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/labels/Avatar";
 
 interface TeamListProps {
   currentUser: string;
@@ -14,6 +29,7 @@ interface TeamListProps {
 
 export function TeamList({ currentUser }: TeamListProps) {
   const t = useTranslations("Navbar");
+  const teamT = useTranslations("Settings.team");
   const [searchQuery, setSearchQuery] = useState("");
   const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -60,31 +76,143 @@ export function TeamList({ currentUser }: TeamListProps) {
         </div>
         <AddUser isAdmin={currentUserData?.isAdmin || false} />
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-        {isLoading ? (
-          <>
-            {[...Array(9)].map((_, index) => (
-              <div key={index} className="p-6 rounded-lg border bg-card">
-                <div className="flex items-center space-x-4">
-                  <Skeleton className="h-12 w-12 rounded-full" />
-                  <div className="space-y-2">
-                    <Skeleton className="h-4 w-[200px]" />
-                    <Skeleton className="h-4 w-[160px]" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </>
-        ) : (
-          filteredUsers.map((user) => (
-            <TeammateCard
-              key={user.id}
-              user={user}
-              currentUser={currentUserData || user}
-            />
-          ))
-        )}
-      </div>
+
+      {isLoading ? (
+        <div className="rounded-md bg-white border p-4">
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-white border-b border-gray-100">
+                <TableHead className="bg-white border-b-0 ">
+                  {teamT("name")}
+                </TableHead>
+                <TableHead className="bg-white border-b-0 ">
+                  {teamT("email")}
+                </TableHead>
+                <TableHead className="bg-white border-b-0 ">
+                  {teamT("role")}
+                </TableHead>
+                <TableHead className="bg-white border-b-0">
+                  {teamT("status")}
+                </TableHead>
+                <TableHead className="bg-white border-b-0 text-right">
+                  {teamT("settings")}
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {[...Array(5)].map((_, index) => (
+                <TableRow
+                  key={index}
+                  className="bg-white border-b border-gray-100">
+                  <TableCell className="border-0 bg-white py-3 ">
+                    <div className="flex items-center space-x-4">
+                      <Skeleton className="h-10 w-10 rounded-full" />
+                      <div className="space-y-2">
+                        <Skeleton className="h-4 w-[100px]" />
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell className="border-0 bg-white py-3 ">
+                    <Skeleton className="h-3 w-[120px]" />
+                  </TableCell>
+                  <TableCell className="border-0 bg-white py-3 ">
+                    <Skeleton className="h-4 w-[100px]" />
+                  </TableCell>
+                  <TableCell className="border-0 bg-white py-3">
+                    <Skeleton className="h-5 w-[80px]" />
+                  </TableCell>
+                  <TableCell className="border-0 bg-white py-3 text-right">
+                    <div className="flex justify-end space-x-2">
+                      <Skeleton className="h-9 w-9" />
+                      <Skeleton className="h-9 w-9" />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      ) : (
+        <div className="rounded-md bg-white p-4 border">
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-white border-b border-gray-100">
+                <TableHead className="bg-white border-b-0 ">
+                  {teamT("name")}
+                </TableHead>
+                <TableHead className="bg-white border-b-0 ">
+                  {teamT("email")}
+                </TableHead>
+                <TableHead className="bg-white border-b-0">
+                  {teamT("role")}
+                </TableHead>
+                <TableHead className="bg-white border-b-0">
+                  {teamT("status")}
+                </TableHead>
+                <TableHead className="bg-white border-b-0 text-right">
+                  {teamT("settings")}
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredUsers.map((user) => (
+                <TableRow
+                  key={user.id}
+                  className="bg-white border-b border-gray-100">
+                  <TableCell className="border-0 bg-white py-3 ">
+                    <div className="flex items-center space-x-4">
+                      <Avatar className="size-10">
+                        <AvatarImage src={user.avatar || ""} />
+                        <AvatarFallback>{user.name?.charAt(0)}</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <p className="font-medium">{user.name}</p>
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell className="border-0 bg-white py-3 ">
+                    <p className="text-sm text-muted-foreground truncate">
+                      {user.email}
+                    </p>
+                  </TableCell>
+                  <TableCell className="border-0 bg-white py-3 ">
+                    {user.role || "-"}
+                  </TableCell>
+                  <TableCell className="border-0 bg-white py-3">
+                    <div className="flex flex-wrap gap-1">
+                      {user.isAdmin && (
+                        <Badge variant="green">{teamT("admin")}</Badge>
+                      )}
+                      {!user.emailVerified && (
+                        <Badge variant="yellow">{teamT("pending")}</Badge>
+                      )}
+                    </div>
+                  </TableCell>
+                  <TableCell className="border-0 bg-white py-3 text-right">
+                    <div className="flex justify-end space-x-2">
+                      <Admin
+                        user={user}
+                        disabled={
+                          !currentUserData?.isAdmin ||
+                          currentUserData?.id === user.id ||
+                          !user.emailVerified
+                        }
+                      />
+                      <DeleteUser
+                        user={user}
+                        disabled={
+                          !currentUserData?.isAdmin ||
+                          currentUserData?.id === user.id
+                        }
+                      />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      )}
     </>
   );
 }

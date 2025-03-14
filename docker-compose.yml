@@ -19,17 +19,14 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=bydeusz_db
+    networks:
+      - app_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
-  pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4:latest
-    expose:
-      - "80"
-    volumes:
-      - pgadmin_data:/var/lib/pgadmin
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@local.dev
-      - PGADMIN_DEFAULT_PASSWORD=admin123
   minio:
     image: minio/minio
     ports:
@@ -39,9 +36,19 @@ services:
       MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: minioadmin
     volumes:
-      - ./storage:/data
+      - ./docker/storage:/data
+    networks:
+      - app_network
     command: server --console-address ":9001" /data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+networks:
+  app_network:
+    driver: bridge
 
 volumes:
-  postgres_data:
-  pgadmin_data:
+  postgres_data: 
