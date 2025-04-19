@@ -5,18 +5,18 @@ const prisma = new PrismaClient();
 
 const users = [
   {
-    name: "John Doe",
-    email: "john@bydeusz.com",
+    name: "Tadeusz de Ruijter",
+    email: "hello@bydeusz.com",
     password: "test@123",
-    isAdmin: false,
-    role: "Designer",
+    isAdmin: true,
+    role: "Software Developer",
     emailVerified: new Date(),
   },
   {
     name: "Jane Smith",
     email: "jane@bydeusz.com",
     password: "test@123",
-    isAdmin: true,
+    isAdmin: false,
     role: "Manager",
     emailVerified: new Date(),
   },

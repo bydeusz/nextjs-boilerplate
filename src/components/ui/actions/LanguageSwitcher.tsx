@@ -52,10 +52,10 @@ export default function LanguageSwitcher() {
   const selectedLanguage = languages.find((lang) => lang.code === locale);
 
   return (
-    <div className="relative text-sm" ref={dropdownRef}>
+    <div className="relative text-xs" ref={dropdownRef}>
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 cursor-pointer rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 hover:ring-2 hover:ring-primary">
+        className="flex items-center gap-2 cursor-pointer rounded-md border-0 py-2.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 hover:ring-2 hover:ring-primary">
         <span className={"fi fi-" + selectedLanguage?.flag}></span>
         <span>{selectedLanguage?.label}</span>
         <span className="absolute right-3 top-1/2 -translate-y-1/2">
