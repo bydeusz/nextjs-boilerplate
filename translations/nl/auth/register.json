@@ -1,0 +1,16 @@
+{
+  "form": {
+    "title": "Maak je account aan",
+    "description": "Vul je inloggegevens in om verder te gaan.",
+    "name": "Volledige naam",
+    "email": "Email",
+    "password": "Wachtwoord",
+    "signUp": "Aanmelden",
+    "alreadyHaveAccount": "Heb je al een account?"
+  },
+  "confirm": {
+    "title": "Registratie succesvol!",
+    "description": "We hebben een verificatie e-mail gestuurd naar {email}. Controleer je inbox en klik op de verificatielink om je account te activeren.",
+    "button": "Terug naar inloggen"
+  }
+}

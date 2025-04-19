@@ -1,0 +1,16 @@
+{
+  "form": {
+    "title": "Create your account",
+    "description": "Please fill in your information to create an account.",
+    "name": "Full name",
+    "email": "Email",
+    "password": "Password",
+    "signUp": "Sign up",
+    "alreadyHaveAccount": "Already have an account?"
+  },
+  "confirm": {
+    "title": "Registration successful!",
+    "description": "We've sent a verification email to {email}. Please check your inbox and click the verification link to activate your account.",
+    "button": "Back to login"
+  }
+}

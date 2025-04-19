@@ -32,7 +32,7 @@ export default function PasswordForm({ token }: PasswordFormProps) {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const t = useTranslations("ResetPassword");
+  const t = useTranslations("auth.reset");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

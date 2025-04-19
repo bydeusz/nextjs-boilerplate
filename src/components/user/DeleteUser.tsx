@@ -15,7 +15,7 @@ import { DeleteUser as Delete } from "@/components/modals/Delete";
 import { Skeleton } from "@/components/ui/layout/Skeleton";
 
 export function DeleteUser() {
-  const t = useTranslations("User.delete");
+  const t = useTranslations("forms.user-delete");
   const { data: session, status } = useSession();
 
   return (

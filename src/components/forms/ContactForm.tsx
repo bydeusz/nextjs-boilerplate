@@ -27,7 +27,7 @@ export default function ContactForm() {
   const [message, setMessage] = useState("");
   const [attachment, setAttachment] = useState<File | null>(null);
 
-  const t = useTranslations("ContactForm");
+  const t = useTranslations("forms.support");
   const { toast } = useToast();
 
   // Pre-fill name and email from session when available

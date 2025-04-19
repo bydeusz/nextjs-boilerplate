@@ -1,0 +1,12 @@
+{
+  "title": "Gebruiker toevoegen",
+  "desc": "Je staat op het punt om een gebruiker toe te voegen aan het team.",
+  "fullName": "Volledige naam",
+  "email": "Email",
+  "password": "Wachtwoord",
+  "fullNamePlaceholder": "Voer volledige naam in",
+  "emailPlaceholder": "Voer email in",
+  "passwordPlaceholder": "Voer wachtwoord in",
+  "button": "Gebruiker toevoegen",
+  "invalidDomain": "Dit e-maildomein is niet toegestaan. Gebruik een goedgekeurd domein."
+}

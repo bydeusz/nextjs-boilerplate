@@ -26,7 +26,7 @@ interface AdminProps {
 }
 
 export default function Admin({ user, disabled }: AdminProps) {
-  const t = useTranslations("Modals.admin");
+  const t = useTranslations("modals.admin");
   const [inputValue, setInputValue] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);

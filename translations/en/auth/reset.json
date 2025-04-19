@@ -1,0 +1,22 @@
+{
+  "title": "Reset password",
+  "description": "Enter your email address to reset your password.",
+  "email": "Enter your email address",
+  "submit": "Submit",
+  "login": "Back to login",
+  "success": "If the account exists, you will receive a password reset email",
+  "error": "An error occurred while sending your email. Please try again.",
+  "resetTitle": "Forgot password?",
+  "resetDescription": "Create a new and secure password for your account.",
+  "newPassword": "New password",
+  "newPasswordPlaceholder": "Enter new password",
+  "confirmPassword": "Confirm password",
+  "confirmPasswordPlaceholder": "Confirm new password",
+  "resetButton": "Reset password",
+  "errors": {
+    "passwordMismatch": "Passwords do not match",
+    "passwordLength": "Password must be at least 6 characters long",
+    "invalidToken": "Invalid or expired reset token",
+    "default": "Something went wrong"
+  }
+}

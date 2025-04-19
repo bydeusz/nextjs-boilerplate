@@ -27,7 +27,7 @@ export default function RegisterForm() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
 
-  const t = useTranslations("RegisterForm");
+  const t = useTranslations("auth.register.form");
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

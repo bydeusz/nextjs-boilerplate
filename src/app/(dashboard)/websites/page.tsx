@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default async function Websites() {
   await isLoggedIn();
-  const t = await getTranslations("Websites");
+  const t = await getTranslations("pages.websites");
 
   return (
     <div className="p-4 md:p-12 space-y-6">

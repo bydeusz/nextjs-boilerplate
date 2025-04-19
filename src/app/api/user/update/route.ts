@@ -30,10 +30,11 @@ export async function POST(request: Request) {
     }
 
     // Check if email domain is allowed
-    const allowedDomain = process.env.ALLOWED_DOMAIN;
-    if (!email.endsWith(`@${allowedDomain}`)) {
+    const allowedDomains = process.env.ALLOWED_DOMAIN?.split(',') || [];
+    const emailDomain = email.split('@')[1];
+    if (!allowedDomains.includes(emailDomain)) {
       return NextResponse.json(
-        { error: `Only ${allowedDomain} email addresses are allowed` },
+        { error: `Only ${allowedDomains.join(', ')} email addresses are allowed` },
         { status: 403 },
       );
     }

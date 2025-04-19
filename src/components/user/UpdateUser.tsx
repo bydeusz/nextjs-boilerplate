@@ -18,7 +18,7 @@ import {
 
 export function UpdateUser() {
   const router = useRouter();
-  const t = useTranslations("User.update");
+  const t = useTranslations("forms.user-update");
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullname: "",
@@ -78,12 +78,12 @@ export function UpdateUser() {
       return;
     }
 
-    // Validate file size (100KB = 102400 bytes)
-    if (file.size > 102400) {
+    // Validate file size (3MB = 3 * 1024 * 1024 bytes)
+    if (file.size > 3 * 1024 * 1024) {
       toast({
         variant: "destructive",
         title: t("errorTitle"),
-        description: "File size must be less than 100KB",
+        description: "File size must be less than 3MB",
       });
       return;
     }
@@ -94,11 +94,11 @@ export function UpdateUser() {
 
     img.onload = async () => {
       URL.revokeObjectURL(objectUrl);
-      if (img.width !== 80 || img.height !== 80) {
+      if (img.width !== 800 || img.height !== 800) {
         toast({
           variant: "destructive",
           title: t("errorTitle"),
-          description: "Image dimensions must be 80x80 pixels",
+          description: "Image dimensions must be 800x800 pixels",
         });
         return;
       }
@@ -194,18 +194,18 @@ export function UpdateUser() {
         <form onSubmit={updateUser}>
           <div className="space-y-4 mt-4">
             <div className="flex items-center space-x-4">
-              <div className="relative w-20 h-20">
+              <div className="relative w-24 h-24">
                 {formData.avatar ? (
                   <Image
                     src={formData.avatar}
                     alt="Avatar"
-                    width={80}
-                    height={80}
-                    className="rounded-md object-cover"
+                    width={800}
+                    height={800}
+                    className="rounded-md object-cover w-24 h-24"
                   />
                 ) : (
-                  <div className="w-20 h-20 bg-gray-200 rounded-md flex items-center justify-center">
-                    <span className="text-gray-500 text-2xl">
+                  <div className="w-24 h-24 bg-gray-200 rounded-md flex items-center justify-center">
+                    <span className="text-gray-500 text-3xl">
                       {formData.fullname?.charAt(0)?.toUpperCase() || "?"}
                     </span>
                   </div>
@@ -225,7 +225,7 @@ export function UpdateUser() {
                   Upload Avatar
                 </label>
                 <p className="text-xs text-gray-500">
-                  JPEG, PNG, GIF (80x80px, max 100KB)
+                  JPEG, PNG, GIF (800x800px, max 3MB)
                 </p>
               </div>
             </div>

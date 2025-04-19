@@ -30,7 +30,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const t = useTranslations("LoginForm");
+  const t = useTranslations("auth.login");
 
   const getErrorMessage = (error: string) => {
     switch (error) {

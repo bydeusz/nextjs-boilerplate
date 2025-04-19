@@ -28,8 +28,8 @@ interface TeamListProps {
 }
 
 export function TeamList({ currentUser }: TeamListProps) {
-  const t = useTranslations("Navbar");
-  const teamT = useTranslations("Settings.team");
+  const t = useTranslations("navigation.navbar");
+  const teamT = useTranslations("tables.team");
   const [searchQuery, setSearchQuery] = useState("");
   const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);

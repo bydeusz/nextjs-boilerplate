@@ -1,0 +1,10 @@
+{
+  "admin": "Admin",
+  "pending": "Pending",
+  "settings": "Instellingen",
+  "delete": "Verwijderen",
+  "name": "Naam",
+  "email": "Email",
+  "role": "Rol",
+  "status": "Status"
+}

@@ -26,7 +26,7 @@ export const PasswordInput = ({
   value,
   onChange,
 }: PasswordProps) => {
-  const t = useTranslations("Inputs.errors");
+  const t = useTranslations("inputs.errors");
   const [error, setError] = useState(false);
   const [blurred, setBlurred] = useState(false);
   const [showPassword, setShowPassword] = useState(false);

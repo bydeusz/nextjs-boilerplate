@@ -1,0 +1,6 @@
+{
+  "success": "Email succesvol geverifieerd!",
+  "error": "Er is iets fout gegaan bij het verifiëren van je email. Probeer het opnieuw.",
+  "redirecting": "Je kunt nu inloggen. Het account is nu volledig geactiveerd.",
+  "backToLogin": "Inloggen"
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Settings",
+  "tabs": {
+    "profile": "Profile",
+    "team": "Team",
+    "account": "Account"
+  }
+}

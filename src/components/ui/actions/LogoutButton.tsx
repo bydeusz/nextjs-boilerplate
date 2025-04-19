@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { LogOut } from "lucide-react";
 
 export default function LogoutButton() {
-  const t = useTranslations("Buttons");
+  const t = useTranslations("common.buttons");
 
   return (
     <button

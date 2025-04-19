@@ -26,7 +26,7 @@ export default function ResetPassword() {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
 
-  const t = useTranslations("ResetPassword");
+  const t = useTranslations("auth.reset");
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

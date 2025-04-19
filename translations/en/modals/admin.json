@@ -1,0 +1,16 @@
+{
+  "demote": {
+    "title": "Remove admin rights",
+    "desc": "You are about to remove this user's admin rights. Note: After this action, the user will no longer be able to perform admin tasks. The user can always request admin rights again.",
+    "button": "Change",
+    "label": "Enter full name:",
+    "placeholder": "Enter name here"
+  },
+  "promote": {
+    "title": "Grant admin rights",
+    "desc": "You are about to grant this user admin rights. Note: After this action, the user will be able to perform admin tasks, such as deleting accounts and changing settings.",
+    "button": "Change",
+    "label": "Enter full name:",
+    "placeholder": "Enter name here"
+  }
+}

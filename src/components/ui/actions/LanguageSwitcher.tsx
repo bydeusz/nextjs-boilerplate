@@ -8,7 +8,7 @@ import "flag-icons/css/flag-icons.min.css";
 import { ChevronDown } from "lucide-react";
 
 export default function LanguageSwitcher() {
-  const t = useTranslations("LanguageSwitcher");
+  const t = useTranslations("navigation.language");
   const locale = useLocale();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);

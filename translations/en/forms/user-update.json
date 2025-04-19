@@ -1,0 +1,15 @@
+{
+  "title": "Personal Information",
+  "name": "Name",
+  "namePlaceholder": "Enter name here",
+  "email": "Email",
+  "emailPlaceholder": "Enter email here",
+  "role": "Role",
+  "rolePlaceholder": "Enter role here",
+  "edit": "Edit",
+  "cancel": "Cancel",
+  "save": "Save",
+  "errorTitle": "Error",
+  "successTitle": "Success",
+  "successMessage": "Your profile has been updated successfully"
+}

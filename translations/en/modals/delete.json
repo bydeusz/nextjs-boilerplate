@@ -1,0 +1,7 @@
+{
+  "title": "Delete account",
+  "desc": "You are about to delete an account. This action is irreversible and will result in the permanent loss of the account and all associated data. Proceed with caution.",
+  "button": "Delete",
+  "label": "Enter full name:",
+  "placeholder": "Enter name here"
+}

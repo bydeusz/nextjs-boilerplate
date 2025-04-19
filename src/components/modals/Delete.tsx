@@ -29,7 +29,7 @@ interface DeleteUserProps {
 }
 
 export function DeleteUser({ user, disabled, buttonText }: DeleteUserProps) {
-  const t = useTranslations("Modals.delete");
+  const t = useTranslations("modals.delete");
   const { data: session } = useSession();
   const [inputValue, setInputValue] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);

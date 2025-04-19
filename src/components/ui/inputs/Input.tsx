@@ -30,7 +30,7 @@ export const InputField = ({
   value,
   onChange,
 }: InputProps) => {
-  const t = useTranslations("Inputs.errors");
+  const t = useTranslations("inputs.errors");
   const [error, setError] = useState(false);
   const [blurred, setBlurred] = useState(false);
 

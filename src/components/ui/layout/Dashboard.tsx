@@ -15,7 +15,7 @@ interface DashboardProps {
 
 export const Dashboard = ({ children, thumbnail }: DashboardProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const t = useTranslations("Navbar");
+  const t = useTranslations("navigation.navbar");
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };

@@ -10,7 +10,7 @@ export default async function Layout({
   children: React.ReactNode;
 }>) {
   await isLoggedIn();
-  const t = await getTranslations("Settings");
+  const t = await getTranslations("pages.settings");
 
   return (
     <div className="p-4 md:p-12 space-y-6">

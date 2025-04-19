@@ -1,5 +1,6 @@
 import { getRequestConfig } from "next-intl/server";
 import { cookies, headers } from "next/headers";
+import { loadTranslations } from "@/utils/loadTranslations";
 
 // List of supported locales
 const locales = ["en", "nl"];
@@ -26,8 +27,11 @@ export default getRequestConfig(async () => {
     locale = "en";
   }
 
+  // Dynamically load all translation files
+  const messages = await loadTranslations(locale);
+
   return {
     locale,
-    messages: (await import(`../../translations/${locale}.json`)).default,
+    messages,
   };
 });

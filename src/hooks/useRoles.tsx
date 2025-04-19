@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
 export const useRoles = () => {
-  const t = useTranslations("Data.roles");
+  const t = useTranslations("common.data.roles");
 
   return [
     { label: " ", value: " " },

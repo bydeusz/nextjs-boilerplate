@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/messages/Alert";
 
 export function UpdatePassword() {
-  const t = useTranslations("User.password");
+  const t = useTranslations("forms.user-password");
   const [currentPassword, setCurrentPassword] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");

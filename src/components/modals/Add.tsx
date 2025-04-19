@@ -26,7 +26,7 @@ interface AddUserProps {
 }
 
 export const AddUser = ({ isAdmin }: AddUserProps) => {
-  const t = useTranslations("Modals.add");
+  const t = useTranslations("modals.add");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);

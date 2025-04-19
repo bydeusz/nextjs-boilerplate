@@ -1,0 +1,15 @@
+{
+  "title": "Persoonlijke informatie",
+  "name": "Naam",
+  "namePlaceholder": "Voer naam in",
+  "email": "Email",
+  "emailPlaceholder": "Voer email in",
+  "role": "Rol",
+  "rolePlaceholder": "Voer rol in",
+  "edit": "Bewerken",
+  "cancel": "Annuleren",
+  "save": "Opslaan",
+  "errorTitle": "Fout",
+  "successTitle": "Succes",
+  "successMessage": "Je profiel is succesvol bijgewerkt"
+}

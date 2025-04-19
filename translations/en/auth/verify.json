@@ -1,0 +1,6 @@
+{
+  "success": "Email verified successfully!",
+  "error": "An error occurred while verifying your email. Please try again.",
+  "redirecting": "You can now login. Your account is now fully activated.",
+  "backToLogin": "Login"
+}

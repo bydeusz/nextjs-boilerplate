@@ -1,0 +1,12 @@
+{
+  "title": "Add New User",
+  "desc": "Enter the details for the new user below.",
+  "fullName": "Full name",
+  "email": "Email",
+  "password": "Password",
+  "fullNamePlaceholder": "Enter full name here",
+  "emailPlaceholder": "Enter email here",
+  "passwordPlaceholder": "Enter password here",
+  "button": "Add user",
+  "invalidDomain": "This email domain is not allowed. Please use an approved domain."
+}
