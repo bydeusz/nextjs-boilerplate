@@ -1,7 +1,9 @@
 {
   "title": "Personal Information",
-  "name": "Name",
-  "namePlaceholder": "Enter name here",
+  "firstname": "First Name",
+  "firstnamePlaceholder": "Enter first name here",
+  "surname": "Surname",
+  "surnamePlaceholder": "Enter surname here",
   "email": "Email",
   "emailPlaceholder": "Enter email here",
   "role": "Role",

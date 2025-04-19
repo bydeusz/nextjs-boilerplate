@@ -18,7 +18,8 @@ export async function GET() {
         id: session.user.id,
       },
       select: {
-        name: true,
+        firstname: true,
+        surname: true,
         email: true,
         role: true,
         avatar: true,
@@ -30,7 +31,8 @@ export async function GET() {
     }
 
     const transformedUser = {
-      fullname: user.name,
+      firstname: user.firstname,
+      surname: user.surname,
       email: user.email,
       role: user.role || "",
       avatar: user.avatar || "",

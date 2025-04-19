@@ -14,9 +14,10 @@ export default async function Layout({
 
   return (
     <div className="p-4 md:p-12 space-y-6">
-      <Header title={t("title")} />
+      <Header title={t("title")} description={t("description")} />
       <Tabs>
         <Tab href={`/settings`}>{t("tabs.profile")}</Tab>
+        <Tab href={`/settings/account`}>{t("tabs.account")}</Tab>
         <Tab href={`/settings/team`}>{t("tabs.team")}</Tab>
       </Tabs>
       <div className="space-y-4">{children}</div>

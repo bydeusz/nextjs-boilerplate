@@ -16,13 +16,14 @@ export async function POST(request: Request) {
 
     // Get form data
     const formData = await request.formData();
-    const fullname = formData.get("fullname") as string;
+    const firstname = formData.get("firstname") as string;
+    const surname = formData.get("surname") as string;
     const email = formData.get("email") as string;
     const role = formData.get("role") as string;
     const avatarFile = formData.get("avatar") as File | null;
 
     // Basic validation
-    if (!fullname || !email || !role) {
+    if (!firstname || !surname || !email || !role) {
       return NextResponse.json(
         { error: "All fields are required" },
         { status: 400 },
@@ -67,7 +68,8 @@ export async function POST(request: Request) {
         id: session.user.id,
       },
       data: {
-        name: fullname,
+        firstname,
+        surname,
         email,
         role,
         ...(avatarUrl && { avatar: avatarUrl }),
@@ -77,7 +79,8 @@ export async function POST(request: Request) {
     return NextResponse.json({
       message: "User updated successfully",
       user: {
-        fullname: updatedUser.name,
+        firstname: updatedUser.firstname,
+        surname: updatedUser.surname,
         email: updatedUser.email,
         role: updatedUser.role,
         avatar: updatedUser.avatar,

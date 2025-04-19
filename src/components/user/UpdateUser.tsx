@@ -21,7 +21,8 @@ export function UpdateUser() {
   const t = useTranslations("forms.user-update");
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    fullname: "",
+    firstname: "",
+    surname: "",
     email: "",
     role: "",
     avatar: "",
@@ -45,7 +46,8 @@ export function UpdateUser() {
 
         const data = await response.json();
         setFormData({
-          fullname: data.user.fullname,
+          firstname: data.user.firstname,
+          surname: data.user.surname,
           email: data.user.email,
           role: data.user.role || "",
           avatar: data.user.avatar || "",
@@ -145,7 +147,8 @@ export function UpdateUser() {
 
     try {
       const formDataToSend = new FormData();
-      formDataToSend.append("fullname", formData.fullname);
+      formDataToSend.append("firstname", formData.firstname);
+      formDataToSend.append("surname", formData.surname);
       formDataToSend.append("email", formData.email);
       formDataToSend.append("role", formData.role);
 
@@ -206,7 +209,7 @@ export function UpdateUser() {
                 ) : (
                   <div className="w-24 h-24 bg-gray-200 rounded-md flex items-center justify-center">
                     <span className="text-gray-500 text-3xl">
-                      {formData.fullname?.charAt(0)?.toUpperCase() || "?"}
+                      {formData.firstname?.charAt(0)?.toUpperCase() || "?"}
                     </span>
                   </div>
                 )}
@@ -230,15 +233,31 @@ export function UpdateUser() {
               </div>
             </div>
 
-            <InputField
-              label={t("name")}
-              type="text"
-              name="fullname"
-              id="fullname"
-              placeholder={t("namePlaceholder")}
-              value={formData.fullname}
-              onChange={handleInputChange}
-            />
+            <div className="flex items-center space-x-4">
+              <div className="flex-1">
+                <InputField
+                  label={t("firstname")}
+                  type="text"
+                  name="firstname"
+                  id="firstname"
+                  placeholder={t("firstnamePlaceholder")}
+                  value={formData.firstname}
+                  onChange={handleInputChange}
+                />
+              </div>
+
+              <div className="flex-1">
+                <InputField
+                  label={t("surname")}
+                  type="text"
+                  name="surname"
+                  id="surname"
+                  placeholder={t("surnamePlaceholder")}
+                  value={formData.surname}
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
 
             <InputField
               label={t("email")}

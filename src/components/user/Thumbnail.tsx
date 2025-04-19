@@ -21,7 +21,8 @@ export async function Thumbnail() {
     },
     select: {
       id: true,
-      name: true,
+      firstname: true,
+      surname: true,
       avatar: true,
     },
   });
@@ -36,10 +37,10 @@ export async function Thumbnail() {
         {data.avatar ? (
           <AvatarImage
             src={data.avatar}
-            alt={`avatar picture of ${data.name}`}
+            alt={`avatar picture of ${data.firstname} ${data.surname}`}
           />
         ) : (
-          <AvatarFallback>{data.name?.charAt(0)}</AvatarFallback>
+          <AvatarFallback>{data.firstname?.charAt(0)}</AvatarFallback>
         )}
       </Avatar>
     </Link>

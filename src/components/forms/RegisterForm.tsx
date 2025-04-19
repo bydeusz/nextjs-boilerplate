@@ -25,7 +25,8 @@ export default function RegisterForm() {
   const [error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [surname, setSurname] = useState("");
 
   const t = useTranslations("auth.register.form");
 
@@ -42,7 +43,8 @@ export default function RegisterForm() {
         },
         body: JSON.stringify({
           email,
-          name,
+          firstname,
+          surname,
         }),
       });
 
@@ -68,22 +70,31 @@ export default function RegisterForm() {
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <InputField
-            label={t("name")}
-            required={true}
+            label={t("firstname")}
             type="text"
-            name="name"
-            id="name"
-            placeholder="John Doe"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            name="firstname"
+            id="firstname"
+            placeholder={t("firstnamePlaceholder")}
+            value={firstname}
+            onChange={(e) => setFirstname(e.target.value)}
           />
+
+          <InputField
+            label={t("surname")}
+            type="text"
+            name="surname"
+            id="surname"
+            placeholder={t("surnamePlaceholder")}
+            value={surname}
+            onChange={(e) => setSurname(e.target.value)}
+          />
+
           <InputField
             label={t("email")}
-            required={true}
             type="email"
             name="email"
             id="email"
-            placeholder="john@doe.com"
+            placeholder={t("emailPlaceholder")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />

@@ -1,7 +1,9 @@
 {
   "title": "Persoonlijke informatie",
-  "name": "Naam",
-  "namePlaceholder": "Voer naam in",
+  "firstname": "Voornaam",
+  "firstnamePlaceholder": "Voer voornaam in",
+  "surname": "Achternaam",
+  "surnamePlaceholder": "Voer achternaam in",
   "email": "Email",
   "emailPlaceholder": "Voer email in",
   "role": "Rol",

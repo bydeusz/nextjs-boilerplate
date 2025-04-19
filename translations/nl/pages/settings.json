@@ -1,8 +1,10 @@
 {
   "title": "Instellingen",
+  "description": "Beheer uw accountinstellingen en stel e-mailvoorkeuren in.",
   "tabs": {
     "profile": "Profiel",
     "team": "Team",
-    "account": "Account"
+    "account": "Account",
+    "organisation": "Organisatie"
   }
 }

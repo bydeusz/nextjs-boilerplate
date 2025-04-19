@@ -1,7 +1,8 @@
 export interface User {
   id: string;
   email: string;
-  name: string | null;
+  firstname: string | null;
+  surname: string | null;
   role: string | null;
   password: string | null;
   isAdmin: boolean;

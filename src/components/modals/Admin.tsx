@@ -33,13 +33,14 @@ export default function Admin({ user, disabled }: AdminProps) {
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
 
+  const fullName = `${user.firstname || ""} ${user.surname || ""}`.trim();
+
   useEffect(() => {
     const validateInput = () => {
-      const fullName = `${user.name}`;
       setIsButtonDisabled(inputValue !== fullName);
     };
     validateInput();
-  }, [inputValue, user.name]);
+  }, [inputValue, fullName]);
 
   const toggleAdmin = async (id: string) => {
     setIsLoading(true);
@@ -91,7 +92,7 @@ export default function Admin({ user, disabled }: AdminProps) {
             name="name"
             id="name"
             type="text"
-            label={`${user.isAdmin ? t("demote.label") : t("promote.label")} "${user.name}"`}
+            label={`${user.isAdmin ? t("demote.label") : t("promote.label")} "${fullName}"`}
             placeholder={
               user.isAdmin ? t("demote.placeholder") : t("promote.placeholder")
             }

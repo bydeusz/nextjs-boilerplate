@@ -57,8 +57,9 @@ export function TeamList({ currentUser }: TeamListProps) {
   // Filter users based on search query
   const filteredUsers = users.filter((user) => {
     const searchLower = searchQuery.toLowerCase();
+    const fullName = `${user.firstname || ""} ${user.surname || ""}`.trim();
     return (
-      (user.name || "").toLowerCase().includes(searchLower) ||
+      fullName.toLowerCase().includes(searchLower) ||
       (user.email || "").toLowerCase().includes(searchLower)
     );
   });
@@ -163,10 +164,12 @@ export function TeamList({ currentUser }: TeamListProps) {
                     <div className="flex items-center space-x-4">
                       <Avatar className="size-10">
                         <AvatarImage src={user.avatar || ""} />
-                        <AvatarFallback>{user.name?.charAt(0)}</AvatarFallback>
+                        <AvatarFallback>
+                          {user.firstname?.charAt(0)}
+                        </AvatarFallback>
                       </Avatar>
                       <div>
-                        <p className="font-medium">{user.name}</p>
+                        <p className="font-medium">{`${user.firstname || ""} ${user.surname || ""}`}</p>
                       </div>
                     </div>
                   </TableCell>

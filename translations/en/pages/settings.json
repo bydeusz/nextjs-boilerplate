@@ -1,8 +1,10 @@
 {
   "title": "Settings",
+  "description": "Manage your account settings and set e-mail preferences.",
   "tabs": {
     "profile": "Profile",
     "team": "Team",
-    "account": "Account"
+    "account": "Account",
+    "organisation": "Organisation"
   }
 }

@@ -1,0 +1,14 @@
+{
+  "title": "Register",
+  "description": "Create your account",
+  "firstname": "First Name",
+  "firstnamePlaceholder": "Enter your first name",
+  "surname": "Surname",
+  "surnamePlaceholder": "Enter your surname",
+  "email": "Email",
+  "emailPlaceholder": "Enter your email",
+  "button": "Register",
+  "or": "or",
+  "login": "Login",
+  "loginLink": "Already have an account?"
+}

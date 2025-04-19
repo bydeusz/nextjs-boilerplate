@@ -37,13 +37,14 @@ export function DeleteUser({ user, disabled, buttonText }: DeleteUserProps) {
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
 
+  const fullName = `${user.firstname || ""} ${user.surname || ""}`.trim();
+
   useEffect(() => {
     const validateInput = () => {
-      const fullName = `${user.name}`;
       setIsButtonDisabled(inputValue !== fullName);
     };
     validateInput();
-  }, [inputValue, user.name]);
+  }, [inputValue, fullName]);
 
   const deleteUser = async (id: string) => {
     setIsLoading(true);
@@ -98,7 +99,7 @@ export function DeleteUser({ user, disabled, buttonText }: DeleteUserProps) {
             name="name"
             id="name"
             type="text"
-            label={`${t("label")} "${user.name}"`}
+            label={`${t("label")} "${fullName}"`}
             placeholder={t("placeholder")}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}

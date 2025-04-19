@@ -30,13 +30,32 @@ export default function ContactForm() {
   const t = useTranslations("forms.support");
   const { toast } = useToast();
 
-  // Pre-fill name and email from session when available
+  // Fetch user data from database when component mounts
   useEffect(() => {
-    if (session?.user) {
-      setName(session.user.name || "");
-      setEmail(session.user.email || "");
-    }
-  }, [session]);
+    const fetchUserData = async () => {
+      if (session?.user?.id) {
+        try {
+          const response = await fetch("/api/user/get");
+          if (!response.ok) throw new Error("Failed to fetch user data");
+
+          const data = await response.json();
+          const fullName =
+            `${data.user.firstname || ""} ${data.user.surname || ""}`.trim();
+          setName(fullName);
+          setEmail(data.user.email || "");
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+          toast({
+            variant: "destructive",
+            title: t("errorTitle"),
+            description: "Failed to load user data",
+          });
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [session, t, toast]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -95,9 +114,7 @@ export default function ContactForm() {
         throw new Error(data.error || "Failed to send message");
       }
 
-      // Reset form and show success message
-      setName(session?.user?.name || "");
-      setEmail(session?.user?.email || "");
+      // Reset form except for user data
       setSubject("");
       setMessage("");
       setAttachment(null);
@@ -138,10 +155,10 @@ export default function ContactForm() {
             type="text"
             name="name"
             id="name"
-            placeholder="John Doe"
+            placeholder={t("namePlaceholder")}
             value={name}
             onChange={(e) => setName(e.target.value)}
-            disabled={!!session?.user?.name}
+            disabled={!!session?.user?.id}
           />
           <InputField
             label={t("email")}
@@ -152,7 +169,7 @@ export default function ContactForm() {
             placeholder="john@doe.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            disabled={!!session?.user?.email}
+            disabled={!!session?.user?.id}
           />
           <InputField
             label={t("subject")}

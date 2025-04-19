@@ -3,27 +3,27 @@ import { hash } from "bcryptjs";
 import { NextResponse } from "next/server";
 import { validateDomain } from "@/utils/validateDomain";
 import { randomBytes } from "crypto";
+import crypto from "crypto";
 
 export async function POST(request: Request) {
   try {
-    const { name, email } = await request.json();
+    const { email, firstname, surname } = await request.json();
     const allowedDomains = process.env.ALLOWED_DOMAIN;
 
-    if (!validateDomain(email, allowedDomains)) {
+    // Validate the input
+    if (!email || !firstname || !surname) {
       return NextResponse.json(
-        {
-          error:
-            "This email domain is not allowed. Please use an approved domain.",
-        },
+        { error: "Email, firstname and surname are required" },
         { status: 400 },
       );
     }
 
-    // Basic validation
-    if (!email) {
+    // Check if email domain is allowed
+    if (!validateDomain(email, allowedDomains)) {
+      const domains = allowedDomains?.split(',').map(d => d.trim()).join(', ');
       return NextResponse.json(
-        { error: "Email is required" },
-        { status: 400 },
+        { error: `Only ${domains} email addresses are allowed` },
+        { status: 403 },
       );
     }
 
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
 
     if (existingUser) {
       return NextResponse.json(
-        { error: "User with this email already exists" },
+        { error: "User already exists" },
         { status: 400 },
       );
     }
@@ -43,19 +43,30 @@ export async function POST(request: Request) {
     const temporaryPassword = randomBytes(8).toString("hex");
     const hashedPassword = await hash(temporaryPassword, 12);
 
-    // Create verification token
-    const token = randomBytes(32).toString("hex");
-    const expires = new Date(Date.now() + 24 * 60 * 60 * 1000);
-
-    // Create user and verification token
-    await prisma.user.create({
+    // Create the user
+    const user = await prisma.user.create({
       data: {
-        name,
         email,
+        firstname,
+        surname,
         password: hashedPassword,
         emailVerified: null,
       },
+      select: {
+        id: true,
+        email: true,
+        firstname: true,
+        surname: true,
+      },
     });
+
+    if (!user || !user.id) {
+      throw new Error("Failed to create user");
+    }
+
+    // Create verification token
+    const token = crypto.randomBytes(32).toString("hex");
+    const expires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
 
     await prisma.verificationToken.create({
       data: {
@@ -77,17 +88,30 @@ export async function POST(request: Request) {
           email, 
           token,
           temporaryPassword,
-          name,
+          firstname,
+          surname,
         }),
       },
     );
 
     if (!verificationResponse.ok) {
+      // If email sending fails, we should clean up the created user
+      await prisma.user.delete({
+        where: { id: user.id },
+      });
       throw new Error("Failed to send verification email");
     }
 
     return NextResponse.json(
-      { message: "User created successfully. Please check your email for verification and login details." },
+      { 
+        message: "User created successfully. Please check your email for verification and login details.",
+        user: {
+          id: user.id,
+          email: user.email,
+          firstname: user.firstname,
+          surname: user.surname,
+        }
+      },
       { status: 201 },
     );
   } catch (error) {

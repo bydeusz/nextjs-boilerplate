@@ -32,13 +32,16 @@ export const AddUser = ({ isAdmin }: AddUserProps) => {
   const [open, setOpen] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const [inputValue, setInputValue] = useState({
-    fullName: "",
+    firstname: "",
+    surname: "",
     email: "",
   });
 
   useEffect(() => {
     setIsFormValid(
-      inputValue.fullName.trim() !== "" && inputValue.email.trim() !== "",
+      inputValue.firstname.trim() !== "" &&
+        inputValue.surname.trim() !== "" &&
+        inputValue.email.trim() !== "",
     );
   }, [inputValue]);
 
@@ -55,7 +58,8 @@ export const AddUser = ({ isAdmin }: AddUserProps) => {
         },
         body: JSON.stringify({
           email: inputValue.email,
-          name: inputValue.fullName,
+          firstname: inputValue.firstname,
+          surname: inputValue.surname,
         }),
       });
 
@@ -65,7 +69,7 @@ export const AddUser = ({ isAdmin }: AddUserProps) => {
       }
 
       // Reset form and close dialog on success
-      setInputValue({ fullName: "", email: "" });
+      setInputValue({ firstname: "", surname: "", email: "" });
       setOpen(false);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
@@ -99,12 +103,22 @@ export const AddUser = ({ isAdmin }: AddUserProps) => {
           </DialogHeader>
           <form onSubmit={handleSubmit} className="space-y-4">
             <InputField
-              label={t("fullName")}
+              label={t("firstname")}
               type="text"
-              name="fullName"
-              id="fullName"
-              placeholder={t("fullNamePlaceholder")}
-              value={inputValue.fullName}
+              name="firstname"
+              id="firstname"
+              placeholder={t("firstnamePlaceholder")}
+              value={inputValue.firstname}
+              onChange={handleChange}
+            />
+
+            <InputField
+              label={t("surname")}
+              type="text"
+              name="surname"
+              id="surname"
+              placeholder={t("surnamePlaceholder")}
+              value={inputValue.surname}
               onChange={handleChange}
             />
 
