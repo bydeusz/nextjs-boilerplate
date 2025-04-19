@@ -1,7 +1,6 @@
 import { auth } from "@/config/auth";
 import { prisma } from "@/config/prisma";
 import { NextResponse } from "next/server";
-import { minioClient, MINIO_BUCKET_NAME } from "@/config/minio";
 
 export async function POST(request: Request) {
   try {
@@ -20,7 +19,6 @@ export async function POST(request: Request) {
     const surname = formData.get("surname") as string;
     const email = formData.get("email") as string;
     const role = formData.get("role") as string;
-    const avatarFile = formData.get("avatar") as File | null;
 
     // Basic validation
     if (!firstname || !surname || !email || !role) {
@@ -40,28 +38,6 @@ export async function POST(request: Request) {
       );
     }
 
-    let avatarUrl: string | null = null;
-    if (avatarFile) {
-      // Generate avatar path
-      const extension = avatarFile.name.split('.').pop();
-      const avatarPath = `users/${session.user.id}/${session.user.id}-avatar.${extension}`;
-
-      // Convert File to Buffer
-      const buffer = Buffer.from(await avatarFile.arrayBuffer());
-
-      // Upload to MinIO
-      await minioClient.putObject(
-        MINIO_BUCKET_NAME,
-        avatarPath,
-        buffer,
-        avatarFile.size,
-        { 'Content-Type': avatarFile.type }
-      );
-
-      // Generate URL for the avatar
-      avatarUrl = `${process.env.NEXT_PUBLIC_MINIO_URL}/${MINIO_BUCKET_NAME}/${avatarPath}`;
-    }
-
     // Update user
     const updatedUser = await prisma.user.update({
       where: {
@@ -72,7 +48,6 @@ export async function POST(request: Request) {
         surname,
         email,
         role,
-        ...(avatarUrl && { avatar: avatarUrl }),
       },
     });
 
@@ -83,7 +58,6 @@ export async function POST(request: Request) {
         surname: updatedUser.surname,
         email: updatedUser.email,
         role: updatedUser.role,
-        avatar: updatedUser.avatar,
       },
     });
   } catch (error) {

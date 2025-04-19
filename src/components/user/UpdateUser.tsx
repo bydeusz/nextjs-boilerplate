@@ -3,8 +3,6 @@ import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/hooks/useToast";
-import Image from "next/image";
-
 import { Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/actions/Button";
@@ -25,7 +23,6 @@ export function UpdateUser() {
     surname: "",
     email: "",
     role: "",
-    avatar: "",
   });
 
   const { toast } = useToast();
@@ -50,7 +47,6 @@ export function UpdateUser() {
           surname: data.user.surname,
           email: data.user.email,
           role: data.user.role || "",
-          avatar: data.user.avatar || "",
         });
       } catch (err) {
         console.error("Error fetching user:", err);
@@ -64,74 +60,6 @@ export function UpdateUser() {
 
     getUser();
   }, [t, toast]);
-
-  const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    // Validate file type
-    const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
-    if (!allowedTypes.includes(file.type)) {
-      toast({
-        variant: "destructive",
-        title: t("errorTitle"),
-        description: "Please upload a JPEG, PNG, or GIF file",
-      });
-      return;
-    }
-
-    // Validate file size (3MB = 3 * 1024 * 1024 bytes)
-    if (file.size > 3 * 1024 * 1024) {
-      toast({
-        variant: "destructive",
-        title: t("errorTitle"),
-        description: "File size must be less than 3MB",
-      });
-      return;
-    }
-
-    // Validate image dimensions
-    const img = document.createElement("img");
-    const objectUrl = URL.createObjectURL(file);
-
-    img.onload = async () => {
-      URL.revokeObjectURL(objectUrl);
-      if (img.width !== 800 || img.height !== 800) {
-        toast({
-          variant: "destructive",
-          title: t("errorTitle"),
-          description: "Image dimensions must be 800x800 pixels",
-        });
-        return;
-      }
-
-      try {
-        setIsLoading(true);
-
-        // Convert file to base64
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          const base64String = reader.result as string;
-          setFormData((prev) => ({
-            ...prev,
-            avatar: base64String,
-          }));
-          setIsLoading(false);
-        };
-        reader.readAsDataURL(file);
-      } catch (err) {
-        console.error("Error handling avatar:", err);
-        toast({
-          variant: "destructive",
-          title: t("errorTitle"),
-          description: "Failed to handle avatar",
-        });
-        setIsLoading(false);
-      }
-    };
-
-    img.src = objectUrl;
-  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -151,13 +79,6 @@ export function UpdateUser() {
       formDataToSend.append("surname", formData.surname);
       formDataToSend.append("email", formData.email);
       formDataToSend.append("role", formData.role);
-
-      if (formData.avatar && formData.avatar.startsWith("data:image")) {
-        // Convert base64 to blob
-        const response = await fetch(formData.avatar);
-        const blob = await response.blob();
-        formDataToSend.append("avatar", blob, "avatar.png");
-      }
 
       const response = await fetch("/api/user/update", {
         method: "POST",
@@ -189,105 +110,70 @@ export function UpdateUser() {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{t("title")}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={updateUser}>
-          <div className="space-y-4 mt-4">
-            <div className="flex items-center space-x-4">
-              <div className="relative w-24 h-24">
-                {formData.avatar ? (
-                  <Image
-                    src={formData.avatar}
-                    alt="Avatar"
-                    width={800}
-                    height={800}
-                    className="rounded-md object-cover w-24 h-24"
+    <div className="space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle>{t("title")}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={updateUser}>
+            <div className="space-y-4">
+              <div className="flex items-center space-x-4">
+                <div className="flex-1">
+                  <InputField
+                    label={t("firstname")}
+                    type="text"
+                    name="firstname"
+                    id="firstname"
+                    placeholder={t("firstnamePlaceholder")}
+                    value={formData.firstname}
+                    onChange={handleInputChange}
                   />
-                ) : (
-                  <div className="w-24 h-24 bg-gray-200 rounded-md flex items-center justify-center">
-                    <span className="text-gray-500 text-3xl">
-                      {formData.firstname?.charAt(0)?.toUpperCase() || "?"}
-                    </span>
-                  </div>
-                )}
+                </div>
+
+                <div className="flex-1">
+                  <InputField
+                    label={t("surname")}
+                    type="text"
+                    name="surname"
+                    id="surname"
+                    placeholder={t("surnamePlaceholder")}
+                    value={formData.surname}
+                    onChange={handleInputChange}
+                  />
+                </div>
               </div>
-              <div className="space-y-2">
-                <input
-                  type="file"
-                  accept="image/jpeg,image/png,image/gif"
-                  onChange={handleAvatarUpload}
-                  className="hidden"
-                  id="avatar-upload"
-                />
-                <label
-                  htmlFor="avatar-upload"
-                  className="text-sm cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md inline-flex items-center">
-                  Upload Avatar
-                </label>
-                <p className="text-xs text-gray-500">
-                  JPEG, PNG, GIF (800x800px, max 3MB)
-                </p>
-              </div>
+
+              <InputField
+                label={t("email")}
+                type="email"
+                name="email"
+                id="email"
+                placeholder={t("emailPlaceholder")}
+                value={formData.email}
+                onChange={handleInputChange}
+              />
+
+              <InputField
+                label={t("role")}
+                type="text"
+                name="role"
+                id="role"
+                placeholder={t("rolePlaceholder")}
+                value={formData.role}
+                onChange={handleInputChange}
+              />
             </div>
 
-            <div className="flex items-center space-x-4">
-              <div className="flex-1">
-                <InputField
-                  label={t("firstname")}
-                  type="text"
-                  name="firstname"
-                  id="firstname"
-                  placeholder={t("firstnamePlaceholder")}
-                  value={formData.firstname}
-                  onChange={handleInputChange}
-                />
-              </div>
-
-              <div className="flex-1">
-                <InputField
-                  label={t("surname")}
-                  type="text"
-                  name="surname"
-                  id="surname"
-                  placeholder={t("surnamePlaceholder")}
-                  value={formData.surname}
-                  onChange={handleInputChange}
-                />
-              </div>
+            <div className="mt-6">
+              <Button variant="default" disabled={isLoading}>
+                {isLoading && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
+                {t("save")}
+              </Button>
             </div>
-
-            <InputField
-              label={t("email")}
-              type="email"
-              name="email"
-              id="email"
-              placeholder={t("emailPlaceholder")}
-              value={formData.email}
-              onChange={handleInputChange}
-            />
-
-            <InputField
-              label={t("role")}
-              type="text"
-              name="role"
-              id="role"
-              placeholder={t("rolePlaceholder")}
-              value={formData.role}
-              onChange={handleInputChange}
-            />
-          </div>
-
-          <div className="mt-6">
-            <Button variant="default" disabled={isLoading}>
-              {isLoading && <Loader2 className="h-4 w-4" />}
-              {t("save")}
-            </Button>
-          </div>
-        </form>
-      </CardContent>
-    </Card>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
