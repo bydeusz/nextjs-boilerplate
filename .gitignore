@@ -32,6 +32,9 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# Production environment files
+_infra/env/.env.prod
+_infra/env/prod
 
 # vercel
 .vercel
