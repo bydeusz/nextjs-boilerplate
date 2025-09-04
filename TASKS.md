@@ -1,3 +1,0 @@
-- Project volledig gecheckt dat the user name veranderd is naar firstname en surname
-- Go back to the original 2 translation files
-- Minio features disabled met environment variable

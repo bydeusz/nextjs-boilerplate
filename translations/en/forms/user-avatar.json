@@ -1,9 +1,0 @@
-{
-  "title": "Update Avatar",
-  "desc": "Upload a new avatar for your account",
-  "errorTitle": "Error",
-  "successTitle": "Success",
-  "error": "Something went wrong",
-  "success": "Avatar updated successfully",
-  "button": "Choose File"
-}

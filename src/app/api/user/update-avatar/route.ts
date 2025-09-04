@@ -1,10 +1,18 @@
 import { auth } from "@/config/auth";
 import { prisma } from "@/config/prisma";
 import { NextResponse } from "next/server";
-import { minioClient, MINIO_BUCKET_NAME } from "@/config/minio";
+import { minioClient, MINIO_BUCKET_NAME, MINIO_ACTIVE } from "@/config/minio";
 
 export async function POST(request: Request) {
   try {
+    // Check if MinIO is active
+    if (!MINIO_ACTIVE || !minioClient) {
+      return NextResponse.json(
+        { error: "Avatar upload is currently disabled" },
+        { status: 503 },
+      );
+    }
+
     // Check if user is authenticated
     const session = await auth();
     if (!session?.user?.id) {

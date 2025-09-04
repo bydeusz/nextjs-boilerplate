@@ -1,17 +1,27 @@
 import { Client } from 'minio';
 
-export const minioClient = new Client({
-  endPoint: process.env.MINIO_ENDPOINT || 'localhost',
-  port: parseInt(process.env.MINIO_PORT || '9000'),
-  useSSL: process.env.MINIO_USE_SSL === 'true',
-  accessKey: process.env.MINIO_ACCESS_KEY || 'minioadmin',
-  secretKey: process.env.MINIO_SECRET_KEY || 'minioadmin'
-});
+// Parse MINIO_ACTIVE environment variable correctly
+export const MINIO_ACTIVE = process.env.MINIO_ACTIVE === 'true' || process.env.MINIO_ACTIVE === '1';
+
+export const minioClient = MINIO_ACTIVE
+  ? new Client({
+      endPoint: process.env.MINIO_ENDPOINT || 'localhost',
+      port: parseInt(process.env.MINIO_PORT || '9000'),
+      useSSL: process.env.MINIO_USE_SSL === 'true',
+      accessKey: process.env.MINIO_ACCESS_KEY || 'minioadmin',
+      secretKey: process.env.MINIO_SECRET_KEY || 'minioadmin'
+    })
+  : null;
 
 export const MINIO_BUCKET_NAME = process.env.MINIO_BUCKET_NAME || 'uploads';
 
 // Initialize bucket if it doesn't exist
 export async function initializeBucket() {
+  if (!MINIO_ACTIVE || !minioClient) {
+    console.log('MinIO is not active, skipping bucket initialization');
+    return;
+  }
+  
   try {
     const exists = await minioClient.bucketExists(MINIO_BUCKET_NAME);
     if (!exists) {

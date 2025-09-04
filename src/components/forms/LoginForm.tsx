@@ -116,7 +116,7 @@ export default function LoginForm() {
             </Link>
           </div>
           <div className="flex space-x-1 items-center">
-            <p className="text-xs text-gray-500">Heb je geen account?</p>
+            <p className="text-xs text-gray-500">{t("alreadyHaveAccount")}</p>
             <Link
               href="/register"
               className="flex items-center bg-white text-primary font-medium hover:underline underline-offset-4 text-xs">
@@ -125,7 +125,7 @@ export default function LoginForm() {
           </div>
           {error && (
             <Alert variant="destructive">
-              <AlertTitle>Error</AlertTitle>
+              <AlertTitle>{t("errorTitle")}</AlertTitle>
               <AlertDescription>{error}</AlertDescription>
             </Alert>
           )}

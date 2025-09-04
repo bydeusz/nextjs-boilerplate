@@ -33,12 +33,12 @@ export function UpdatePassword() {
     setError("");
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      setError(t("errors.passwordMismatch"));
       return;
     }
 
     if (password.length < 6) {
-      setError("Password must be at least 6 characters long");
+      setError(t("errors.passwordLength"));
       return;
     }
 
@@ -60,9 +60,7 @@ export function UpdatePassword() {
 
       await signOut({ redirect: true, callbackUrl: "/login" });
     } catch (error: unknown) {
-      setError(
-        error instanceof Error ? error.message : "Failed to update password",
-      );
+      setError(error instanceof Error ? error.message : t("errors.default"));
       console.error(error);
       setIsLoading(false);
     }

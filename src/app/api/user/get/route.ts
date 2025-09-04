@@ -1,5 +1,6 @@
 import { auth } from "@/config/auth";
 import { prisma } from "@/config/prisma";
+import { MINIO_ACTIVE } from "@/config/minio";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -38,7 +39,10 @@ export async function GET() {
       avatar: user.avatar || "",
     };
 
-    return NextResponse.json({ user: transformedUser });
+    return NextResponse.json({ 
+      user: transformedUser,
+      minioActive: MINIO_ACTIVE
+    });
   } catch (error) {
     console.error("Error fetching user:", error);
     return NextResponse.json(

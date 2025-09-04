@@ -18,7 +18,7 @@ interface UserItemProps {
 }
 
 export const TeammateCard = ({ user, currentUser }: UserItemProps) => {
-  const t = useTranslations("Settings.team");
+  const t = useTranslations("tables.team");
 
   return (
     <Card>

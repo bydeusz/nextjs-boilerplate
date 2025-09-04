@@ -23,10 +23,12 @@ export function UpdateAvatar({ firstname }: UpdateAvatarProps) {
   const t = useTranslations("forms.user-avatar");
   const [isLoading, setIsLoading] = useState(false);
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
+  const [isMinioActive, setIsMinioActive] = useState(false);
   const { toast } = useToast();
 
+  // Check MinIO status on component mount
   useEffect(() => {
-    const fetchAvatar = async () => {
+    const checkMinioStatus = async () => {
       try {
         const response = await fetch("/api/user/get", {
           method: "GET",
@@ -35,28 +37,33 @@ export function UpdateAvatar({ firstname }: UpdateAvatarProps) {
           },
         });
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch user data");
+        if (response.ok) {
+          const data = await response.json();
+          setIsMinioActive(data.minioActive || false);
+          setAvatarPreview(data.user?.avatar || null);
         }
-
-        const data = await response.json();
-        setAvatarPreview(data.user.avatar || null);
       } catch (err) {
-        console.error("Error fetching avatar:", err);
-        toast({
-          variant: "destructive",
-          title: t("errorTitle"),
-          description: "Failed to load avatar",
-        });
+        console.error("Error checking MinIO status:", err);
+        setIsMinioActive(false);
       }
     };
 
-    fetchAvatar();
-  }, [t, toast]);
+    checkMinioStatus();
+  }, []);
 
   const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    // Check if MinIO is active before proceeding
+    if (!isMinioActive) {
+      toast({
+        variant: "destructive",
+        title: t("errorTitle"),
+        description: "Avatar upload is currently disabled",
+      });
+      return;
+    }
 
     // Validate file type
     const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
@@ -85,11 +92,11 @@ export function UpdateAvatar({ firstname }: UpdateAvatarProps) {
 
     img.onload = async () => {
       URL.revokeObjectURL(objectUrl);
-      if (img.width !== 800 || img.height !== 800) {
+      if (img.width > 800 || img.height > 800) {
         toast({
           variant: "destructive",
           title: t("errorTitle"),
-          description: "Image dimensions must be 800x800 pixels",
+          description: "Image dimensions must be maximum 800x800 pixels",
         });
         return;
       }
@@ -116,7 +123,7 @@ export function UpdateAvatar({ firstname }: UpdateAvatarProps) {
 
         toast({
           title: t("successTitle"),
-          description: t("successMessage"),
+          description: t("success"),
           variant: "success",
         });
         router.refresh();
@@ -134,6 +141,19 @@ export function UpdateAvatar({ firstname }: UpdateAvatarProps) {
 
     img.src = objectUrl;
   };
+
+  if (!isMinioActive) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>{t("title")}</CardTitle>
+          <CardDescription>
+            Avatar upload feature is currently disabled.
+          </CardDescription>
+        </CardHeader>
+      </Card>
+    );
+  }
 
   return (
     <Card>
@@ -184,7 +204,7 @@ export function UpdateAvatar({ firstname }: UpdateAvatarProps) {
               )}
             </label>
             <p className="text-xs text-gray-500">
-              JPEG, PNG, GIF (800x800px, max 3MB)
+              JPEG, PNG, GIF (max 800x800px, max 3MB)
             </p>
           </div>
         </div>

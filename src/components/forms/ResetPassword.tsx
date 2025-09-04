@@ -45,7 +45,7 @@ export default function ResetPassword() {
 
       if (!response.ok) {
         const data = await response.json();
-        throw new Error(data.error || "Failed to send reset email");
+        throw new Error(data.error || t("error"));
       }
 
       setSuccess(true);

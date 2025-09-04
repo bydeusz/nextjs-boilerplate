@@ -1,0 +1,319 @@
+{
+  "auth": {
+    "login": {
+      "title": "Inloggen",
+      "description": "Inloggen in je account",
+      "email": "Email",
+      "password": "Wachtwoord",
+      "signIn": "Inloggen",
+      "noAccount": "Registreren",
+      "alreadyHaveAccount": "Heb je al een account?",
+      "forgotPassword": "Wachtwoord vergeten?",
+      "errorTitle": "Fout",
+      "errors": {
+        "missingCredentials": "Vul alle velden in",
+        "userNotFound": "Gebruiker niet gevonden",
+        "invalidPassword": "Ongeldig wachtwoord",
+        "emailNotVerified": "Email niet geverifieerd",
+        "default": "Er is iets fout gegaan"
+      }
+    },
+    "register": {
+      "form": {
+        "title": "Maak je account aan",
+        "description": "Vul je inloggegevens in om verder te gaan.",
+        "firstname": "Voornaam",
+        "firstnamePlaceholder": "Voer voornaam in",
+        "surname": "Achternaam",
+        "surnamePlaceholder": "Voer achternaam in",
+        "email": "Email",
+        "emailPlaceholder": "Voer email in",
+        "password": "Wachtwoord",
+        "passwordPlaceholder": "Voer wachtwoord in",
+        "signUp": "Aanmelden",
+        "alreadyHaveAccount": "Heb je al een account?",
+        "errorTitle": "Fout"
+      },
+      "confirm": {
+        "title": "Aanmelding succesvol!",
+        "description": "We hebben een verificatie e-mail gestuurd naar {email}. Controleer je inbox en klik op de verificatielink om je account te activeren.",
+        "button": "Terug naar inloggen"
+      }
+    },
+    "reset": {
+      "title": "Wachtwoord resetten",
+      "description": "Voer je email adres in om je wachtwoord te resetten.",
+      "email": "Geef je e-mailadres op",
+      "submit": "Verzenden",
+      "login": "Terug naar inloggen",
+      "success": "Als het account bestaat, ontvang je een wachtwoord reset email",
+      "error": "Er is iets fout gegaan bij het verzenden van je email. Probeer het opnieuw.",
+      "resetTitle": "Wachtwoord vergeten?",
+      "resetDescription": "Maak een nieuw en veilig wachtwoord voor je account.",
+      "newPassword": "Nieuw wachtwoord",
+      "newPasswordPlaceholder": "Voer nieuw wachtwoord in",
+      "confirmPassword": "Bevestig wachtwoord",
+      "confirmPasswordPlaceholder": "Bevestig nieuw wachtwoord",
+      "resetButton": "Wachtwoord resetten",
+      "errors": {
+        "passwordMismatch": "Wachtwoorden komen niet overeen",
+        "passwordLength": "Wachtwoord moet minstens 6 tekens lang zijn",
+        "invalidToken": "Ongeldig of verlopen reset token",
+        "default": "Er is iets fout gegaan"
+      }
+    },
+    "verify": {
+      "success": "Email succesvol geverifieerd!",
+      "error": "Er is iets fout gegaan bij het verifieren van je email. Probeer het opnieuw.",
+      "redirecting": "Je kunt nu inloggen. Het account is nu volledig geactiveerd.",
+      "backToLogin": "Inloggen"
+    }
+  },
+  "common": {
+    "buttons": {
+      "logout": "Uitloggen"
+    }
+  },
+  "forms": {
+    "support": {
+      "title": "Support Ticket",
+      "description": "Vul het support formulier in om contact op te nemen met ons.",
+      "name": "Naam",
+      "namePlaceholder": "Voer naam in",
+      "email": "E-mail",
+      "emailPlaceholder": "Voer e-mail in",
+      "subject": "Onderwerp",
+      "subjectPlaceholder": "Voer onderwerp in",
+      "message": "Bericht",
+      "messagePlaceholder": "Voer bericht in",
+      "submit": "Bericht verzenden",
+      "success": "Je bericht is succesvol verzonden!",
+      "error": "Er is iets fout gegaan bij het verzenden van je bericht. Probeer het opnieuw.",
+      "attachment": "Bijlage",
+      "attachmentHelp": "JPEG, PNG, GIF (max 3MB)",
+      "fileTypeError": "Alleen JPEG, PNG en GIF bestanden zijn toegestaan",
+      "fileSizeError": "Bestand moet kleiner zijn dan 3MB",
+      "errorTitle": "Fout",
+      "successTitle": "Succes"
+    },
+    "user-avatar": {
+      "title": "Avatar bijwerken",
+      "desc": "Upload een nieuwe avatar voor je account",
+      "errorTitle": "Fout",
+      "successTitle": "Success",
+      "error": "Iets ging mis",
+      "success": "Avatar bijgewerkt",
+      "button": "Kies bestand"
+    },
+    "user-delete": {
+      "title": "Account verwijderen",
+      "description": "Als je je account verwijdert, is er geen weg meer terug. Wees er zeker van.",
+      "deleteButton": "Account verwijderen",
+      "modalTitle": "Account verwijderen",
+      "modalDescription": "Deze actie kan niet ongedaan worden gemaakt. Dit zal je account permanent verwijderen en al je gegevens van onze servers wissen.",
+      "inputLabel": "Typ je volledige naam ter verificatie",
+      "inputPlaceholder": "Voer je volledige naam in",
+      "cancelButton": "Annuleren",
+      "confirmButton": "Account verwijderen",
+      "successTitle": "Succes",
+      "successMessage": "Je account is succesvol verwijderd",
+      "errorTitle": "Fout"
+    },
+    "user-password": {
+      "title": "Wachtwoord wijzigen",
+      "desc": "Voer je nieuwe wachtwoord in.",
+      "currentPassword": "Huidig wachtwoord",
+      "currentPasswordPlaceholder": "Voer huidig wachtwoord in",
+      "newPassword": "Nieuw wachtwoord",
+      "newPasswordPlaceholder": "Voer nieuw wachtwoord in",
+      "confirmPassword": "Bevestig wachtwoord",
+      "confirmPasswordPlaceholder": "Bevestig nieuw wachtwoord",
+      "update": "Wijzigen",
+      "errors": {
+        "passwordMismatch": "Wachtwoorden komen niet overeen",
+        "passwordLength": "Wachtwoord moet minstens 6 tekens lang zijn",
+        "default": "Er is iets fout gegaan"
+      }
+    },
+    "user-update": {
+      "title": "Persoonlijke informatie",
+      "firstname": "Voornaam",
+      "firstnamePlaceholder": "Voer voornaam in",
+      "surname": "Achternaam",
+      "surnamePlaceholder": "Voer achternaam in",
+      "email": "Email",
+      "emailPlaceholder": "Voer email in",
+      "role": "Rol",
+      "rolePlaceholder": "Voer rol in",
+      "edit": "Bewerken",
+      "cancel": "Annuleren",
+      "save": "Opslaan",
+      "errorTitle": "Fout",
+      "successTitle": "Succes",
+      "successMessage": "Je profiel is succesvol bijgewerkt"
+    }
+  },
+  "inputs": {
+    "errors": {
+      "required": "Dit veld is verplicht",
+      "email": "Voer een geldig e-mailadres in",
+      "url": "Voer een geldige URL in, bijv. https://www.example.com",
+      "tel": "Voer een geldig telefoonnummer in"
+    }
+  },
+  "modals": {
+    "add": {
+      "title": "Gebruiker toevoegen",
+      "desc": "Je staat op het punt om een gebruiker toe te voegen aan het team.",
+      "firstname": "Voornaam",
+      "surname": "Achternaam",
+      "email": "Email",
+      "password": "Wachtwoord",
+      "fullName": "Volledige naam",
+      "firstnamePlaceholder": "Voer voornaam in",
+      "surnamePlaceholder": "Voer achternaam in",
+      "emailPlaceholder": "Voer email in",
+      "passwordPlaceholder": "Voer wachtwoord in",
+      "button": "Gebruiker toevoegen",
+      "errorTitle": "Fout",
+      "invalidDomain": "Dit e-maildomein is niet toegestaan. Gebruik een goedgekeurd domein."
+    },
+    "admin": {
+      "demote": {
+        "title": "Verwijder admin rechten",
+        "desc": "Je bent op het punt om deze gebruiker admin rechten te verwijderen. Let op: Na deze actie zal de gebruiker geen admin rechten meer kunnen uitvoeren. De gebruiker kan altijd admin rechten aanvragen.",
+        "button": "Wijzigen",
+        "label": "Voer volledige naam in:",
+        "placeholder": "Voer naam in"
+      },
+      "promote": {
+        "title": "Verleen admin rechten",
+        "desc": "Je bent op het punt om deze gebruiker admin rechten te verlenen. Let op: Na deze actie zal de gebruiker admin rechten kunnen uitvoeren, zoals het verwijderen van accounts en instellingen aanpassen.",
+        "button": "Wijzigen",
+        "label": "Voer volledige naam in:",
+        "placeholder": "Voer naam in"
+      },
+      "error": {
+        "title": "Fout"
+      }
+    },
+    "delete": {
+      "title": "Verwijder account",
+      "desc": "Je bent op het punt om een account te verwijderen. Dit is een onomkeerbare actie en zal leiden tot het permanent verlies van het account en alle gekoppelde gegevens. Ga voorzichtig te werk.",
+      "button": "Verwijder",
+      "label": "Voer volledige naam in:",
+      "placeholder": "Voer naam in",
+      "error": {
+        "title": "Fout"
+      }
+    },
+    "website": {
+      "title": "Website toevoegen",
+      "desc": "Voer de details voor de nieuwe website hieronder in.",
+      "name": "Website naam",
+      "namePlaceholder": "Voer website naam in",
+      "url": "Website URL",
+      "urlPlaceholder": "Voer website URL in",
+      "addButton": "Website toevoegen",
+      "cancelButton": "Annuleren",
+      "loadingButton": "Toevoegen...",
+      "error": {
+        "title": "Fout",
+        "general": "Er is iets fout gegaan. Probeer het opnieuw."
+      },
+      "delete": {
+        "title": "Website verwijderen",
+        "desc": "Je bent op het punt om een website te verwijderen. Dit is een onomkeerbare actie en zal leiden tot het permanent verlies van de website en alle gekoppelde gegevens. Ga voorzichtig te werk.",
+        "label": "Voer website naam in:",
+        "deleteButton": "Website verwijderen",
+        "cancelButton": "Annuleren",
+        "addedOn": "Toegevoegd op",
+        "loadingButton": "Verwijderen..."
+      }
+    },
+    "league": {
+      "delete": {
+        "title": "Competitie verwijderen",
+        "desc": "Je staat op het punt om een competitie te verwijderen. Deze actie is onomkeerbaar en zal leiden tot het permanent verlies van de competitie en alle gekoppelde gegevens. Ga voorzichtig te werk.",
+        "label": "Voer competitie naam in:",
+        "placeholder": "Voer het id van de competitie in",
+        "deleteButton": "Competitie verwijderen",
+        "cancelButton": "Annuleren",
+        "deleting": "Verwijderen...",
+        "error": "Er is iets fout gegaan. Probeer het opnieuw."
+      }
+    },
+    "match": {
+      "delete": {
+        "title": "Wedstrijd verwijderen",
+        "desc": "Je staat op het punt om een wedstrijd te verwijderen. Deze actie is onomkeerbaar en zal leiden tot het permanent verlies van de wedstrijd en alle gekoppelde gegevens. Ga voorzichtig te werk.",
+        "confirmId": "Bevestig wedstrijd ID",
+        "placeholder": "Voer het id van de wedstrijd in",
+        "error": "Er is iets fout gegaan. Probeer het opnieuw.",
+        "success": "Wedstrijd succesvol verwijderd!",
+        "successTitle": "Succes",
+        "errorTitle": "Fout",
+        "deleteButton": "Wedstrijd verwijderen",
+        "cancelButton": "Annuleren",
+        "deleting": "Verwijderen...",
+        "loadingButton": "Verwijderen..."
+      }
+    }
+  },
+  "navigation": {
+    "language": {
+      "dutch": "Nederlands",
+      "english": "Engels"
+    },
+    "navbar": {
+      "search": "Zoeken",
+      "links": {
+        "dashboard": "Dashboard",
+        "websites": "Websites",
+        "settings": "Instellingen",
+        "support": "Support",
+        "leagues": "Competities",
+        "matches": "Wedstrijden"
+      }
+    }
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "settings": {
+      "title": "Instellingen",
+      "description": "Beheer uw accountinstellingen en stel e-mailvoorkeuren in.",
+      "tabs": {
+        "profile": "Profiel",
+        "team": "Team",
+        "account": "Account",
+        "organisation": "Organisatie"
+      }
+    },
+    "websites": {
+      "title": "Websites",
+      "description": "Beheer je websites en hun instellingen."
+    },
+    "leagues": {
+      "title": "Competities",
+      "description": "Beheer je competities en hun instellingen."
+    },
+    "matches": {
+      "title": "Wedstrijden",
+      "description": "Beheer je wedstrijden en hun instellingen."
+    }
+  },
+  "tables": {
+    "team": {
+      "admin": "Admin",
+      "pending": "Pending",
+      "settings": "Instellingen",
+      "delete": "Verwijderen",
+      "name": "Naam",
+      "email": "Email",
+      "role": "Rol",
+      "status": "Status"
+    }
+  }
+}

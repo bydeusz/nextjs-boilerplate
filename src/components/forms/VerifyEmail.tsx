@@ -36,7 +36,7 @@ export default function VerifyEmail({ token }: { token: string }) {
           throw new Error(data.error);
         }
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Verification failed");
+        setError(err instanceof Error ? err.message : t("error"));
       } finally {
         setIsVerifying(false);
       }
