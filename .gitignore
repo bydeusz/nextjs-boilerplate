@@ -43,5 +43,5 @@ _infra/env/prod
 *.tsbuildinfo
 next-env.d.ts
 
-# MinIO Storage
+# Docker
 _docker/*
