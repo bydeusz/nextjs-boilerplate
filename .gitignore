@@ -44,4 +44,4 @@ _infra/env/prod
 next-env.d.ts
 
 # MinIO Storage
-docker/storage/
+_docker/*
