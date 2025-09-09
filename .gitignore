@@ -45,3 +45,4 @@ next-env.d.ts
 
 # Docker
 _docker/*
+_docker/storage/*
