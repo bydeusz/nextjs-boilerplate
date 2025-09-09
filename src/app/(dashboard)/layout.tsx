@@ -1,14 +1,21 @@
-import { Dashboard } from "@/components/ui/layout/Dashboard";
+import {
+  Dashboard,
+  DashboardSidebar,
+  DashboardNavigation,
+  DashboardContent,
+} from "@/components/ui/layout/Dashboard";
 import { Thumbnail } from "@/components/user/Thumbnail";
+import DashboardLinks from "@/components/navigation/DashboardLinks";
 
-export default async function Layout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      <Dashboard thumbnail={<Thumbnail />}>{children}</Dashboard>
-    </>
+    <Dashboard>
+      <DashboardSidebar thumbnail={<Thumbnail />}>
+        <DashboardNavigation>
+          <DashboardLinks />
+        </DashboardNavigation>
+      </DashboardSidebar>
+      <DashboardContent>{children}</DashboardContent>
+    </Dashboard>
   );
 }
