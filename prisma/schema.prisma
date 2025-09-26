@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -21,6 +21,8 @@ model User {
   avatar        String?
   accounts      Account[]
   sessions      Session[]
+
+  @@map("users")
 }
 
 model Account {
@@ -40,6 +42,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@map("accounts")
 }
 
 model Session {
@@ -48,6 +51,8 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
 }
 
 model VerificationToken {
@@ -56,6 +61,7 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+  @@map("verification_tokens")
 }
 
 model PasswordResetToken {
@@ -64,4 +70,5 @@ model PasswordResetToken {
   expires    DateTime
 
   @@unique([identifier, token])
+  @@map("password_reset_tokens")
 }

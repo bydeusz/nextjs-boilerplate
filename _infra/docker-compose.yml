@@ -4,7 +4,7 @@
 #   Download:           docker compose pull
 #   Stop:               docker compose down
 #   Destroy:            docker compose down -v --remove-orphans
-#   DB URL:             mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@localhost:${MYSQL_PORT}/${MYSQL_DATABASE}
+#   DB URL:             postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:${POSTGRES_PORT}/${POSTGRES_DB}
 
 name: bydeusz-business-boilerplate
 
@@ -16,9 +16,6 @@ include:
 
 services:
 
-
-
 networks:
   app_network:
     driver: bridge
-
