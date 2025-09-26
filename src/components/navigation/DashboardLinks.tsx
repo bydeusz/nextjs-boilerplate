@@ -17,14 +17,6 @@ const DashboardLinks = () => {
         <Globe className="size-4 mr-2" />
         {t("links.websites")}
       </NavLink>
-      <NavLink href="/leagues">
-        <Trophy className="size-4 mr-2" />
-        {t("links.leagues")}
-      </NavLink>
-      <NavLink href="/matches">
-        <Gamepad2 className="size-4 mr-2" />
-        {t("links.matches")}
-      </NavLink>
     </>
   );
 };
