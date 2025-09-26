@@ -14,8 +14,6 @@ include:
   - services/docker-cms.yml
   - services/docker-db.yml
 
-services:
-
 networks:
   app_network:
     driver: bridge
